@@ -49,7 +49,7 @@ def main() -> int:
     moon_objs = []
     for obj_name, src in moon_srcs:
         obj = c_dir / "build" / obj_name
-        run(["gcc", "-std=c11", "-O2", "-Wall", "-Wextra",
+        run(["gcc", "-std=c11", "-D_DEFAULT_SOURCE", "-O2", "-Wall", "-Wextra",
              "-Ithird_party/moonlab", "-Ithird_party/moonlab/applications",
              "-c", "-o", str(obj), src], c_dir)
         moon_objs.append(str(obj))

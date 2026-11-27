@@ -2,7 +2,7 @@
 CC ?= gcc
 NASM ?= nasm
 CFLAGS := -std=c11 -O2 -Wall -Wextra -Werror -Iinclude
-MOON_CFLAGS := -std=c11 -O2 -Wall -Wextra -Ithird_party/moonlab -Ithird_party/moonlab/applications
+MOON_CFLAGS := -std=c11 -D_DEFAULT_SOURCE -O2 -Wall -Wextra -Ithird_party/moonlab -Ithird_party/moonlab/applications
 LDFLAGS := -lm
 BUILD_DIR := build
 
@@ -63,7 +63,7 @@ fuzz: $(BUILD_DIR)/fuzz_qpr$(EXE)
 	./$(BUILD_DIR)/fuzz_qpr$(EXE) 250000
 
 sanitize: | $(BUILD_DIR)
-	$(CC) -std=c11 -O1 -g -Wall -Wextra -Werror -DQPR_NO_ASM -fsanitize=address,undefined -Iinclude \
+	$(CC) -std=c11 -D_DEFAULT_SOURCE -O1 -g -Wall -Wextra -Werror -DQPR_NO_ASM -fsanitize=address,undefined -Iinclude -Ithird_party/moonlab -Ithird_party/moonlab/applications \
 	  -o $(BUILD_DIR)/qpr_c_san$(EXE) src/main.c src/qpr_core.c src/qgtl_metric.c src/qrng_fw.c \
 	  third_party/moonlab/crypto/sha3/sha3.c third_party/moonlab/crypto/aes/aes.c \
 	  third_party/moonlab/crypto/drbg/ctr_drbg.c third_party/moonlab/applications/health_tests.c $(LDFLAGS)
