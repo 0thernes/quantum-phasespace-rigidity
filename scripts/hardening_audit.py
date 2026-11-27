@@ -524,7 +524,7 @@ def run_1000_checks() -> tuple[AuditRunner, int]:
     ar.check(d6, f"D6-{c6:03d}", "bib_entry_count_25", len(bib_keys) == 25, "gap", f"Expected 25 BibTeX entries, got {len(bib_keys)}")
     for bk in bib_keys:
         c6 += 1
-        ar.check(d6, f"D6-{c6:03d}", f"bib_key_cited:{bk}", bk in tex, "issue", f"Uncited BibTeX key: {bk}")
+        ar.check(d6, f"D6-{c6:03d}", f"bib_cite:{bk}", bk in tex, "issue", f"Uncited BibTeX key: {bk}")
     cited: set[str] = set()
     for cm in re.finditer(r"\\cite(?:\[[^\]]*\])?\{([^}]+)\}", tex):
         for k in cm.group(1).split(","):

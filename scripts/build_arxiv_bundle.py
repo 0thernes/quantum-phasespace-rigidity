@@ -30,6 +30,7 @@ def find_tectonic() -> str:
 
 
 def main() -> int:
+    check_only = "--check-only" in sys.argv
     tectonic = find_tectonic()
     BUILD.mkdir(parents=True, exist_ok=True)
     DIST.mkdir(parents=True, exist_ok=True)
@@ -62,30 +63,36 @@ def main() -> int:
     if overfull or warnings:
         raise RuntimeError("Typography/warning gate failed! Fix all overfull hboxes and warnings.")
 
-    # 3. Copy frozen PDF to dist/
+    # 3. Copy frozen PDF to dist/ (unless --check-only in CI, preserving committed hashes)
     pdf_src = BUILD / "main.pdf"
     pdf_dst = DIST / "Donahue_2026_quantum_phasespace_rigidity.pdf"
-    shutil.copy2(pdf_src, pdf_dst)
-    pdf_sha = hashlib.sha256(pdf_dst.read_bytes()).hexdigest()
-    print(f"[DIST] Frozen PDF: {pdf_dst.name} ({pdf_dst.stat().st_size} bytes, SHA-256: {pdf_sha})")
-
-    # 4. Build standalone arXiv submission tarball (main.tex, references.bib, main.bbl, figures/*.pdf)
     tar_path = DIST / "arxiv_submission.tar.gz"
-    files_to_pack: list[tuple[pathlib.Path, str]] = [
-        (PAPER / "main.tex", "main.tex"),
-        (PAPER / "references.bib", "references.bib"),
-    ]
-    bbl = BUILD / "main.bbl"
-    if bbl.exists():
-        files_to_pack.append((bbl, "main.bbl"))
-    for fig in sorted((PAPER / "figures").glob("*.pdf")):
-        files_to_pack.append((fig, f"figures/{fig.name}"))
+    if not check_only:
+        shutil.copy2(pdf_src, pdf_dst)
+        pdf_sha = hashlib.sha256(pdf_dst.read_bytes()).hexdigest()
+        print(f"[DIST] Frozen PDF: {pdf_dst.name} ({pdf_dst.stat().st_size} bytes, SHA-256: {pdf_sha})")
 
-    with tarfile.open(tar_path, "w:gz") as tf:
-        for src, arcname in files_to_pack:
-            tf.add(src, arcname=arcname)
-    tar_sha = hashlib.sha256(tar_path.read_bytes()).hexdigest()
-    print(f"[ARXIV] Tarball: {tar_path.name} ({len(files_to_pack)} files, SHA-256: {tar_sha})")
+        # 4. Build standalone arXiv submission tarball (main.tex, references.bib, main.bbl, figures/*.pdf)
+        files_to_pack: list[tuple[pathlib.Path, str]] = [
+            (PAPER / "main.tex", "main.tex"),
+            (PAPER / "references.bib", "references.bib"),
+        ]
+        bbl = BUILD / "main.bbl"
+        if bbl.exists():
+            files_to_pack.append((bbl, "main.bbl"))
+        for fig in sorted((PAPER / "figures").glob("*.pdf")):
+            files_to_pack.append((fig, f"figures/{fig.name}"))
+
+        with tarfile.open(tar_path, "w:gz") as tf:
+            for src, arcname in files_to_pack:
+                tf.add(src, arcname=arcname)
+        tar_sha = hashlib.sha256(tar_path.read_bytes()).hexdigest()
+        print(f"[ARXIV] Tarball: {tar_path.name} ({len(files_to_pack)} files, SHA-256: {tar_sha})")
+    else:
+        print(
+            f"[CHECK-ONLY] Compiled main.pdf ({pdf_src.stat().st_size} bytes); "
+            f"verifying committed {tar_path.name}"
+        )
 
     # 5. Clean-room compile verification inside an isolated temp directory
     with tempfile.TemporaryDirectory(prefix="qpr_arxiv_cleanroom_") as tmp:

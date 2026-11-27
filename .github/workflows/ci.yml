@@ -200,7 +200,7 @@ jobs:
         run: |
           GITLEAKS_VER="8.24.2"
           curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VER}/gitleaks_${GITLEAKS_VER}_linux_x64.tar.gz" | tar -xz -C /tmp gitleaks
-          /tmp/gitleaks detect --source . --verbose --no-banner
+          /tmp/gitleaks detect --source . --config .gitleaks.toml --verbose --no-banner
       - name: Run OSV-Scanner dependency vulnerability audit
         run: |
           OSV_VER="2.0.1"
@@ -223,7 +223,7 @@ jobs:
           curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
           echo "$PWD" >> "$GITHUB_PATH"
       - name: Compile AMS-LaTeX + Clean-Room arXiv Tarball & Zero-Overfull Audit
-        run: python scripts/build_arxiv_bundle.py
+        run: python scripts/build_arxiv_bundle.py --check-only
       - name: Run Build Standard v1.2.0 Audit, Zero-Padding 1,000-Check Audit, & Blueprint
         run: |
           python scripts/build_blueprint.py
