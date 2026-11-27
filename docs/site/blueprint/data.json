@@ -1,0 +1,267 @@
+{
+  "project": "quantum-phasespace-rigidity",
+  "archive_id": "0TH-2026-020",
+  "lean_toolchain": "leanprover/lean4:v4.35.0",
+  "zero_mathlib": true,
+  "nodes": [
+    {
+      "id": "T1a",
+      "decl": "QPRigidity.Palomar.prove_t1a",
+      "pillar": "Pillar I (AME)",
+      "file": "lean/QPRigidity/AMEGraph.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "deps": [],
+      "summary": "Radical divisor descent, prime-power/CRT lifting, and universal unimodular graphs (C_5, Prism_6, W_5) for all d >= 2."
+    },
+    {
+      "id": "T1b",
+      "decl": "QPRigidity.Palomar.prove_t1b",
+      "pillar": "Pillar I (AME)",
+      "file": "lean/QPRigidity/AMEGraph.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "deps": [],
+      "summary": "Universal Pless moment obstruction: even N >= 2p^2 and odd N >= 2p^2+2p+1 impossible."
+    },
+    {
+      "id": "T1c",
+      "decl": "QPRigidity.Palomar.prove_t1c",
+      "pillar": "Pillar I (AME)",
+      "file": "lean/QPRigidity/AMEGraph.lean",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "deps": [],
+      "summary": "Exact Rains shadow obstructions for N in {4,7,9,11} and exhaustive 0/64 binary N=4 graph proof."
+    },
+    {
+      "id": "T1d",
+      "decl": "QPRigidity.Palomar.prove_t1d",
+      "pillar": "Pillar I (AME)",
+      "file": "lean/QPRigidity/AMEGraph.lean",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "deps": [],
+      "summary": "Torsion Singleton p-rank forcing (dim G[2] = N) and additive F_4-MDS impossibility (N=7 A_6=-21, odd N>=9)."
+    },
+    {
+      "id": "T1e",
+      "decl": "QPRigidity.Palomar.prove_t1e",
+      "pillar": "Pillar I (AME)",
+      "file": "lean/QPRigidity/AMEGraph.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "deps": [
+        "T1a",
+        "T1b",
+        "T1c",
+        "T1d"
+      ],
+      "summary": "Complete even-d cyclic Z_{2l}-stabilizer dichotomy (N in {2,3,5,6}) and Z_4 vs F_4 separation at (4,4)."
+    },
+    {
+      "id": "T2a",
+      "decl": "QPRigidity.Palomar.prove_t2a",
+      "pillar": "Pillar II (RQLS)",
+      "file": "lean/QPRigidity/ResolvableQLS.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "deps": [],
+      "summary": "Trace-nonconstant coset lemma & affine transversal unique intersection for maximal-cardinality t-RQLS."
+    },
+    {
+      "id": "T2b",
+      "decl": "QPRigidity.Palomar.prove_t2b",
+      "pillar": "Pillar II (RQLS)",
+      "file": "lean/QPRigidity/ResolvableQLS.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "deps": [
+        "T2a"
+      ],
+      "summary": "Kernel-checked certificates for 2-RQLS(9), 3-RQLS(11), 4-RQLS(13), and char-2 3-RQLS(16)."
+    },
+    {
+      "id": "T2c",
+      "decl": "QPRigidity.Palomar.prove_t2c",
+      "pillar": "Pillar II (RQLS)",
+      "file": "lean/QPRigidity/ResolvableQLS.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "deps": [
+        "T2b"
+      ],
+      "summary": "Direct-product composite lifting theorem (instantiated at 3-RQLS(55))."
+    },
+    {
+      "id": "T2d",
+      "decl": "QPRigidity.Palomar.prove_t2d",
+      "pillar": "Pillar II (RQLS)",
+      "file": "lean/QPRigidity/ResolvableQLS.lean",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "deps": [],
+      "summary": "Zero-gap F_8 obstruction: every orthomorphism fixing 0 is F_2-linear (0/4,872 nonlinear)."
+    },
+    {
+      "id": "T3a",
+      "decl": "QPRigidity.Palomar.prove_t3a",
+      "pillar": "Pillar III (Magic)",
+      "file": "lean/QPRigidity/MagicGeometry.lean",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "deps": [],
+      "summary": "Gurvits-Barnum Cor. 3 exact identity & 2-qubit rational witnesses rho_ent, rho_sep."
+    },
+    {
+      "id": "T3b",
+      "decl": "QPRigidity.Palomar.prove_t3b",
+      "pillar": "Pillar III (Magic)",
+      "file": "lean/QPRigidity/MagicGeometry.lean",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "deps": [
+        "T3a"
+      ],
+      "summary": "Exact closed-form circumradii R^2(ASTAB_{2,2}) = 3(13+4*sqrt(3))/484 and R^2(ASTAB_{1,3}) = (7-3*sqrt(5))/6."
+    },
+    {
+      "id": "T3c",
+      "decl": "QPRigidity.Palomar.prove_t3c",
+      "pillar": "Pillar III (Magic)",
+      "file": "lean/QPRigidity/MagicGeometry.lean",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "deps": [],
+      "summary": "Symplectic Marginal Descent: C_n <= (7*4^n + 8)/(15*2^n) and exact 15/7x squared-inball gain for all n >= 2."
+    },
+    {
+      "id": "T3d",
+      "decl": "QPRigidity.Palomar.prove_t3d",
+      "pillar": "Pillar III (Magic)",
+      "file": "lean/QPRigidity/MagicGeometry.lean",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "deps": [],
+      "summary": "Clifford-Reynolds Degree-2 RLT+SOS Barrier: M >= 4^n - 1 for all n >= 1."
+    },
+    {
+      "id": "ALL",
+      "decl": "QPRigidity.Palomar.prove_all_rigidity_theorems",
+      "pillar": "Master Bundle",
+      "file": "lean/PalomarSolution.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "deps": [
+        "T1e",
+        "T2c",
+        "T2d",
+        "T3b",
+        "T3c",
+        "T3d"
+      ],
+      "summary": "Unified Palomar Challenge-Solution master conjunction across all three pillars."
+    },
+    {
+      "id": "NV1",
+      "decl": "QPRigidity.NonVacuity.nonvacuity_pillar1_ame",
+      "pillar": "Non-Vacuity",
+      "file": "lean/QPRigidity/NonVacuity.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "deps": [
+        "T1a",
+        "T1b"
+      ],
+      "summary": "Concrete Prism_6 AME(6,12), C_5 AME(5,6), and inhabited Pless specs."
+    },
+    {
+      "id": "NV2",
+      "decl": "QPRigidity.NonVacuity.nonvacuity_pillar2_rqls55",
+      "pillar": "Non-Vacuity",
+      "file": "lean/QPRigidity/NonVacuity.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "deps": [
+        "T2b",
+        "T2c"
+      ],
+      "summary": "Concrete inhabited 3-RQLS(55) from 3-RQLS(11) x ClassicalMOLS(5)."
+    },
+    {
+      "id": "NV3",
+      "decl": "QPRigidity.NonVacuity.nonvacuity_pillar3_magic",
+      "pillar": "Non-Vacuity",
+      "file": "lean/QPRigidity/NonVacuity.lean",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "deps": [
+        "T3a",
+        "T3c",
+        "T3d"
+      ],
+      "summary": "Inhabited witnesses for Gurvits-Barnum D=9, SMD n=3, and RLT barrier n=2."
+    },
+    {
+      "id": "ADV",
+      "decl": "QPRigidity.AdversarialTests (6 refutations)",
+      "pillar": "Adversarial",
+      "file": "lean/QPRigidity/AdversarialTests.lean",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "deps": [
+        "T1a",
+        "T1b",
+        "T2d",
+        "T3b",
+        "T3d"
+      ],
+      "summary": "6 concrete boundary refutations (Path_5, N=8/13 Pless, F_8 swap67, Deg-2 RLT M=14, 2q ASTAB outside GB ball)."
+    }
+  ]
+}

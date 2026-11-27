@@ -1,0 +1,57 @@
+# SPDX-License-Identifier: Apache-2.0
+# Lean 4
+lean/.lake/
+*.olean
+*.ilean
+*.trace
+
+# Rust
+rust/target/
+**/target/
+
+# Zig
+zig/.zig-cache/
+zig/zig-out/
+.zig-cache/
+zig-out/
+
+# C / C++ / ASM build outputs
+c/build/
+cpp/build/
+asm/build/
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.dylib
+*.exe
+*.pdb
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+*.egg-info/
+
+# LaTeX build scratch
+paper/build/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# OS & Secrets
+.DS_Store
+Thumbs.db
+.env
+.env.local
+*.secret

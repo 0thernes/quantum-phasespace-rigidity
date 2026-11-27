@@ -1,0 +1,11 @@
+---
+description: Build Standard for LLMs v1.2.0 and Lean 4.35.0 epistemic integrity rules for quantum-phasespace-rigidity
+globs: ["**/*"]
+alwaysApply: true
+---
+Follow AGENTS.md strictly:
+- Zero sorry, zero admit, zero native_decide, zero custom axioms in lean/.
+- All Lean files use Lean 4.35.0 module headers with zero Mathlib.
+- Commit directly to main (Build Standard R1-R4). Never enable branch protection or commit signing.
+- Preserve dual Apache-2.0 / CC-BY-4.0 licensing and Moonlab MIT notices.
+- Classify every audit finding into the 10 taxonomy classes in HARDENING_LOG.md.

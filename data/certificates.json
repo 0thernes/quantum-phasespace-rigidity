@@ -1,0 +1,485 @@
+{
+  "affiliation": "Independent Researcher, Spokane, WA, USA",
+  "author": "Alexander Stephen Donahue",
+  "c11_nasm_moonlab_qgtl_engine": {
+    "all_ok": true,
+    "c5_weights": [
+      1,
+      0,
+      0,
+      10,
+      15,
+      6
+    ],
+    "engine": "c11-nasm-moonlab-qgtl",
+    "moonlab_qrng": {
+      "continuous_ok": true,
+      "max_lambda2_tr_sq": 0.773880786,
+      "samples": 3072,
+      "sha3_256": "9934cfbc7a4152937adf6426338f20422ebbba0c2e86f47fee5a6c5257512768",
+      "startup_ok": true,
+      "stuck_detected": true
+    },
+    "n4_f2_ame_count": 0,
+    "n5_f2_ame_count": 132,
+    "prism6_unimodular": true,
+    "prism6_weights": [
+      1,
+      0,
+      0,
+      0,
+      45,
+      0,
+      18
+    ],
+    "qgtl_entangled_astab": {
+      "err": 1.715e-11,
+      "g_pp": 0.210104358505,
+      "g_tt": 0.137499999986,
+      "omega_tp": -0.245082024015
+    },
+    "qgtl_rqls11": {
+      "err": 5.904e-10,
+      "g_aa": 9.99999999941,
+      "g_ab": 0.999999999938,
+      "g_bb": 9.99999999941,
+      "omega_ab": -0.0
+    },
+    "wheel5_unimodular": true
+  },
+  "cpp20_cyclotomic_engine": {
+    "all_ok": true,
+    "certificates": [
+      {
+        "collinear_offdiag": 0,
+        "name": "2-RQLS(9)",
+        "p": 3,
+        "pairs": 6561,
+        "q": 9,
+        "t": 2,
+        "verified": true,
+        "zero_pairs": 2592
+      },
+      {
+        "collinear_offdiag": 0,
+        "name": "3-RQLS(11)",
+        "p": 11,
+        "pairs": 14641,
+        "q": 11,
+        "t": 3,
+        "verified": true,
+        "zero_pairs": 6050
+      },
+      {
+        "collinear_offdiag": 0,
+        "name": "4-RQLS(13)",
+        "p": 13,
+        "pairs": 28561,
+        "q": 13,
+        "t": 4,
+        "verified": true,
+        "zero_pairs": 12168
+      },
+      {
+        "collinear_offdiag": 0,
+        "name": "6-RQLS(17)",
+        "p": 17,
+        "pairs": 83521,
+        "q": 17,
+        "t": 6,
+        "verified": true,
+        "zero_pairs": 36992
+      },
+      {
+        "collinear_offdiag": 0,
+        "name": "3-RQLS(16)",
+        "p": 2,
+        "pairs": 65536,
+        "q": 16,
+        "t": 3,
+        "verified": true,
+        "zero_pairs": 32000
+      }
+    ],
+    "engine": "cpp20-cyclotomic"
+  },
+  "eshkol_ad_engine": {
+    "all_ok": true,
+    "astab_1qt": {
+      "err": 2.0816681711721685e-17,
+      "exact": 0.04863267791677176,
+      "grad": 0.2917960675006308,
+      "val": 0.04863267791677178
+    },
+    "astab_2q": {
+      "err": 2.7755575615628914e-17,
+      "exact": 0.12352192084881512,
+      "grad": 0.8116548391159552,
+      "val": 0.12352192084881515
+    },
+    "engine": "eshkol-dual-ad",
+    "qgtl_gpp": {
+      "err": 0.0,
+      "exact": 0.2101043584874127,
+      "grad": 0.09790484414139072,
+      "val": 0.2101043584874127
+    }
+  },
+  "lean_axioms_verified": true,
+  "orcid": "0009-0006-8168-9648",
+  "project": "quantum-phasespace-rigidity",
+  "python_exact": {
+    "astab_circumradii": {
+      "r2_1qutrit_awp": "0.16666666666666666666666666666666666666666666666666666666666666666666666666666667",
+      "r2_1qutrit_exact": "0.048632677916771818462079832301028548946357486860903804531218043961406203847764217",
+      "r2_1qutrit_inball": "0.041666666666666666666666666666666666666666666666666666666666666666666666666666667",
+      "r2_2qubit_exact": "0.12352192084881513950894495061584807521345798149943092466254066891203139711344132",
+      "r2_2qubit_gb": "0.083333333333333333333333333333333333333333333333333333333333333333333333333333333",
+      "rho_ent_entangled_va": "1/10"
+    },
+    "megyesi_primes": {
+      "11": {
+        "cardinality": 121,
+        "directions": [
+          7,
+          8,
+          10
+        ],
+        "t": 3
+      },
+      "13": {
+        "cardinality": 169,
+        "directions": [
+          7,
+          9,
+          10,
+          11
+        ],
+        "t": 4
+      },
+      "17": {
+        "cardinality": 289,
+        "directions": [
+          3,
+          4,
+          6,
+          11,
+          13,
+          14
+        ],
+        "t": 6
+      },
+      "19": {
+        "cardinality": 361,
+        "directions": [
+          5,
+          7,
+          8,
+          9,
+          15,
+          16,
+          17
+        ],
+        "t": 7
+      },
+      "23": {
+        "cardinality": 529,
+        "directions": [
+          8,
+          10,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          21
+        ],
+        "t": 9
+      },
+      "29": {
+        "cardinality": 841,
+        "directions": [
+          5,
+          7,
+          8,
+          9,
+          13,
+          14,
+          17,
+          20,
+          21,
+          25,
+          26,
+          27
+        ],
+        "t": 12
+      },
+      "31": {
+        "cardinality": 961,
+        "directions": [
+          6,
+          9,
+          11,
+          12,
+          15,
+          17,
+          18,
+          19,
+          20,
+          22,
+          25,
+          26,
+          28
+        ],
+        "t": 13
+      },
+      "7": {
+        "cardinality": 49,
+        "directions": [
+          6
+        ],
+        "t": 1
+      }
+    },
+    "rains_shadows": {
+      "10": {
+        "S": [
+          "23/8",
+          "0",
+          "-135/8",
+          "0",
+          "315/4",
+          "0",
+          "945/4",
+          "0",
+          "4995/8",
+          "0",
+          "789/8"
+        ],
+        "feasible": false
+      },
+      "11": {
+        "S": [
+          "0",
+          "33/8",
+          "0",
+          "-165/8",
+          "0",
+          "693/4",
+          "0",
+          "2475/4",
+          "0",
+          "8965/8",
+          "0",
+          "1215/8"
+        ],
+        "feasible": false
+      },
+      "12": {
+        "S": [
+          "-83/16",
+          "0",
+          "297/8",
+          "0",
+          "-1485/16",
+          "0",
+          "2079/4",
+          "0",
+          "22275/16",
+          "0",
+          "16137/8",
+          "0",
+          "3645/16"
+        ],
+        "feasible": false
+      },
+      "2": {
+        "S": [
+          "1",
+          "0",
+          "3"
+        ],
+        "feasible": true
+      },
+      "3": {
+        "S": [
+          "0",
+          "3",
+          "0",
+          "5"
+        ],
+        "feasible": true
+      },
+      "4": {
+        "S": [
+          "-1/2",
+          "0",
+          "9",
+          "0",
+          "15/2"
+        ],
+        "feasible": false
+      },
+      "5": {
+        "S": [
+          "0",
+          "0",
+          "0",
+          "20",
+          "0",
+          "12"
+        ],
+        "feasible": true
+      },
+      "6": {
+        "S": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "45",
+          "0",
+          "18"
+        ],
+        "feasible": true
+      },
+      "7": {
+        "S": [
+          "0",
+          "7/4",
+          "0",
+          "35/4",
+          "0",
+          "357/4",
+          "0",
+          "113/4"
+        ],
+        "feasible": false
+      },
+      "8": {
+        "S": [
+          "-13/8",
+          "0",
+          "21/2",
+          "0",
+          "105/4",
+          "0",
+          "357/2",
+          "0",
+          "339/8"
+        ],
+        "feasible": false
+      },
+      "9": {
+        "S": [
+          "0",
+          "-9/4",
+          "0",
+          "21",
+          "0",
+          "189/2",
+          "0",
+          "333",
+          "0",
+          "263/4"
+        ],
+        "feasible": false
+      }
+    },
+    "summary": {
+      "pillar1_ame_feasible": [
+        2,
+        3,
+        5,
+        6
+      ],
+      "pillar2_prime_t": {
+        "7": 1,
+        "11": 3,
+        "13": 4,
+        "17": 6,
+        "19": 7
+      },
+      "pillar3_astab": {
+        "r2_1qutrit_awp": "0.16666666666666666666666666666666666666666666666666666666666666666666666666666667",
+        "r2_1qutrit_between_inball_and_awp": true,
+        "r2_1qutrit_exact": "0.048632677916771818462079832301028548946357486860903804531218043961406203847764217",
+        "r2_1qutrit_inball": "0.041666666666666666666666666666666666666666666666666666666666666666666666666666667",
+        "r2_2qubit_exact": "0.12352192084881513950894495061584807521345798149943092466254066891203139711344132",
+        "r2_2qubit_gb": "0.083333333333333333333333333333333333333333333333333333333333333333333333333333333",
+        "r2_2qubit_gt_gb": true,
+        "rho_ent_entangled_va": "1/10",
+        "rho_ent_in_astab": true,
+        "rho_sep_in_asep": true,
+        "rho_sep_outside_astab": true
+      },
+      "pillar3_smd_ratio": "15/7"
+    },
+    "symplectic_marginal_descent": {
+      "10": {
+        "c_liu": "1024",
+        "c_ours": "61167/128",
+        "inball_ratio": "15/7"
+      },
+      "2": {
+        "c_liu": "4",
+        "c_ours": "2",
+        "inball_ratio": "15/7"
+      },
+      "3": {
+        "c_liu": "8",
+        "c_ours": "19/5",
+        "inball_ratio": "15/7"
+      },
+      "4": {
+        "c_liu": "16",
+        "c_ours": "15/2",
+        "inball_ratio": "15/7"
+      },
+      "5": {
+        "c_liu": "32",
+        "c_ours": "299/20",
+        "inball_ratio": "15/7"
+      },
+      "6": {
+        "c_liu": "64",
+        "c_ours": "239/8",
+        "inball_ratio": "15/7"
+      },
+      "8": {
+        "c_liu": "256",
+        "c_ours": "3823/32",
+        "inball_ratio": "15/7"
+      }
+    }
+  },
+  "rust_engine": {
+    "all_ok": true,
+    "engine": "rust-exact-forbid-unsafe",
+    "lambda2_c2_exact": "2/1",
+    "lambda2_cnc_m1_tight_facets": 33,
+    "lambda2_cnc_m2_tr_sq": "3/2",
+    "qubit_ame_feasible_n": [
+      2,
+      3,
+      5,
+      6
+    ],
+    "qubit_ame_ruled_out_n": [
+      4,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "symplectic_inball_gain": "15/7",
+    "witnesses_ok": true
+  },
+  "schema_version": "1.0.0",
+  "zig_comptime_summary": "[Zig 0.17 comptime+runtime] comptime_verified=(F7:t=1,F9:t=2,F11:t=3,F13:t=4,F16:t=3,F17:t=6,F19:t=7) F8=(total=5040,lin=168,nonlin=4872,ortho=48,nonlin_t>=1=0) F7_nonlin_mc=84 all_ok=true"
+}

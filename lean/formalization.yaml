@@ -1,0 +1,86 @@
+# SPDX-License-Identifier: Apache-2.0
+schema_version: "1.0"
+id: "0TH-2026-020"
+repository: "https://github.com/0thernes/quantum-phasespace-rigidity"
+version: "1.0.0"
+title: "Quantum Phase-Space Rigidity: Cyclic Weyl-Heisenberg AME Dichotomy, Maximal-Cardinality t-Resolvable Quantum Latin Squares, and Absolutely Stabilizer Magic Geometry"
+author:
+  name: "Alexander Stephen Donahue"
+  orcid: "0009-0006-8168-9648"
+  affiliation: "Independent Researcher, Spokane, WA, USA"
+  email: "0_0@0thernes.art"
+license:
+  code: "Apache-2.0"
+  documentation: "CC-BY-4.0"
+prover:
+  name: "Lean 4"
+  version: "4.35.0"
+  toolchain: "leanprover/lean4:v4.35.0"
+  mathlib: false
+  zero_mathlib: true
+  module_system: true
+verification:
+  allowed_axioms:
+    - "propext"
+    - "Classical.choice"
+    - "Quot.sound"
+  forbid_sorry: true
+  forbid_admit: true
+  forbid_native_decide: true
+  forbid_custom_axioms: true
+  independent_kernels:
+    - "lean (Lean 4.35.0 C++ kernel)"
+    - "leanchecker-paranoid"
+    - "lean4lean"
+    - "nanoda"
+    - "con-leche"
+    - "con-ron"
+  statement_contract:
+    challenge: "PalomarChallenge"
+    solution: "PalomarSolution"
+    comparator_config: "comparator.json"
+    comparator_flags: "--paranoid"
+theorems:
+  - id: "T1a"
+    name: "radical_divisor_descent / prime_power_kuniform_ascent / crt_coprime_kuniform_lift"
+    module: "QPRigidity.AMEGraph"
+  - id: "T1b"
+    name: "universal_unimodular_graphs_all_d"
+    module: "QPRigidity.AMEGraph"
+  - id: "T1c"
+    name: "pless_even_obstruction / pless_odd_obstruction"
+    module: "QPRigidity.AMEGraph"
+  - id: "T1d"
+    name: "f2_commuting_weight_additive / rains_shadow_no_ame{4,7,9,11} / no_canonical_graph_ame4_f2"
+    module: "QPRigidity.AMEGraph"
+  - id: "T1e"
+    name: "torsion_rank_lower_and_free / additive_mds_odd_ge9_impossible / additive_mds_n7_impossible / z4_vs_f4_separation"
+    module: "QPRigidity.AMEGraph"
+  - id: "T2a"
+    name: "trace_spanning_coset_nonconstant / affine_transversal_unique_intersection"
+    module: "QPRigidity.ResolvableQLS"
+  - id: "T2b"
+    name: "rqls9_t2_maximal_cert / rqls11_t3_maximal_cert / rqls13_t4_maximal_cert / rqls16_t3_maximal_cert"
+    module: "QPRigidity.ResolvableQLS"
+  - id: "T2c"
+    name: "direct_product_rqls_lifting"
+    module: "QPRigidity.ResolvableQLS"
+  - id: "T2d"
+    name: "f8_every_orthomorphism_is_f2_linear / f8_no_nonlinear_direction_perm"
+    module: "QPRigidity.ResolvableQLS"
+  - id: "T3a"
+    name: "gurvits_barnum_cor3_identity / two_qubit_entangled_astab_witness / two_qubit_sep_non_astab_witness"
+    module: "QPRigidity.MagicGeometry"
+  - id: "T3b"
+    name: "ordered4_sum_sq_le_endpoints / exact_astab_circumradius_2qubit_vertex / exact_astab_circumradius_1qutrit_vertex"
+    module: "QPRigidity.MagicGeometry"
+  - id: "T3c"
+    name: "symplectic_marginal_descent_all_n / inball_gain_exact_15_over_7"
+    module: "QPRigidity.MagicGeometry"
+  - id: "T3d"
+    name: "clifford_reynolds_deg2_rlt_barrier / stabilizer_pair_overlap_lower_bound"
+    module: "QPRigidity.MagicGeometry"
+open_problems_explicitly_not_claimed:
+  - "Zhang & Cao (2608.29201v2) 17 open singly-even 1-RQLS(v) orders {10,14,...,94}"
+  - "Zurel & Davis (2602.22336v2) Conjecture 1 (CNC sufficiency) and Conjecture 2 (Tr(X^2) <= 2) for n >= 3 qubits"
+  - "Multipartite (n >= 3) odd-prime bound-entangled AWP existence beyond all-bipartition biseparability"

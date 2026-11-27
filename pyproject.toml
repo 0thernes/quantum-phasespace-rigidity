@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: Apache-2.0
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qp-rigidity"
+version = "1.0.0"
+description = "Exact algebraic & quantum phase-space rigidity oracle for AME stabilizer dichotomy, maximal-cardinality t-RQLS, and ASTAB/AWP magic geometry"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Alexander Stephen Donahue", email = "0_0@0thernes.art" },
+]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "hypothesis>=6.100",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "ruff>=0.6",
+    "mypy>=1.11",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/build_blueprint.py" = ["E501"]
+"scripts/hardening_audit.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false

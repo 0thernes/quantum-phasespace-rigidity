@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: Apache-2.0
+# Build Standard v1.2.0 — 10 Finding Classes
+- name: bug
+  color: d73a4a
+  description: Code or proof defect producing wrong behavior or failed check
+- name: error
+  color: b60205
+  description: Build, runtime, compiler, or mathematical calculation failure
+- name: issue
+  color: fbca04
+  description: General operational, workflow, or tooling defect
+- name: problem
+  color: e99695
+  description: Structural or algorithmic obstacle requiring redesign
+- name: concern
+  color: fef2c0
+  description: Potential fragility, maintainability, or epistemic risk
+- name: dilemma
+  color: d4c5f9
+  description: Tradeoff between competing engineering or formalization goals
+- name: conflict
+  color: 5319e7
+  description: Contradiction across files, specs, citations, or claims
+- name: gap
+  color: 0075ca
+  description: Missing file, test, proof step, or standard requirement
+- name: hole
+  color: 0052cc
+  description: Logical, security, or boundary-case omission in an existing artifact
+- name: blindspot
+  color: 1d76db
+  description: Unexamined assumption, platform edge case, or hidden dependency

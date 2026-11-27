@@ -1,0 +1,22 @@
+version = 1
+SPDX-PackageName = "quantum-phasespace-rigidity"
+SPDX-PackageSupplier = "Alexander Stephen Donahue <0_0@0thernes.art>"
+SPDX-PackageDownloadLocation = "https://github.com/0thernes/quantum-phasespace-rigidity"
+
+[[annotations]]
+path = ["lean/**", "asm/**", "c/include/**", "c/src/**", "c/tests/**", "c/Makefile", "cpp/**", "zig/**", "rust/**", "eshkol/**", "src/**", "reference/**", "tests/**", "scripts/**", "examples/**", ".github/**", ".cursor/**", "justfile", "pyproject.toml", "repo.yaml", "requirements.lock.txt", "repo-standard.schema.json", ".editorconfig", ".gitattributes", ".gitignore", ".env.example"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Alexander Stephen Donahue"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["c/third_party/moonlab/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "Moonlab Contributors (tsotchke/moonlab)"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["paper/**", "dist/**", "docs/**", "data/**", "results/**", "timestamps/**", "*.md", "llms*.txt", "CITATION.cff", "VERSION", "MANIFEST.sha256", "SHA256SUMS"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Alexander Stephen Donahue"
+SPDX-License-Identifier = "CC-BY-4.0"

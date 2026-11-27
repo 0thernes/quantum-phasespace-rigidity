@@ -1,0 +1,26 @@
+{
+  "challenge_module": "PalomarChallenge",
+  "solution_module": "PalomarSolution",
+  "theorem_names": [
+    "QPRigidity.Palomar.prove_t1a",
+    "QPRigidity.Palomar.prove_t1b",
+    "QPRigidity.Palomar.prove_t1c",
+    "QPRigidity.Palomar.prove_t1d",
+    "QPRigidity.Palomar.prove_t1e",
+    "QPRigidity.Palomar.prove_t2a",
+    "QPRigidity.Palomar.prove_t2b",
+    "QPRigidity.Palomar.prove_t2c",
+    "QPRigidity.Palomar.prove_t2d",
+    "QPRigidity.Palomar.prove_t3a",
+    "QPRigidity.Palomar.prove_t3b",
+    "QPRigidity.Palomar.prove_t3c",
+    "QPRigidity.Palomar.prove_t3d",
+    "QPRigidity.Palomar.prove_all_rigidity_theorems"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

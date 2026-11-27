@@ -1,0 +1,13 @@
+# Quantum Phase-Space Rigidity (0TH-2026-020)
+
+> Discrete Symplectic Phase-Space Rigidity: Complete Cyclic Stabilizer AME Dichotomy, Maximal-Cardinality Resolvable Quantum Latin Squares, and Stabilizer-Polytope Magic Geometry.
+> Author: Alexander Stephen Donahue (ORCID 0009-0006-8168-9648, Independent Researcher, Spokane, WA, USA).
+
+## Key Files
+- [README.md](README.md): Executive summary, verbatim Lean 4.35.0 `#print axioms` audit, and quickstart commands.
+- [CLAIMS.md](CLAIMS.md): Epistemic Claims Ledger separating `[LEAN-6K]`, `[EXACT-COMP]`, `[PAPER-PROOF]`, and `[OPEN]`.
+- [docs/statement-fidelity.md](docs/statement-fidelity.md): Line-by-line semantic audit of every Lean 4 theorem against the white paper.
+- [paper/main.tex](paper/main.tex): Complete AMS-LaTeX manuscript with full proofs and 4 vector PDF figures.
+- [lean/PalomarSolution.lean](lean/PalomarSolution.lean): Zero-Mathlib Lean 4.35.0 proof bundle audited by 6 independent kernels.
+- [data/certificates.json](data/certificates.json): Machine-verified exact certificate bundle across all 7 engines.
+- [HARDENING_LOG.md](HARDENING_LOG.md): 3 × 1,000-check systematic hardening audit log across all 10 finding classes.

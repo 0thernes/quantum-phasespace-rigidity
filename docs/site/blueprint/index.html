@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:;">
+<title>Lean 4.35.0 Blueprint DAG — Quantum Phase-Space Rigidity (0TH-2026-020)</title>
+<style>
+  :root { --bg:#0b1120; --card:#111827; --ink:#f8fafc; --muted:#94a3b8; --accent:#38bdf8; --ok:#10b981; --border:#1e293b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; }
+  header { padding:1.25rem 2rem; border-bottom:1px solid var(--border); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem; }
+  header h1 { margin:0; font-size:1.25rem; }
+  a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+  main { max-width:1280px; margin:0 auto; padding:1.5rem 2rem; }
+  .controls { display:flex; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.25rem; }
+  input, select { background:var(--card); color:var(--ink); border:1px solid var(--border); padding:0.5rem 0.75rem; border-radius:6px; font-size:0.9rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:1rem; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1rem 1.15rem; }
+  .card:hover { border-color:var(--accent); }
+  .pill { display:inline-block; font-size:0.72rem; padding:0.15rem 0.5rem; border-radius:999px; background:#0f2942; color:#7dd3fc; margin-right:0.35rem; font-weight:600; }
+  .ok { background:#064e3b; color:#6ee7b7; }
+  .decl { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:0.82rem; color:#e2e8f0; word-break:break-all; margin:0.4rem 0; }
+  .meta { font-size:0.8rem; color:var(--muted); margin-top:0.5rem; }
+  svg { width:100%; height:auto; background:#070d19; border:1px solid var(--border); border-radius:10px; margin-bottom:1.5rem; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Lean 4.35.0 Zero-Mathlib Blueprint DAG — <code>0TH-2026-020</code></h1>
+    <div style="font-size:0.85rem;color:#94a3b8;">Alexander Stephen Donahue · Independent Researcher · 23 Audited Declarations · Strictly <code>[propext, Classical.choice, Quot.sound]</code></div>
+  </div>
+  <nav><a href="../index.html">&larr; Back to Scientific Observatory</a></nav>
+</header>
+<main>
+  <svg id="dag" viewBox="0 0 1160 360" role="img" aria-label="Lean 4 Theorem Dependency DAG"></svg>
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search theorem, declaration, or file..." aria-label="Search theorems" style="min-width:280px;">
+    <select id="pillar" aria-label="Filter by pillar">
+      <option value="">All Pillars &amp; Audits</option>
+      <option>Pillar I (AME)</option>
+      <option>Pillar II (RQLS)</option>
+      <option>Pillar III (Magic)</option>
+      <option>Master Bundle</option>
+      <option>Non-Vacuity</option>
+      <option>Adversarial</option>
+    </select>
+  </div>
+  <div id="cards" class="grid"></div>
+</main>
+<script>
+const NODES = [{"id": "T1a", "decl": "QPRigidity.Palomar.prove_t1a", "pillar": "Pillar I (AME)", "file": "lean/QPRigidity/AMEGraph.lean", "axioms": ["propext", "Classical.choice", "Quot.sound"], "deps": [], "summary": "Radical divisor descent, prime-power/CRT lifting, and universal unimodular graphs (C_5, Prism_6, W_5) for all d >= 2."}, {"id": "T1b", "decl": "QPRigidity.Palomar.prove_t1b", "pillar": "Pillar I (AME)", "file": "lean/QPRigidity/AMEGraph.lean", "axioms": ["propext", "Classical.choice", "Quot.sound"], "deps": [], "summary": "Universal Pless moment obstruction: even N >= 2p^2 and odd N >= 2p^2+2p+1 impossible."}, {"id": "T1c", "decl": "QPRigidity.Palomar.prove_t1c", "pillar": "Pillar I (AME)", "file": "lean/QPRigidity/AMEGraph.lean", "axioms": ["propext", "Quot.sound"], "deps": [], "summary": "Exact Rains shadow obstructions for N in {4,7,9,11} and exhaustive 0/64 binary N=4 graph proof."}, {"id": "T1d", "decl": "QPRigidity.Palomar.prove_t1d", "pillar": "Pillar I (AME)", "file": "lean/QPRigidity/AMEGraph.lean", "axioms": ["propext", "Quot.sound"], "deps": [], "summary": "Torsion Singleton p-rank forcing (dim G[2] = N) and additive F_4-MDS impossibility (N=7 A_6=-21, odd N>=9)."}, {"id": "T1e", "decl": "QPRigidity.Palomar.prove_t1e", "pillar": "Pillar I (AME)", "file": "lean/QPRigidity/AMEGraph.lean", "axioms": ["propext", "Classical.choice", "Quot.sound"], "deps": ["T1a", "T1b", "T1c", "T1d"], "summary": "Complete even-d cyclic Z_{2l}-stabilizer dichotomy (N in {2,3,5,6}) and Z_4 vs F_4 separation at (4,4)."}, {"id": "T2a", "decl": "QPRigidity.Palomar.prove_t2a", "pillar": "Pillar II (RQLS)", "file": "lean/QPRigidity/ResolvableQLS.lean", "axioms": ["propext", "Classical.choice", "Quot.sound"], "deps": [], "summary": "Trace-nonconstant coset lemma & affine transversal unique intersection for maximal-cardinality t-RQLS."}, {"id": "T2b", "decl": "QPRigidity.Palomar.prove_t2b", "pillar": "Pillar II (RQLS)", "file": "lean/QPRigidity/ResolvableQLS.lean", "axioms": ["propext", "Classical.choice", "Quot.sound"], "deps": ["T2a"], "summary": "Kernel-checked certificates for 2-RQLS(9), 3-RQLS(11), 4-RQLS(13), and char-2 3-RQLS(16)."}, {"id": "T2c", "decl": "QPRigidity.Palomar.prove_t2c", "pillar": "Pillar II (RQLS)", "file": "lean/QPRigidity/ResolvableQLS.lean", "axioms": ["propext", "Classical.choice", "Quot.sound"], "deps": ["T2b"], "summary": "Direct-product composite lifting theorem (instantiated at 3-RQLS(55))."}, {"id": "T2d", "decl": "QPRigidity.Palomar.prove_t2d", "pillar": "Pillar II (RQLS)", "file": "lean/QPRigidity/ResolvableQLS.lean", "axioms": ["propext", "Quot.sound"], "deps": [], "summary": "Zero-gap F_8 obstruction: every orthomorphism fixing 0 is F_2-linear (0/4,872 nonlinear)."}, {"id": "T3a", "decl": "QPRigidity.Palomar.prove_t3a", "pillar": "Pillar III (Magic)", "file": "lean/QPRigidity/MagicGeometry.lean", "axioms": ["propext", "Quot.sound"], "deps": [], "summary": "Gurvits-Barnum Cor. 3 exact identity & 2-qubit rational witnesses rho_ent, rho_sep."}, {"id": "T3b", "decl": "QPRigidity.Palomar.prove_t3b", "pillar": "Pillar III (Magic)", "file": "lean/QPRigidity/MagicGeometry.lean", "axioms": ["propext", "Quot.sound"], "deps": ["T3a"], "summary": "Exact closed-form circumradii R^2(ASTAB_{2,2}) = 3(13+4*sqrt(3))/484 and R^2(ASTAB_{1,3}) = (7-3*sqrt(5))/6."}, {"id": "T3c", "decl": "QPRigidity.Palomar.prove_t3c", "pillar": "Pillar III (Magic)", "file": "lean/QPRigidity/MagicGeometry.lean", "axioms": ["propext", "Quot.sound"], "deps": [], "summary": "Symplectic Marginal Descent: C_n <= (7*4^n + 8)/(15*2^n) and exact 15/7x squared-inball gain for all n >= 2."}, {"id": "T3d", "decl": "QPRigidity.Palomar.prove_t3d", "pillar": "Pillar III (Magic)", "file": "lean/QPRigidity/MagicGeometry.lean", "axioms": ["propext", "Quot.sound"], "deps": [], "summary": "Clifford-Reynolds Degree-2 RLT+SOS Barrier: M >= 4^n - 1 for all n >= 1."}, {"id": "ALL", "decl": "QPRigidity.Palomar.prove_all_rigidity_theorems", "pillar": "Master Bundle", "file": "lean/PalomarSolution.lean", "axioms": ["propext", "Classical.choice", "Quot.sound"], "deps": ["T1e", "T2c", "T2d", "T3b", "T3c", "T3d"], "summary": "Unified Palomar Challenge-Solution master conjunction across all three pillars."}, {"id": "NV1", "decl": "QPRigidity.NonVacuity.nonvacuity_pillar1_ame", "pillar": "Non-Vacuity", "file": "lean/QPRigidity/NonVacuity.lean", "axioms": ["propext", "Classical.choice", "Quot.sound"], "deps": ["T1a", "T1b"], "summary": "Concrete Prism_6 AME(6,12), C_5 AME(5,6), and inhabited Pless specs."}, {"id": "NV2", "decl": "QPRigidity.NonVacuity.nonvacuity_pillar2_rqls55", "pillar": "Non-Vacuity", "file": "lean/QPRigidity/NonVacuity.lean", "axioms": ["propext", "Classical.choice", "Quot.sound"], "deps": ["T2b", "T2c"], "summary": "Concrete inhabited 3-RQLS(55) from 3-RQLS(11) x ClassicalMOLS(5)."}, {"id": "NV3", "decl": "QPRigidity.NonVacuity.nonvacuity_pillar3_magic", "pillar": "Non-Vacuity", "file": "lean/QPRigidity/NonVacuity.lean", "axioms": ["propext", "Quot.sound"], "deps": ["T3a", "T3c", "T3d"], "summary": "Inhabited witnesses for Gurvits-Barnum D=9, SMD n=3, and RLT barrier n=2."}, {"id": "ADV", "decl": "QPRigidity.AdversarialTests (6 refutations)", "pillar": "Adversarial", "file": "lean/QPRigidity/AdversarialTests.lean", "axioms": ["propext", "Quot.sound"], "deps": ["T1a", "T1b", "T2d", "T3b", "T3d"], "summary": "6 concrete boundary refutations (Path_5, N=8/13 Pless, F_8 swap67, Deg-2 RLT M=14, 2q ASTAB outside GB ball)."}];
+const POS = {
+  T1a:[75,55], T1b:[75,125], T1c:[75,195], T1d:[75,265], T1e:[250,155],
+  T2a:[435,70], T2b:[435,160], T2c:[600,120], T2d:[600,225],
+  T3a:[775,60], T3b:[940,60], T3c:[775,165], T3d:[775,265],
+  ALL:[980,175], NV1:[250,295], NV2:[600,315], NV3:[940,295], ADV:[435,295]
+};
+const COLORS = {
+  "Pillar I (AME)":"#0284c7", "Pillar II (RQLS)":"#059669", "Pillar III (Magic)":"#d97706",
+  "Master Bundle":"#7c3aed", "Non-Vacuity":"#0f766e", "Adversarial":"#be123c"
+};
+function drawDAG() {
+  const svg = document.getElementById("dag");
+  let out = '<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#475569"/></marker></defs>';
+  for (const n of NODES) {
+    const [x2, y2] = POS[n.id];
+    for (const d of n.deps) {
+      const [x1, y1] = POS[d];
+      out += `<line x1="${x1+44}" y1="${y1}" x2="${x2-44}" y2="${y2}" stroke="#475569" stroke-width="1.6" marker-end="url(#arr)"/>`;
+    }
+  }
+  for (const n of NODES) {
+    const [x, y] = POS[n.id];
+    const col = COLORS[n.pillar] || "#334155";
+    out += `<g style="cursor:pointer" onclick="document.getElementById('q').value='${n.id}';render();">
+      <rect x="${x-44}" y="${y-20}" width="88" height="40" rx="8" fill="${col}" stroke="#e2e8f0" stroke-width="1.2"/>
+      <text x="${x}" y="${y+4}" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700" font-family="ui-monospace,monospace">${n.id}</text>
+    </g>`;
+  }
+  svg.innerHTML = out;
+}
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const p = document.getElementById("pillar").value;
+  const list = NODES.filter(n => (!p || n.pillar === p) && (!q || JSON.stringify(n).toLowerCase().includes(q)));
+  document.getElementById("cards").innerHTML = list.map(n => `
+    <article class="card">
+      <div><span class="pill">${n.pillar}</span><span class="pill ok">KERNEL-VERIFIED</span></div>
+      <div class="decl">${n.id} &mdash; ${n.decl}</div>
+      <p style="margin:0.4rem 0;font-size:0.88rem;color:#cbd5e1;">${n.summary}</p>
+      <div class="meta">File: <code>${n.file}</code><br>Axioms: <code>[${n.axioms.join(", ")}]</code>${n.deps.length ? "<br>Depends on: " + n.deps.join(", ") : ""}</div>
+    </article>`).join("");
+}
+drawDAG(); render();
+document.getElementById("q").addEventListener("input", render);
+document.getElementById("pillar").addEventListener("change", render);
+</script>
+</body>
+</html>

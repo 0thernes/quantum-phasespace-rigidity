@@ -1,0 +1,31 @@
+;; SPDX-License-Identifier: Apache-2.0
+;; Copyright (c) 2026 Alexander Stephen Donahue
+;; Target dialect: tsotchke/eshkol (pinned commit eb224260b4814baf3ad260744c8dcdd05fb84898, MIT)
+;;
+;; Forward-Mode AD for QGTL Fubini-Study Metric & Berry Curvature along our
+;; Pillar III entangled-ASTAB witness (spectrum 11/20, 3/20, 3/20, 3/20):
+;;   g_pp(theta) = w(theta) * (1 - w(theta)),  w(theta) = (11/20)*sin^2(theta/2) + 3/20
+;;   dg_pp/dtheta computed exactly by dual-number AD!
+
+(define (dual val der) (cons val der))
+(define (dual-val z) (car z))
+(define (dual-der z) (cdr z))
+
+(define (d+ a b) (dual (+ (dual-val a) (dual-val b)) (+ (dual-der a) (dual-der b))))
+(define (d- a b) (dual (- (dual-val a) (dual-val b)) (- (dual-der a) (dual-der b))))
+(define (d* a b)
+  (dual (* (dual-val a) (dual-val b))
+        (+ (* (dual-der a) (dual-val b)) (* (dual-val a) (dual-der b)))))
+(define (d-sin a)
+  (dual (sin (dual-val a)) (* (cos (dual-val a)) (dual-der a))))
+
+(define (qgtl-gpp-entangled theta-dual)
+  (let ((p (dual 0.55 0.0))
+        (q (dual 0.15 0.0))
+        (half (dual 0.5 0.0))
+        (one (dual 1.0 0.0)))
+    (let ((s (d-sin (d* half theta-dual))))
+      (let ((w (d+ (d* p (d* s s)) q)))
+        (d* w (d- one w))))))
+
+(define res-qgtl (qgtl-gpp-entangled (dual 1.1 1.0)))

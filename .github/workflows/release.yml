@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Release — Frozen PDF, arXiv Tarball, Checksums & SLSA Provenance
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    name: Verify Checksums, Attest Provenance & Publish Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify cryptographic SHA-256 manifests
+        run: |
+          sha256sum -c SHA256SUMS
+          sha256sum -c MANIFEST.sha256
+
+      - name: Generate SLSA Build Provenance Attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            dist/Donahue_2026_quantum_phasespace_rigidity.pdf
+            dist/arxiv_submission.tar.gz
+            data/certificates.json
+            MANIFEST.sha256
+            SHA256SUMS
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "Quantum Phase-Space Rigidity ${GITHUB_REF_NAME} (0TH-2026-020)" \
+            --notes "Machine-checked Lean 4.35.0 (6-kernel) + 7-engine polyglot release with frozen AMS-LaTeX PDF, clean-room arXiv tarball, SHA-256 manifests, and RFC 3161 / OpenTimestamps proofs." \
+            dist/Donahue_2026_quantum_phasespace_rigidity.pdf \
+            dist/arxiv_submission.tar.gz \
+            data/certificates.json \
+            MANIFEST.sha256 \
+            SHA256SUMS \
+            timestamps/MANIFEST.sha256.tsr \
+            timestamps/MANIFEST.sha256.ots

@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+[package]
+name = "qpr-rust"
+version = "1.0.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "Zero-dependency, #![forbid(unsafe_code)] exact rational/integer auditor for Quantum Phase-Space Rigidity"
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
