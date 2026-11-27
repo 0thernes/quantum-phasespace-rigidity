@@ -200,13 +200,13 @@ jobs:
         run: |
           GITLEAKS_VER="8.24.2"
           curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VER}/gitleaks_${GITLEAKS_VER}_linux_x64.tar.gz" | tar -xz -C /tmp gitleaks
-          /tmp/gitleaks detect --source . --config .gitleaks.toml --verbose --no-banner
+          /tmp/gitleaks detect --source . --verbose --no-banner
       - name: Run OSV-Scanner dependency vulnerability audit
         run: |
           OSV_VER="2.0.1"
           curl -sSfL "https://github.com/google/osv-scanner/releases/download/v${OSV_VER}/osv-scanner_linux_amd64" -o /tmp/osv-scanner
           chmod +x /tmp/osv-scanner
-          /tmp/osv-scanner scan --lockfile=requirements.lock.txt --lockfile=rust/Cargo.lock
+          /tmp/osv-scanner scan source -L requirements.lock.txt -L rust/Cargo.lock
       - name: Verify RFC 3161 (OpenSSL) & Bitcoin OpenTimestamps cryptographic anchors
         run: python3 scripts/stamp_timestamps.py --verify
 

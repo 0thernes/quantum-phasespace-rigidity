@@ -1,8 +1,0 @@
-[extend]
-useDefault = true
-
-[[allowlists]]
-description = "Allow historical commit 29deab0a HARDENING_INDEX.md label prefix bib_key_cited:<bibtex_key> (renamed to bib_cite:)"
-commits = ["29deab0a7259eb3a59039b50f146148b6a89b3a5"]
-paths = ['''^HARDENING_INDEX\.md$''']
-regexes = ['''bib_key_cited:[a-z0-9]+''']

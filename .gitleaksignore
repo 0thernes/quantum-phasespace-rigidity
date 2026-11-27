@@ -1,0 +1,14 @@
+# Official gitleaks false-positive fingerprints for historical commit 29deab0a:
+# HARDENING_INDEX.md check labels `bib_key_cited:<bibtex_key>` (renamed to `bib_cite:` in 7480c46).
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:552
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:554
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:556
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:557
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:559
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:562
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:565
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:571
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:572
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:573
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:574
+29deab0a7259eb3a59039b50f146148b6a89b3a5:HARDENING_INDEX.md:generic-api-key:576
