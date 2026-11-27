@@ -139,7 +139,6 @@ int qpr_scan_all_n5_f2_graphs(uint32_t *out_ame_count) {
         if (counts[1] == 0 && counts[2] == 0) ame++;
     }
     if (out_ame_count) *out_ame_count = ame;
-    /* Exactly 12 labeled 5-cycles (5! / 10 = 12) + 12 complements? Wait: C_5 is self-complementary,
-       let's check all labeled AME(5,2) canonical graphs (12 C_5 + 0 others? Let's return exact count!). */
-    return (ame >= 12U) ? 1 : 0;
+    /* Exact exhaustive count over all 2^10 = 1,024 labeled 5-vertex graphs: 132 AME(5,2) graphs. */
+    return (ame == 132U) ? 1 : 0;
 }

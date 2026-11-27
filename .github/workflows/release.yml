@@ -13,15 +13,19 @@ permissions:
 
 jobs:
   release:
-    name: Verify Checksums, Attest Provenance & Publish Release
+    name: Verify Checksums, Timestamps, Attest Provenance & Publish Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
 
-      - name: Verify cryptographic SHA-256 manifests
+      - name: Verify cryptographic SHA-256 manifests & RFC 3161/OTS timestamps
         run: |
           sha256sum -c SHA256SUMS
           sha256sum -c MANIFEST.sha256
+          python3 scripts/stamp_timestamps.py --verify
 
       - name: Generate SLSA Build Provenance Attestation
         uses: actions/attest-build-provenance@v2
@@ -39,7 +43,7 @@ jobs:
         run: |
           gh release create "${GITHUB_REF_NAME}" \
             --title "Quantum Phase-Space Rigidity ${GITHUB_REF_NAME} (0TH-2026-020)" \
-            --notes "Machine-checked Lean 4.35.0 (6-kernel) + 7-engine polyglot release with frozen AMS-LaTeX PDF, clean-room arXiv tarball, SHA-256 manifests, and RFC 3161 / OpenTimestamps proofs." \
+            --notes "Machine-checked Lean 4.35.0 (6-kernel + whole-module axiom sweep) + unified 7-engine polyglot release with frozen AMS-LaTeX PDF, clean-room arXiv tarball, SHA-256 manifests, and DigiCert RFC 3161 / 3-calendar Bitcoin OpenTimestamps proofs." \
             dist/Donahue_2026_quantum_phasespace_rigidity.pdf \
             dist/arxiv_submission.tar.gz \
             data/certificates.json \

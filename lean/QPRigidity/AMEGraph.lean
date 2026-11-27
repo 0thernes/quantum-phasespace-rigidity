@@ -892,12 +892,261 @@ public theorem graphPrism6_ame_all_d (d : Nat) (_hd : d ≥ 2) : IsAMEGraph d gr
     rcases exists_three_false_fin6 _ hlt with ⟨i1, i2, i3, h12, h23, f1, f2, f3⟩
     exact hi0 (prism6_three_inactive_forces_zero α i1 i2 i3 h12 h23 f1 f2 f3 i0)
 
+private theorem wheel5_three_inactive_forces_zero {d : Nat} (α : Fin 6 → Nat)
+    (i1 i2 i3 : Fin 6) (h12 : i1 < i2) (h23 : i2 < i3)
+    (ha1 : pauliActive d graphWheel5 α i1 = false)
+    (ha2 : pauliActive d graphWheel5 α i2 = false)
+    (ha3 : pauliActive d graphWheel5 α i3 = false) :
+    ∀ i : Fin 6, α i % d = 0 := by
+  have hmv0 : matVec graphWheel5 α 0 = α 1 + α 4 + α 5 := by
+    have h : matVec graphWheel5 α 0 = 0 + 0 * α 0 + 1 * α 1 + 0 * α 2 + 0 * α 3 + 1 * α 4 + 1 * α 5 := rfl
+    omega
+  have hmv1 : matVec graphWheel5 α 1 = α 0 + α 2 + α 5 := by
+    have h : matVec graphWheel5 α 1 = 0 + 1 * α 0 + 0 * α 1 + 1 * α 2 + 0 * α 3 + 0 * α 4 + 1 * α 5 := rfl
+    omega
+  have hmv2 : matVec graphWheel5 α 2 = α 1 + α 3 + α 5 := by
+    have h : matVec graphWheel5 α 2 = 0 + 0 * α 0 + 1 * α 1 + 0 * α 2 + 1 * α 3 + 0 * α 4 + 1 * α 5 := rfl
+    omega
+  have hmv3 : matVec graphWheel5 α 3 = α 2 + α 4 + α 5 := by
+    have h : matVec graphWheel5 α 3 = 0 + 0 * α 0 + 0 * α 1 + 1 * α 2 + 0 * α 3 + 1 * α 4 + 1 * α 5 := rfl
+    omega
+  have hmv4 : matVec graphWheel5 α 4 = α 0 + α 3 + α 5 := by
+    have h : matVec graphWheel5 α 4 = 0 + 1 * α 0 + 0 * α 1 + 0 * α 2 + 1 * α 3 + 0 * α 4 + 1 * α 5 := rfl
+    omega
+  have hmv5 : matVec graphWheel5 α 5 = α 0 + α 1 + α 2 + α 3 + α 4 := by
+    have h : matVec graphWheel5 α 5 = 0 + 1 * α 0 + 1 * α 1 + 1 * α 2 + 1 * α 3 + 1 * α 4 + 0 * α 5 := rfl
+    omega
+  have h3_1 : ∀ {x y z : Nat}, x % d = 0 → y % d = 0 → (x + y + z) % d = 0 → z % d = 0 := by
+    intro x y z hx hy hxyz; rw [Nat.add_assoc] at hxyz; exact mod_add_left_zero hy (mod_add_left_zero hx hxyz)
+  have h3_2 : ∀ {x y z : Nat}, x % d = 0 → z % d = 0 → (x + y + z) % d = 0 → y % d = 0 := by
+    intro x y z hx hz hxyz; exact mod_add_left_zero hx (mod_add_right_zero hz hxyz)
+  have h3_3 : ∀ {x y z : Nat}, y % d = 0 → z % d = 0 → (x + y + z) % d = 0 → x % d = 0 := by
+    intro x y z hy hz hxyz; exact mod_add_right_zero hy (mod_add_right_zero hz hxyz)
+  have h5_zero : ∀ {a b c e f : Nat}, a % d = 0 → b % d = 0 → c % d = 0 → e % d = 0 →
+      (a + b + c + e + f) % d = 0 → f % d = 0 := by
+    intro a b c e f ha hb hc he hsum
+    have hd := Int.dvd_sub (nat_dvd_int hsum)
+      (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int ha) (nat_dvd_int hb)) (nat_dvd_int hc)) (nat_dvd_int he))
+    have heq : (((a + b + c + e + f : Nat) : Int) - ((a : Int) + (b : Int) + (c : Int) + (e : Int))) = (f : Int) := by omega
+    rw [heq] at hd; exact dvd_int_cancel_nat hd
+  have hfin6 : ∀ j : Fin 6, j = 0 ∨ j = 1 ∨ j = 2 ∨ j = 3 ∨ j = 4 ∨ j = 5 := by decide
+  rcases hfin6 i1 with rfl | rfl | rfl | rfl | rfl | rfl <;>
+  rcases hfin6 i2 with rfl | rfl | rfl | rfl | rfl | rfl <;>
+  rcases hfin6 i3 with rfl | rfl | rfl | rfl | rfl | rfl
+  all_goals try (exfalso; revert h12 h23; decide)
+  · -- (0, 1, 2)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv1, hmv2] at ha1 ha2 ha3
+    have e5 := h3_1 ha1.1 ha3.1 ha2.2
+    have e4 := h3_2 ha2.1 e5 ha1.2
+    have e3 := h3_2 ha2.1 e5 ha3.2
+    exact fin6_cases ha1.1 ha2.1 ha3.1 e3 e4 e5
+  · -- (0, 1, 3)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv1, hmv3] at ha1 ha2 ha3
+    have e2 : α 2 % d = 0 := by
+      have hd := Int.dvd_add (Int.dvd_sub (nat_dvd_int ha3.2) (nat_dvd_int ha1.2)) (nat_dvd_int ha2.1)
+      have heq : (((α 2 + α 4 + α 5 : Nat) : Int) - ((α 1 + α 4 + α 5 : Nat) : Int) + (α 1 : Int)) = (α 2 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    have e5 := h3_1 ha1.1 e2 ha2.2
+    have e4 := h3_2 ha2.1 e5 ha1.2
+    exact fin6_cases ha1.1 ha2.1 e2 ha3.1 e4 e5
+  · -- (0, 1, 4)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv1, hmv4] at ha1 ha2 ha3
+    have e5 := h3_1 ha2.1 ha3.1 ha1.2
+    have e2 := h3_2 ha1.1 e5 ha2.2
+    have e3 := h3_2 ha1.1 e5 ha3.2
+    exact fin6_cases ha1.1 ha2.1 e2 e3 ha3.1 e5
+  · -- (0, 1, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv1, hmv5] at ha1 ha2 ha3
+    have e4 := h3_2 ha2.1 ha3.1 ha1.2
+    have e2 := h3_2 ha1.1 ha3.1 ha2.2
+    have e3 : α 3 % d = 0 := by
+      have hd := Int.dvd_sub (nat_dvd_int ha3.2)
+        (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int ha1.1) (nat_dvd_int ha2.1)) (nat_dvd_int e2)) (nat_dvd_int e4))
+      have heq : (((α 0 + α 1 + α 2 + α 3 + α 4 : Nat) : Int) - ((α 0 : Int) + (α 1 : Int) + (α 2 : Int) + (α 4 : Int))) = (α 3 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    exact fin6_cases ha1.1 ha2.1 e2 e3 e4 ha3.1
+  · -- (0, 2, 3)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv2, hmv3] at ha1 ha2 ha3
+    have e1 : α 1 % d = 0 := by
+      have hd := Int.dvd_add (Int.dvd_sub (nat_dvd_int ha1.2) (nat_dvd_int ha3.2)) (nat_dvd_int ha2.1)
+      have heq : (((α 1 + α 4 + α 5 : Nat) : Int) - ((α 2 + α 4 + α 5 : Nat) : Int) + (α 2 : Int)) = (α 1 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    have e5 := h3_1 e1 ha3.1 ha2.2
+    have e4 := h3_2 e1 e5 ha1.2
+    exact fin6_cases ha1.1 e1 ha2.1 ha3.1 e4 e5
+  · -- (0, 2, 4)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv2, hmv4] at ha1 ha2 ha3
+    have e1 : α 1 % d = 0 := by
+      have hd := Int.dvd_sub (Int.dvd_add (nat_dvd_int ha2.2) (nat_dvd_int ha1.1)) (nat_dvd_int ha3.2)
+      have heq : (((α 1 + α 3 + α 5 : Nat) : Int) + (α 0 : Int) - ((α 0 + α 3 + α 5 : Nat) : Int)) = (α 1 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    have e5 := h3_1 e1 ha3.1 ha1.2
+    have e3 := h3_2 e1 e5 ha2.2
+    exact fin6_cases ha1.1 e1 ha2.1 e3 ha3.1 e5
+  · -- (0, 2, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv2, hmv5] at ha1 ha2 ha3
+    have e1 : α 1 % d = 0 := by
+      have hd := Int.dvd_sub (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int ha1.2) (nat_dvd_int ha2.2)) (nat_dvd_int ha1.1)) (nat_dvd_int ha2.1))
+        (Int.dvd_add (nat_dvd_int ha3.2) (Int.dvd_add (nat_dvd_int ha3.1) (nat_dvd_int ha3.1)))
+      have heq : (((α 1 + α 4 + α 5 : Nat) : Int) + ((α 1 + α 3 + α 5 : Nat) : Int) + (α 0 : Int) + (α 2 : Int) -
+                  (((α 0 + α 1 + α 2 + α 3 + α 4 : Nat) : Int) + ((α 5 : Int) + (α 5 : Int)))) = (α 1 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    have e4 := h3_2 e1 ha3.1 ha1.2
+    have e3 := h3_2 e1 ha3.1 ha2.2
+    exact fin6_cases ha1.1 e1 ha2.1 e3 e4 ha3.1
+  · -- (0, 3, 4)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv3, hmv4] at ha1 ha2 ha3
+    have e5 := h3_1 ha1.1 ha2.1 ha3.2
+    have e1 := h3_3 ha3.1 e5 ha1.2
+    have e2 := h3_3 ha3.1 e5 ha2.2
+    exact fin6_cases ha1.1 e1 e2 ha2.1 ha3.1 e5
+  · -- (0, 3, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv3, hmv5] at ha1 ha2 ha3
+    have e4 : α 4 % d = 0 := by
+      have hd := Int.dvd_sub (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int ha1.2) (nat_dvd_int ha2.2)) (nat_dvd_int ha1.1)) (nat_dvd_int ha2.1))
+        (Int.dvd_add (nat_dvd_int ha3.2) (Int.dvd_add (nat_dvd_int ha3.1) (nat_dvd_int ha3.1)))
+      have heq : (((α 1 + α 4 + α 5 : Nat) : Int) + ((α 2 + α 4 + α 5 : Nat) : Int) + (α 0 : Int) + (α 3 : Int) -
+                  (((α 0 + α 1 + α 2 + α 3 + α 4 : Nat) : Int) + ((α 5 : Int) + (α 5 : Int)))) = (α 4 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    have e1 := h3_3 e4 ha3.1 ha1.2
+    have e2 := h3_3 e4 ha3.1 ha2.2
+    exact fin6_cases ha1.1 e1 e2 ha2.1 e4 ha3.1
+  · -- (0, 4, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv0, hmv4, hmv5] at ha1 ha2 ha3
+    have e1 := h3_3 ha2.1 ha3.1 ha1.2
+    have e3 := h3_2 ha1.1 ha3.1 ha2.2
+    have e2 : α 2 % d = 0 := by
+      have hd := Int.dvd_sub (nat_dvd_int ha3.2)
+        (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int ha1.1) (nat_dvd_int e1)) (nat_dvd_int e3)) (nat_dvd_int ha2.1))
+      have heq : (((α 0 + α 1 + α 2 + α 3 + α 4 : Nat) : Int) - ((α 0 : Int) + (α 1 : Int) + (α 3 : Int) + (α 4 : Int))) = (α 2 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    exact fin6_cases ha1.1 e1 e2 e3 ha2.1 ha3.1
+  · -- (1, 2, 3)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv1, hmv2, hmv3] at ha1 ha2 ha3
+    have e5 := h3_1 ha1.1 ha3.1 ha2.2
+    have e0 := h3_3 ha2.1 e5 ha1.2
+    have e4 := h3_2 ha2.1 e5 ha3.2
+    exact fin6_cases e0 ha1.1 ha2.1 ha3.1 e4 e5
+  · -- (1, 2, 4)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv1, hmv2, hmv4] at ha1 ha2 ha3
+    have e3 : α 3 % d = 0 := by
+      have hd := Int.dvd_add (Int.dvd_sub (nat_dvd_int ha3.2) (nat_dvd_int ha1.2)) (nat_dvd_int ha2.1)
+      have heq : (((α 0 + α 3 + α 5 : Nat) : Int) - ((α 0 + α 2 + α 5 : Nat) : Int) + (α 2 : Int)) = (α 3 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    have e5 := h3_1 ha1.1 e3 ha2.2
+    have e0 := h3_3 ha2.1 e5 ha1.2
+    exact fin6_cases e0 ha1.1 ha2.1 e3 ha3.1 e5
+  · -- (1, 2, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv1, hmv2, hmv5] at ha1 ha2 ha3
+    have e0 := h3_3 ha2.1 ha3.1 ha1.2
+    have e3 := h3_2 ha1.1 ha3.1 ha2.2
+    have e4 := h5_zero e0 ha1.1 ha2.1 e3 ha3.2
+    exact fin6_cases e0 ha1.1 ha2.1 e3 e4 ha3.1
+  · -- (1, 3, 4)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv1, hmv3, hmv4] at ha1 ha2 ha3
+    have e2 : α 2 % d = 0 := by
+      have hd2 := Int.dvd_add (Int.dvd_sub (nat_dvd_int ha1.2) (nat_dvd_int ha3.2)) (nat_dvd_int ha2.1)
+      have heq2 : (((α 0 + α 2 + α 5 : Nat) : Int) - ((α 0 + α 3 + α 5 : Nat) : Int) + (α 3 : Int)) = (α 2 : Int) := by omega
+      rw [heq2] at hd2; exact dvd_int_cancel_nat hd2
+    have e5 := h3_1 e2 ha3.1 ha2.2
+    have e0 := h3_3 e2 e5 ha1.2
+    exact fin6_cases e0 ha1.1 e2 ha2.1 ha3.1 e5
+  · -- (1, 3, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv1, hmv3, hmv5] at ha1 ha2 ha3
+    have e2 : α 2 % d = 0 := by
+      have hd := Int.dvd_sub (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int ha1.2) (nat_dvd_int ha2.2)) (nat_dvd_int ha1.1)) (nat_dvd_int ha2.1))
+        (Int.dvd_add (nat_dvd_int ha3.2) (Int.dvd_add (nat_dvd_int ha3.1) (nat_dvd_int ha3.1)))
+      have heq : (((α 0 + α 2 + α 5 : Nat) : Int) + ((α 2 + α 4 + α 5 : Nat) : Int) + (α 1 : Int) + (α 3 : Int) -
+                  (((α 0 + α 1 + α 2 + α 3 + α 4 : Nat) : Int) + ((α 5 : Int) + (α 5 : Int)))) = (α 2 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    have e0 := h3_3 e2 ha3.1 ha1.2
+    have e4 := h3_2 e2 ha3.1 ha2.2
+    exact fin6_cases e0 ha1.1 e2 ha2.1 e4 ha3.1
+  · -- (1, 4, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv1, hmv4, hmv5] at ha1 ha2 ha3
+    have e0 : α 0 % d = 0 := by
+      have hd := Int.dvd_sub (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int ha1.2) (nat_dvd_int ha2.2)) (nat_dvd_int ha1.1)) (nat_dvd_int ha2.1))
+        (Int.dvd_add (nat_dvd_int ha3.2) (Int.dvd_add (nat_dvd_int ha3.1) (nat_dvd_int ha3.1)))
+      have heq : (((α 0 + α 2 + α 5 : Nat) : Int) + ((α 0 + α 3 + α 5 : Nat) : Int) + (α 1 : Int) + (α 4 : Int) -
+                  (((α 0 + α 1 + α 2 + α 3 + α 4 : Nat) : Int) + ((α 5 : Int) + (α 5 : Int)))) = (α 0 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    have e2 := h3_2 e0 ha3.1 ha1.2
+    have e3 := h3_2 e0 ha3.1 ha2.2
+    exact fin6_cases e0 ha1.1 e2 e3 ha2.1 ha3.1
+  · -- (2, 3, 4)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv2, hmv3, hmv4] at ha1 ha2 ha3
+    have e5 := h3_1 ha1.1 ha3.1 ha2.2
+    have e1 := h3_3 ha2.1 e5 ha1.2
+    have e0 := h3_3 ha2.1 e5 ha3.2
+    exact fin6_cases e0 e1 ha1.1 ha2.1 ha3.1 e5
+  · -- (2, 3, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv2, hmv3, hmv5] at ha1 ha2 ha3
+    have e1 := h3_3 ha2.1 ha3.1 ha1.2
+    have e4 := h3_2 ha1.1 ha3.1 ha2.2
+    have e0 : α 0 % d = 0 := by
+      have hd := Int.dvd_sub (nat_dvd_int ha3.2)
+        (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int e1) (nat_dvd_int ha1.1)) (nat_dvd_int ha2.1)) (nat_dvd_int e4))
+      have heq : (((α 0 + α 1 + α 2 + α 3 + α 4 : Nat) : Int) - ((α 1 : Int) + (α 2 : Int) + (α 3 : Int) + (α 4 : Int))) = (α 0 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    exact fin6_cases e0 e1 ha1.1 ha2.1 e4 ha3.1
+  · -- (2, 4, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv2, hmv4, hmv5] at ha1 ha2 ha3
+    have e3 : α 3 % d = 0 := by
+      have hd := Int.dvd_sub (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int ha1.2) (nat_dvd_int ha2.2)) (nat_dvd_int ha1.1)) (nat_dvd_int ha2.1))
+        (Int.dvd_add (nat_dvd_int ha3.2) (Int.dvd_add (nat_dvd_int ha3.1) (nat_dvd_int ha3.1)))
+      have heq : (((α 1 + α 3 + α 5 : Nat) : Int) + ((α 0 + α 3 + α 5 : Nat) : Int) + (α 2 : Int) + (α 4 : Int) -
+                  (((α 0 + α 1 + α 2 + α 3 + α 4 : Nat) : Int) + ((α 5 : Int) + (α 5 : Int)))) = (α 3 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    have e1 := h3_3 e3 ha3.1 ha1.2
+    have e0 := h3_3 e3 ha3.1 ha2.2
+    exact fin6_cases e0 e1 ha1.1 e3 ha2.1 ha3.1
+  · -- (3, 4, 5)
+    unfold pauliActive at ha1 ha2 ha3
+    simp only [decide_eq_false_iff_not, not_or, Decidable.not_not, hmv3, hmv4, hmv5] at ha1 ha2 ha3
+    have e2 := h3_3 ha2.1 ha3.1 ha1.2
+    have e0 := h3_3 ha1.1 ha3.1 ha2.2
+    have e1 : α 1 % d = 0 := by
+      have hd := Int.dvd_sub (nat_dvd_int ha3.2)
+        (Int.dvd_add (Int.dvd_add (Int.dvd_add (nat_dvd_int e0) (nat_dvd_int e2)) (nat_dvd_int ha1.1)) (nat_dvd_int ha2.1))
+      have heq : (((α 0 + α 1 + α 2 + α 3 + α 4 : Nat) : Int) - ((α 0 : Int) + (α 2 : Int) + (α 3 : Int) + (α 4 : Int))) = (α 1 : Int) := by omega
+      rw [heq] at hd; exact dvd_int_cancel_nat hd
+    exact fin6_cases e0 e1 e2 ha1.1 ha2.1 ha3.1
+
+public theorem graphWheel5_ame_all_d (d : Nat) (_hd : d ≥ 2) : IsAMEGraph d graphWheel5 := by
+  intro α ⟨i0, hi0⟩
+  exact Classical.byContradiction fun hle => by
+    have hlt : countFin 6 (pauliActive d graphWheel5 α) ≤ 3 := by
+      unfold pauliWeight at hle; omega
+    rcases exists_three_false_fin6 _ hlt with ⟨i1, i2, i3, h12, h23, f1, f2, f3⟩
+    exact hi0 (wheel5_three_inactive_forces_zero α i1 i2 i3 h12 h23 f1 f2 f3 i0)
+
 /-- **T1b (Universal Unimodular Existence Theorem):** For ALL `d ≥ 2`, canonical `Z_d`
-graph-state `AME(N, d)` exists for every `N ∈ {2, 3, 5, 6}` via `K_2`, `K_3`, `C_5`, `K_3 □ K_2`. -/
+graph-state `AME(N, d)` exists for every `N ∈ {2, 3, 5, 6}` via `K_2`, `K_3`, `C_5`,
+`K_3 □ K_2`, and `W_5`. -/
 public theorem universal_unimodular_graphs_all_d (d : Nat) (hd : d ≥ 2) :
     IsAMEGraph d graphK2 ∧ IsAMEGraph d graphK3 ∧
-    IsAMEGraph d graphC5 ∧ IsAMEGraph d graphPrism6 :=
-  ⟨graphK2_ame_all_d d hd, graphK3_ame_all_d d hd, graphC5_ame_all_d d hd, graphPrism6_ame_all_d d hd⟩
+    IsAMEGraph d graphC5 ∧ IsAMEGraph d graphPrism6 ∧ IsAMEGraph d graphWheel5 :=
+  ⟨graphK2_ame_all_d d hd, graphK3_ame_all_d d hd, graphC5_ame_all_d d hd,
+   graphPrism6_ame_all_d d hd, graphWheel5_ame_all_d d hd⟩
 
 /-! ## Section 4: T1c — Pure-Integer Combinatorial Pless Power-Moment Obstruction (ALL `p ≥ 2`) -/
 

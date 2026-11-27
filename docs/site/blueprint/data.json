@@ -1,5 +1,6 @@
 {
   "project": "quantum-phasespace-rigidity",
+  "version": "2.0.0",
   "archive_id": "0TH-2026-020",
   "lean_toolchain": "leanprover/lean4:v4.35.0",
   "zero_mathlib": true,
@@ -15,7 +16,7 @@
         "Quot.sound"
       ],
       "deps": [],
-      "summary": "Radical divisor descent, prime-power/CRT lifting, and universal unimodular graphs (C_5, Prism_6, W_5) for all d >= 2."
+      "summary": "Radical-CRT equivalence: divisor descent (d -> p|d), prime-power Hensel ascent (p -> p^e), and coprime CRT lifting."
     },
     {
       "id": "T1b",
@@ -28,7 +29,7 @@
         "Quot.sound"
       ],
       "deps": [],
-      "summary": "Universal Pless moment obstruction: even N >= 2p^2 and odd N >= 2p^2+2p+1 impossible."
+      "summary": "Universal unimodular canonical graph states K_2, K_3, C_5, Prism_6 = K_3 \u25a1 K_2, and W_5 (all 20 minors in {\u00b11}) for ALL d >= 2."
     },
     {
       "id": "T1c",
@@ -40,7 +41,7 @@
         "Quot.sound"
       ],
       "deps": [],
-      "summary": "Exact Rains shadow obstructions for N in {4,7,9,11} and exhaustive 0/64 binary N=4 graph proof."
+      "summary": "Universal Pless power-moment obstruction for all p >= 2: even N >= 2p^2 and odd N >= 2p^2+2p+1 impossible."
     },
     {
       "id": "T1d",
@@ -52,7 +53,7 @@
         "Quot.sound"
       ],
       "deps": [],
-      "summary": "Torsion Singleton p-rank forcing (dim G[2] = N) and additive F_4-MDS impossibility (N=7 A_6=-21, odd N>=9)."
+      "summary": "Binary commuting-weight homomorphism, exact Rains shadow obstructions at N in {4,7,9,11}, and exhaustive 0/64 binary N=4 graph proof."
     },
     {
       "id": "T1e",
@@ -70,7 +71,7 @@
         "T1c",
         "T1d"
       ],
-      "summary": "Complete even-d cyclic Z_{2l}-stabilizer dichotomy (N in {2,3,5,6}) and Z_4 vs F_4 separation at (4,4)."
+      "summary": "Torsion Singleton forcing (dim G[2]=N), additive F_4-MDS obstructions (N=7 A_6=-21, odd N>=9), even-d dichotomy, and Z_4 vs F_4 CSS separation at (4,4)."
     },
     {
       "id": "T2a",
@@ -83,7 +84,7 @@
         "Quot.sound"
       ],
       "deps": [],
-      "summary": "Trace-nonconstant coset lemma & affine transversal unique intersection for maximal-cardinality t-RQLS."
+      "summary": "General Trace-Spanning Maximal-Cardinality Theorem over ANY abstract finite field (F, +, *, tr) for two-frequency t-RQLS."
     },
     {
       "id": "T2b",
@@ -98,7 +99,7 @@
       "deps": [
         "T2a"
       ],
-      "summary": "Kernel-checked certificates for 2-RQLS(9), 3-RQLS(11), 4-RQLS(13), and char-2 3-RQLS(16)."
+      "summary": "Kernel-checked certificates for 2-RQLS(9), 3-RQLS(11), 4-RQLS(13), and char-2 3-RQLS(16) (0 off-diagonal collinear pairs)."
     },
     {
       "id": "T2c",
@@ -113,7 +114,7 @@
       "deps": [
         "T2b"
       ],
-      "summary": "Direct-product composite lifting theorem (instantiated at 3-RQLS(55))."
+      "summary": "Universal direct-product lifting: BOTH untwisted Q_1 x Q_2 (3-RQLS(143)) and unitary-twisted Q_1 x_D C_2 (3-RQLS(55) with twistSep witness)."
     },
     {
       "id": "T2d",
@@ -125,7 +126,7 @@
         "Quot.sound"
       ],
       "deps": [],
-      "summary": "Zero-gap F_8 obstruction: every orthomorphism fixing 0 is F_2-linear (0/4,872 nonlinear)."
+      "summary": "Zero-gap F_8 obstruction: every orthomorphism fixing 0 is F_2-linear (0/4,872 nonlinear permutations)."
     },
     {
       "id": "T3a",
@@ -134,10 +135,11 @@
       "file": "lean/QPRigidity/MagicGeometry.lean",
       "axioms": [
         "propext",
+        "Classical.choice",
         "Quot.sound"
       ],
       "deps": [],
-      "summary": "Gurvits-Barnum Cor. 3 exact identity & 2-qubit rational witnesses rho_ent, rho_sep."
+      "summary": "Gurvits-Barnum Cor. 3 exact identity (ASTAB subset AWP subseteq ASEP odd p) & 2-qubit rational witnesses rho_ent, rho_sep."
     },
     {
       "id": "T3b",
@@ -146,12 +148,13 @@
       "file": "lean/QPRigidity/MagicGeometry.lean",
       "axioms": [
         "propext",
+        "Classical.choice",
         "Quot.sound"
       ],
       "deps": [
         "T3a"
       ],
-      "summary": "Exact closed-form circumradii R^2(ASTAB_{2,2}) = 3(13+4*sqrt(3))/484 and R^2(ASTAB_{1,3}) = (7-3*sqrt(5))/6."
+      "summary": "Universal global polytope optimality in Z[sqrt(3)] & Z[sqrt(5)] for R^2(ASTAB_{2,2}) = 3(13+4*sqrt(3))/484 and R^2(ASTAB_{1,3}) = (7-3*sqrt(5))/6."
     },
     {
       "id": "T3c",
@@ -163,7 +166,7 @@
         "Quot.sound"
       ],
       "deps": [],
-      "summary": "Symplectic Marginal Descent: C_n <= (7*4^n + 8)/(15*2^n) and exact 15/7x squared-inball gain for all n >= 2."
+      "summary": "General finite uniform-covering double-counting theorem + Symplectic Marginal Descent (C_n <= (7*4^n + 8)/(15*2^n), exact 15/7x inball gain)."
     },
     {
       "id": "T3d",
@@ -172,10 +175,11 @@
       "file": "lean/QPRigidity/MagicGeometry.lean",
       "axioms": [
         "propext",
+        "Classical.choice",
         "Quot.sound"
       ],
       "deps": [],
-      "summary": "Clifford-Reynolds Degree-2 RLT+SOS Barrier: M >= 4^n - 1 for all n >= 1."
+      "summary": "First-principles multivariate polynomial Clifford-Reynolds Degree-2 RLT+SOS Barrier: M >= 4^n - 1 for ALL n >= 1."
     },
     {
       "id": "ALL",
@@ -195,7 +199,7 @@
         "T3c",
         "T3d"
       ],
-      "summary": "Unified Palomar Challenge-Solution master conjunction across all three pillars."
+      "summary": "Unified Palomar Challenge-Solution master conjunction across all 13 pillar theorems."
     },
     {
       "id": "NV1",
@@ -208,14 +212,14 @@
         "Quot.sound"
       ],
       "deps": [
-        "T1a",
-        "T1b"
+        "T1b",
+        "T1c"
       ],
-      "summary": "Concrete Prism_6 AME(6,12), C_5 AME(5,6), and inhabited Pless specs."
+      "summary": "Concrete Prism_6 AME(6,12), W_5 AME(6,12), C_5 AME(5,6), and inhabited Pless specs."
     },
     {
       "id": "NV2",
-      "decl": "QPRigidity.NonVacuity.nonvacuity_pillar2_rqls55",
+      "decl": "QPRigidity.NonVacuity.nonvacuity_pillar2_rqls_lifts",
       "pillar": "Non-Vacuity",
       "file": "lean/QPRigidity/NonVacuity.lean",
       "axioms": [
@@ -227,7 +231,7 @@
         "T2b",
         "T2c"
       ],
-      "summary": "Concrete inhabited 3-RQLS(55) from 3-RQLS(11) x ClassicalMOLS(5)."
+      "summary": "Concrete inhabited 3-RQLS(143) (untwisted 11 x 13) AND 3-RQLS(55) (twisted 11 x_D 5)."
     },
     {
       "id": "NV3",
@@ -236,14 +240,16 @@
       "file": "lean/QPRigidity/NonVacuity.lean",
       "axioms": [
         "propext",
+        "Classical.choice",
         "Quot.sound"
       ],
       "deps": [
         "T3a",
+        "T3b",
         "T3c",
         "T3d"
       ],
-      "summary": "Inhabited witnesses for Gurvits-Barnum D=9, SMD n=3, and RLT barrier n=2."
+      "summary": "Inhabited witnesses for Gurvits-Barnum D=9, both global ASTAB theorems, SMD n=3, and pointwise polynomial RLT barrier (n=1, K=6, M=3)."
     },
     {
       "id": "ADV",
@@ -252,16 +258,17 @@
       "file": "lean/QPRigidity/AdversarialTests.lean",
       "axioms": [
         "propext",
-        "Quot.sound"
+        "Quot.sound",
+        "Classical.choice"
       ],
       "deps": [
-        "T1a",
         "T1b",
+        "T1c",
         "T2d",
         "T3b",
         "T3d"
       ],
-      "summary": "6 concrete boundary refutations (Path_5, N=8/13 Pless, F_8 swap67, Deg-2 RLT M=14, 2q ASTAB outside GB ball)."
+      "summary": "6 concrete boundary refutations (Path_5, N=8/13 Pless, F_8 swap67, pointwise Deg-2 RLT M=14, 2q ASTAB outside GB ball)."
     }
   ]
 }

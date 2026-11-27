@@ -1,13 +1,15 @@
-# Quantum Phase-Space Rigidity (0TH-2026-020)
+# Quantum Phase-Space Rigidity (`0TH-2026-020`, v2.0.0)
 
 > Discrete Symplectic Phase-Space Rigidity: Complete Cyclic Stabilizer AME Dichotomy, Maximal-Cardinality Resolvable Quantum Latin Squares, and Stabilizer-Polytope Magic Geometry.
 > Author: Alexander Stephen Donahue (ORCID 0009-0006-8168-9648, Independent Researcher, Spokane, WA, USA).
 
 ## Key Files
-- [README.md](README.md): Executive summary, verbatim Lean 4.35.0 `#print axioms` audit, and quickstart commands.
-- [CLAIMS.md](CLAIMS.md): Epistemic Claims Ledger separating `[LEAN-6K]`, `[EXACT-COMP]`, `[PAPER-PROOF]`, and `[OPEN]`.
-- [docs/statement-fidelity.md](docs/statement-fidelity.md): Line-by-line semantic audit of every Lean 4 theorem against the white paper.
-- [paper/main.tex](paper/main.tex): Complete AMS-LaTeX manuscript with full proofs and 4 vector PDF figures.
-- [lean/PalomarSolution.lean](lean/PalomarSolution.lean): Zero-Mathlib Lean 4.35.0 proof bundle audited by 6 independent kernels.
-- [data/certificates.json](data/certificates.json): Machine-verified exact certificate bundle across all 7 engines.
-- [HARDENING_LOG.md](HARDENING_LOG.md): 3 × 1,000-check systematic hardening audit log across all 10 finding classes.
+- [README.md](README.md): Executive summary, visual overview, verbatim Lean 4.35.0 `#print axioms` audit, and live-tested quickstart.
+- [CLAIMS.md](CLAIMS.md): Epistemic Claims Ledger aligned 1-to-1 with `lean/Challenge.lean`, separating `[LEAN-6K]`, `[EXACT-COMP]`, `[PAPER-PROOF]`, and `[OPEN]`.
+- [docs/statement-fidelity.md](docs/statement-fidelity.md): Line-by-line semantic audit of every Lean 4 theorem against `paper/main.tex`.
+- [docs/configuration.md](docs/configuration.md): Environment variables (`REQUIRE_ALL_ENGINES`, `PYTHONPATH`, `QPR_NO_ASM`, `FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION`).
+- [paper/main.tex](paper/main.tex): Complete AMS-LaTeX manuscript with full self-contained `\begin{proof}` blocks for all 13 theorems (`T1a`–`T3d`), 25 live-verified references, and 4 vector PDF figures.
+- [lean/PalomarSolution.lean](lean/PalomarSolution.lean): Zero-Mathlib Lean 4.35.0 proof bundle (`warningAsError = true`), audited by 6 independent kernels and the 311-declaration whole-module `lean/SweepAllAxioms.lean`.
+- [data/certificates.json](data/certificates.json): Machine-verified exact certificate bundle across all 7 engines (including Rust's 1,770 facet pairs, 240 CNC $m=1$ vertices, and 336 $n=3$ 4D symplectic subspaces).
+- [HARDENING_LOG.md](HARDENING_LOG.md): Full 3 × 1,000-check forensic hardening audit log across all 10 finding classes.
+- [HARDENING_INDEX.md](HARDENING_INDEX.md): Auto-generated index & Table of Contents of all 1,000 genuinely unique, zero-padding checks.

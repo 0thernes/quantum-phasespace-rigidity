@@ -34,38 +34,23 @@ static uint32_t symp2(uint32_t a, uint32_t b) {
     return qpr_asm_symp_f2(x1, z1, x2, z2);
 }
 
-/* Count Y factors (both x_i=1 and z_i=1) in a 2-qubit Pauli label p in 1..15 */
-static int y_count2(uint32_t p) {
-    int y = 0;
-    if ((p & 3U) == 3U) y++;
-    if (((p >> 2) & 3U) == 3U) y++;
-    return y;
-}
-
+/* Enumerate all 60 pure 2-qubit stabilizer projector Pauli vectors (15 non-identity Paulis). */
 static int build_60_stab_facets(stab_facet2_t facets[60]) {
     int n_facets = 0;
-    /* Enumerate unordered triples {p1 < p2 < p3} with p1 ^ p2 == p3 and symp(p1, p2) == 0 */
     for (uint32_t p1 = 1; p1 < 16U; ++p1) {
         for (uint32_t p2 = p1 + 1U; p2 < 16U; ++p2) {
             uint32_t p3 = p1 ^ p2;
             if (p3 <= p2) continue;
             if (symp2(p1, p2) != 0U) continue;
-            /* Phase sign for P_p1 * P_p2 = eta * P_p3 (eta in {+1, -1} since they commute):
-               For single-qubit commuting Paulis, P_a P_b = P_{a^b} ALWAYS (if one is I or a==b);
-               for 2 qubits commuting with anticommuting on BOTH qubits (e.g. X1 X2 and Z1 Z2):
-               (X1 X2)(Z1 Z2) = (-i Y1)(-i Y2) = - Y1 Y2!
-               General exact sign: (-1)^{(y(p1)+y(p2)-y(p3))/2} * (-1)^{#anticommuting single-qubit pairs / 2}?
-               Even simpler: compute directly from single-qubit Pauli table! */
+            /* Phase sign for P_p1 * P_p2 = eta * P_p3 (eta in {+1, -1} since they commute). */
             int phase_i = 0; /* power of i mod 4 */
             for (int q = 0; q < 2; ++q) {
                 uint32_t a = (p1 >> (2 * q)) & 3U; /* 0=I, 1=X, 2=Z, 3=Y */
                 uint32_t b = (p2 >> (2 * q)) & 3U;
                 if (a == 0U || b == 0U || a == b) continue;
-                /* X*Z = -i Y (3), Z*X = +i Y (1), X*Y = +i Z (1), Y*X = -i Z (3), Y*Z = +i X (1), Z*Y = -i X (3) */
                 if ((a == 1U && b == 2U) || (a == 3U && b == 1U) || (a == 2U && b == 3U)) phase_i += 3;
                 else phase_i += 1;
             }
-            (void)y_count2;
             int eta = ((phase_i & 3) == 0) ? 1 : -1;
             const int s1[4] = {1, 1, -1, -1};
             const int s2[4] = {1, -1, 1, -1};
@@ -83,7 +68,7 @@ static int build_60_stab_facets(stab_facet2_t facets[60]) {
 
 int qpr_moonlab_qrng_audit(qrng_audit_report_t *out) {
     uint8_t seed[48];
-    const char *domain = "quantum-phasespace-rigidity-v1.0.0-0TH-2026-020";
+    const char *domain = "quantum-phasespace-rigidity-v2.0.0-0TH-2026-020";
     uint8_t h1[32], h2[32];
     sha3_256((const uint8_t *)domain, strlen(domain), h1);
     sha3_256(h1, 32, h2);

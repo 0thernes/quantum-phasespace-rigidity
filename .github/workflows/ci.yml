@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-name: CI — 6-Kernel Lean 4 + 7-Engine Polyglot + AMS-LaTeX + Build Standard
+name: CI — 6-Kernel Lean 4 + Unified 7-Engine Polyglot + Security + AMS-LaTeX
 
 on:
   push:
@@ -11,10 +11,10 @@ permissions:
 
 jobs:
   lean-6kernel:
-    name: Lean 4.35.0 (6 Independent Proof Kernels + Axiom Lock & Negative Test)
+    name: Lean 4.35.0 (6 Independent Proof Kernels + Whole-Module Axiom Sweep)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install bubblewrap for paranoid kernel sandboxing
         run: |
@@ -40,12 +40,13 @@ jobs:
           lake check --paranoid
           lake comparator --config comparator.json --paranoid
 
-      - name: Verify #print axioms strictly within [propext, Classical.choice, Quot.sound]
+      - name: Verify #print axioms & whole-module Lean.collectAxioms sweep
         working-directory: lean
         run: |
           lake env lean VerifyAxioms.lean > /tmp/ci_axioms.txt
           cat /tmp/ci_axioms.txt
           diff -u ../results/lean_axioms.txt /tmp/ci_axioms.txt
+          lake env lean SweepAllAxioms.lean
 
       - name: Negative Axiom Test (ensure unauthorized axiom is caught)
         working-directory: lean
@@ -70,7 +71,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy
@@ -80,29 +81,40 @@ jobs:
           cargo clippy --all-targets -- -D warnings
           cargo test --release
           cargo run --release -- --verify-all
+      - name: Upload Ubuntu Rust binary for unified differential verification
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v5
+        with:
+          name: bin-rust-linux
+          path: rust/target/release/qpr-rust
 
   zig-matrix:
     name: Zig comptime + exhaustive F_8/F_7 engine
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: mlugg/setup-zig@v2
         with:
           version: master
       - name: Test & verify Zig engine
         working-directory: zig
-        continue-on-error: false
         run: |
           zig version
           zig test src/main.zig
-          zig build-exe -OReleaseSafe src/main.zig -femit-bin=qpr_zig
-          ./qpr_zig --verify-all
+          mkdir -p zig-out
+          zig build-exe -OReleaseSafe src/main.zig -femit-bin=zig-out/qpr_zig
+          ./zig-out/qpr_zig --verify-all
+      - name: Upload Ubuntu Zig binary for unified differential verification
+        uses: actions/upload-artifact@v5
+        with:
+          name: bin-zig-linux
+          path: zig/zig-out/qpr_zig
 
   cpp-c-asm-sanitizers:
     name: C++20 Z[zeta_p] + ISO C11 + x86-64 NASM + Moonlab + ASan/UBSan + 100k Fuzz
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install NASM
         run: sudo apt-get update && sudo apt-get install -y nasm
       - name: Build & verify C++20 cyclotomic engine (with ASan/UBSan)
@@ -130,32 +142,80 @@ jobs:
             -o build/fuzz_qpr tests/fuzz_qpr.c build/pauli_popcnt.o
           ./build/qpr_c --verify-all
           ./build/fuzz_qpr 100000
+      - name: Upload Ubuntu C++20 & C11+NASM binaries for unified differential verification
+        uses: actions/upload-artifact@v5
+        with:
+          name: bin-cpp-c-linux
+          path: |
+            cpp/build/qpr_cpp
+            c/build/qpr_c
 
-  python-eshkol-differential:
-    name: Python 3.12 Exact Oracle + Eshkol Dual-AD + Hypothesis + 100% Mutation + Ruff/Mypy
+  unified-7engine-differential:
+    name: Unified 7-Engine Differential (REQUIRE_ALL_ENGINES=1) + 12/12 Mutation + Schema
     runs-on: ubuntu-latest
+    needs: [rust-matrix, zig-matrix, cpp-c-asm-sanitizers]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - name: Install dev dependencies
+      - name: Download all compiled native engine binaries
+        uses: actions/download-artifact@v5
+        with:
+          name: bin-rust-linux
+          path: rust/target/release
+      - uses: actions/download-artifact@v5
+        with:
+          name: bin-zig-linux
+          path: zig/zig-out
+      - uses: actions/download-artifact@v5
+        with:
+          name: bin-cpp-c-linux
+          path: .
+      - name: Ensure executable permissions on downloaded binaries
+        run: |
+          chmod +x rust/target/release/qpr-rust zig/zig-out/qpr_zig cpp/build/qpr_cpp c/build/qpr_c
+      - name: Install Python dev & schema dependencies
         run: pip install -e ".[dev]"
-      - name: Run Eshkol Dual-AD, quickstart, pytest, mutation suite, ruff, mypy
+      - name: Run Eshkol AD, quickstart, REQUIRE_ALL_ENGINES=1 pytest, 12/12 mutation, ruff, mypy
         run: |
           python eshkol/run_eshkol_ad.py --verify-all
           PYTHONPATH=src:. python examples/quickstart_demo.py
-          PYTHONPATH=src:. pytest -v tests/test_all.py
+          REQUIRE_ALL_ENGINES=1 PYTHONPATH=src:. pytest -v tests/test_all.py
           PYTHONPATH=src:. python scripts/mutate.py
           ruff check src tests scripts reference examples eshkol
           mypy src reference
 
-  latex-and-provenance:
-    name: AMS-LaTeX Tectonic Build + Clean-Room arXiv Check + Build Standard Audit
+  security-supply-chain:
+    name: Secret Scan (gitleaks) + Vulnerability Audit (osv-scanner) + Timestamps
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Run gitleaks secret scan across full git history
+        run: |
+          GITLEAKS_VER="8.24.2"
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VER}/gitleaks_${GITLEAKS_VER}_linux_x64.tar.gz" | tar -xz -C /tmp gitleaks
+          /tmp/gitleaks detect --source . --verbose --no-banner
+      - name: Run OSV-Scanner dependency vulnerability audit
+        run: |
+          OSV_VER="2.0.1"
+          curl -sSfL "https://github.com/google/osv-scanner/releases/download/v${OSV_VER}/osv-scanner_linux_amd64" -o /tmp/osv-scanner
+          chmod +x /tmp/osv-scanner
+          /tmp/osv-scanner scan --lockfile=requirements.lock.txt --lockfile=rust/Cargo.lock
+      - name: Verify RFC 3161 (OpenSSL) & Bitcoin OpenTimestamps cryptographic anchors
+        run: python3 scripts/stamp_timestamps.py --verify
+
+  latex-and-provenance:
+    name: AMS-LaTeX Tectonic + Clean-Room arXiv + Build Standard v1.2.0 + 1000-Check Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Install Tectonic
@@ -164,12 +224,13 @@ jobs:
           echo "$PWD" >> "$GITHUB_PATH"
       - name: Compile AMS-LaTeX + Clean-Room arXiv Tarball & Zero-Overfull Audit
         run: python scripts/build_arxiv_bundle.py
-      - name: Run Build Standard v1.2.0 Audit & Blueprint Build
+      - name: Run Build Standard v1.2.0 Audit, Zero-Padding 1,000-Check Audit, & Blueprint
         run: |
           python scripts/build_blueprint.py
+          python scripts/hardening_audit.py
           bash scripts/audit-repo.sh
       - name: Upload Frozen PDF & arXiv Tarball
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: white-paper-and-arxiv-bundle
           path: |

@@ -10,10 +10,11 @@ import QPRigidity.AdversarialTests
 # Strict Kernel Axiom Audit (`VerifyAxioms.lean`)
 
 Audits exact transitive axiom footprints for all 14 Palomar headline targets
-(`T1a`–`T3d` + `ALL`), 3 pillar non-vacuity witnesses, and 6 adversarial boundary
-refutations (23 declarations total). Every declaration MUST stay strictly inside
-`{propext, Classical.choice, Quot.sound}` (zero `sorryAx`, zero `Lean.ofReduceBool`,
-zero custom axioms).
+(`T1a`–`T3d` + `ALL`), 3 pillar non-vacuity witnesses (including untwisted `3-RQLS(143)`
+and sharp polynomial `n = 1` RLT witness), and 6 adversarial boundary refutations
+(23 declarations total). Every declaration MUST stay strictly inside
+`{propext, Classical.choice, Quot.sound}` (zero `sorryAx`, zero `_native` axioms,
+zero custom axioms). Exhaustive whole-module sweep is performed by `SweepAllAxioms.lean`.
 -/
 
 #print axioms QPRigidity.Palomar.prove_t1a
@@ -32,7 +33,7 @@ zero custom axioms).
 #print axioms QPRigidity.Palomar.prove_all_rigidity_theorems
 
 #print axioms QPRigidity.NonVacuity.nonvacuity_pillar1_ame
-#print axioms QPRigidity.NonVacuity.nonvacuity_pillar2_rqls55
+#print axioms QPRigidity.NonVacuity.nonvacuity_pillar2_rqls_lifts
 #print axioms QPRigidity.NonVacuity.nonvacuity_pillar3_magic
 
 #print axioms QPRigidity.AdversarialTests.refute_path5_ame

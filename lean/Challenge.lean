@@ -28,10 +28,11 @@ public abbrev T1aStmt : Prop :=
     (∃ Γ₂ : GraphAdj N, IsKUniformGraph b Γ₂ k) →
     ∃ Γ : GraphAdj N, IsKUniformGraph (a * b) Γ k)
 
-/-- T1b: Universal unimodular canonical graph states `K_2, K_3, C_5, K_3 □ K_2` are `AME(N, d)` for ALL `d ≥ 2`. -/
+/-- T1b: Universal unimodular canonical graph states `K_2, K_3, C_5, K_3 □ K_2, W_5` are `AME(N, d)` for ALL `d ≥ 2`. -/
 public abbrev T1bStmt : Prop :=
   ∀ d : Nat, d ≥ 2 →
-    IsAMEGraph d graphK2 ∧ IsAMEGraph d graphK3 ∧ IsAMEGraph d graphC5 ∧ IsAMEGraph d graphPrism6
+    IsAMEGraph d graphK2 ∧ IsAMEGraph d graphK3 ∧ IsAMEGraph d graphC5 ∧
+    IsAMEGraph d graphPrism6 ∧ IsAMEGraph d graphWheel5
 
 /-- T1c: Pure-integer Pless power-moment obstruction for ALL `p ≥ 2` (even `k < p²`, odd `k < p² + p`). -/
 public abbrev T1cStmt : Prop :=
@@ -55,6 +56,13 @@ public abbrev T1eStmt : Prop :=
   (∀ {m e N : Nat} (a : Fin m → Nat), e ≥ 1 → (∀ i, a i ≤ e) → sumFin m a = e * N →
     m ≥ N ∧ (m = N → ∀ i, a i = e)) ∧
   (∀ {k : Nat} {B : Nat → Nat}, k ≥ 4 → AdditiveMDSOdd4 k B → False) ∧
+  (∀ {B : Fin 8 → Nat} {A6 : Nat},
+    B ⟨0, by decide⟩ = 1 → B ⟨1, by decide⟩ = 0 → B ⟨2, by decide⟩ = 0 → B ⟨3, by decide⟩ = 0 →
+    choose 7 3 + B ⟨4, by decide⟩ = choose 7 3 * 4 →
+    choose 7 2 + B ⟨4, by decide⟩ * 3 + B ⟨5, by decide⟩ = choose 7 2 * 16 →
+    choose 7 1 + B ⟨4, by decide⟩ * 3 + B ⟨5, by decide⟩ * 2 + B ⟨6, by decide⟩ = choose 7 1 * 64 →
+    1 + B ⟨4, by decide⟩ + B ⟨5, by decide⟩ + B ⟨6, by decide⟩ + B ⟨7, by decide⟩ = 256 →
+    sumFinInt 8 (fun w => (B w : Int) * krawtchouk4 6 w.val 7) = 256 * (A6 : Int) → False) ∧
   (∀ {d : Nat}, d ≥ 2 → 2 ∣ d → ∀ Γ : GraphAdj 4, ¬ IsAMEGraph d Γ) ∧
   ((∀ Γ : GraphAdj 4, ¬ IsAMEGraph 4 Γ) ∧
    (∀ a b c e a' b' c' e' : Fin 4,
@@ -96,10 +104,15 @@ public abbrev T2bStmt : Prop :=
    isBijectiveFin (fun x : Fin 16 => gf16Add (mu16 x) (gf16Mul ⟨10, by decide⟩ x)) = true ∧
    (∀ a b : Fin 16, (a ≠ 0 ∨ b ≠ 0) → ∃ z : Fin 16, gf16Trace (gf16Add (gf16Mul a (mu16 z)) (gf16Mul b z)) = true))
 
-/-- T2c: Universal `t`-resolvable direct-product lifting theorem. -/
+/-- T2c: Universal `t`-resolvable direct-product lifting: BOTH untwisted quantum-quantum `Q₁ ⊗ Q₂`
+and unitary-twisted quantum-classical `Q₁ ⊗_D C₂` (with explicit twist-separation witness). -/
 public abbrev T2cStmt : Prop :=
-  ∀ {v1 v2 t : Nat}, v2 > 0 → ResolvableQLSSpec v1 t → ClassicalMOLSRes v2 t →
-    Nonempty (ResolvableQLSSpec (v1 * v2) t)
+  (∀ {v1 v2 t : Nat}, v2 > 0 → ResolvableQLSSpec v1 t → ResolvableQLSSpec v2 t →
+    Nonempty (ResolvableQLSSpec (v1 * v2) t)) ∧
+  (∀ {v1 v2 t : Nat}, v2 > 0 → ResolvableQLSSpec v1 t → (C2 : ClassicalMOLSRes v2 t) →
+    (twistSep : Fin v2 → Fin v2 → Fin v2 → Fin v2 → Prop) →
+    (∀ i2 j2 i2' j2', (i2 ≠ i2' ∨ j2 ≠ j2') → C2.sym i2 j2 = C2.sym i2' j2' → twistSep i2 j2 i2' j2') →
+    Nonempty (ResolvableQLSSpec (v1 * v2) t))
 
 /-- T2d: Exhaustive `F_8` non-linear orthomorphism & direction obstruction. -/
 public abbrev T2dStmt : Prop :=
@@ -115,26 +128,46 @@ public abbrev T3aStmt : Prop :=
   (quadPos 3 (11 + 3) (3 - 11) ∧ quadPos 5 20 (6 - 14) ∧ (((11 : Int) - 3) * (11 - 3) > 4 * 3 * 3)) ∧
   ((((8 : Int) - 4) * (8 - 4) < 4 * 7 * 1) ∧ quadPos 3 (-(8 + 1)) (8 - 1))
 
-/-- T3b: Exact 2-qubit & 1-qutrit `ASTAB` circumradii + universal ordered-4 endpoint convexity lemma. -/
+/-- T3b: Universal global polytope optimality of 2-qubit (`Z[√3]`) & 1-qutrit (`Z[√5]`) `ASTAB_0`
+circumradii + exact extremal vertex bounds. -/
 public abbrev T3bStmt : Prop :=
-  (∀ l1 l2 l3 l4 M : Int, l1 + l2 + l3 + l4 = M → l1 ≥ l2 → l2 ≥ l3 → l3 ≥ l4 →
-    l1 * l1 + l2 * l2 + l3 * l3 + l4 * l4 ≤ (l1 + l4) * M - 4 * l1 * l4) ∧
+  (∀ l1 l2 l3 l4 M : Int, M > 0 → l1 + l2 + l3 + l4 = M → l1 ≥ l2 → l2 ≥ l3 → l3 ≥ l4 → l4 ≥ 0 →
+    quadNonneg 3 (l1 + l4) (l4 - l1) →
+    quadNonneg 3 (40 * (M * M) - 121 * (l1 * l1 + l2 * l2 + l3 * l3 + l4 * l4)) (3 * (M * M))) ∧
+  (∀ l1 l2 l3 M : Int, M > 0 → l1 + l2 + l3 = M → l1 ≥ l2 → l2 ≥ l3 → l3 ≥ 0 →
+    2 * l1 ≤ M → quadNonneg 5 (2 * l3 - 3 * l1) l1 →
+    quadNonneg 5 (3 * (M * M) - 2 * (l1 * l1 + l2 * l2 + l3 * l3)) (-(M * M))) ∧
   (quadPos 3 (36 * 13 - 484) (36 * 4)) ∧
   (quadPos 5 27 (-12) ∧ quadPos 5 (-6) 3)
 
-/-- T3c: Unconditional Symplectic Marginal Descent bound & exact `15/7` squared-inball gain for ALL `n ≥ 2`. -/
+/-- T3c: General finite uniform-covering double-counting theorem + unconditional Symplectic Marginal
+Descent bound & exact `15/7` squared-inball gain for ALL `n ≥ 2`. -/
 public abbrev T3cStmt : Prop :=
+  (∀ {P K m r B : Nat} (inSub : Fin K → Fin P → Bool) (f : Fin P → Nat),
+    r > 0 →
+    (∀ k : Fin K, countFin P (fun p => inSub k p) = m) →
+    (∀ p : Fin P, countFin K (fun k => inSub k p) = r) →
+    (∀ k : Fin K, sumFin P (fun p => if inSub k p then f p else 0) ≤ B) →
+    m * sumFin P f ≤ B * P) ∧
   (∀ n S Q : Nat, n ≥ 2 → Q > 0 → 15 * S ≤ 7 * (4 ^ n - 1) * Q →
     15 * (Q + S) ≤ (7 * 4 ^ n + 8) * Q ∧ (7 * 4 ^ n + 8) * Q < 15 * 4 ^ n * Q) ∧
   (∀ n : Nat, n ≥ 1 → 15 * ((7 * 4 ^ n + 8) - 15) = 7 * (15 * (4 ^ n - 1)))
 
-/-- T3d: Exact Clifford-Reynolds Degree-2 RLT+SOS Barrier (`M ≥ 4ⁿ - 1` for ALL `n ≥ 1`). -/
+/-- T3d: First-principles multivariate polynomial Degree-2 RLT+SOS Barrier (`M ≥ 4ⁿ - 1` for ALL `n ≥ 1`
+and ANY finite stabilizer facet system `s` with pairwise overlaps `≥ -1`). -/
 public abbrev T3dStmt : Prop :=
-  ∀ (n : Nat), n ≥ 1 →
-  ∀ (M Λ_tot Μ_tot A_sq Q_rlt B_sq : Int),
-    Λ_tot ≥ 0 → Μ_tot ≥ 0 → A_sq ≥ 0 → B_sq ≥ 0 →
-    M = Λ_tot + Μ_tot + A_sq → Q_rlt ≥ -Λ_tot →
-    -((4 ^ n - 1 : Nat) : Int) = Q_rlt + B_sq →
+  ∀ (n K R : Nat), n ≥ 1 →
+  ∀ (s : Fin K → Fin (4 ^ n - 1) → Int)
+    (lam : Fin K → Fin K → Int)
+    (mu : Fin K → Int)
+    (c : Fin R → Int)
+    (v : Fin R → Fin (4 ^ n - 1) → Int)
+    (M : Int),
+    (∀ k l, lam k l ≥ 0) →
+    (∀ k, mu k ≥ 0) →
+    (∀ k l, sumFinInt (4 ^ n - 1) (fun p => s k p * s l p) ≥ -1) →
+    (∀ x : Fin (4 ^ n - 1) → Int,
+      M - sumFinInt (4 ^ n - 1) (fun p => x p * x p) = polyRltSos s lam mu c v x) →
     M ≥ ((4 ^ n - 1 : Nat) : Int)
 
 /-- Master conjunction of all 13 headline theorems across Pillars I, II, and III. -/

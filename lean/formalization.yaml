@@ -2,7 +2,7 @@
 schema_version: "1.0"
 id: "0TH-2026-020"
 repository: "https://github.com/0thernes/quantum-phasespace-rigidity"
-version: "1.0.0"
+version: "2.0.0"
 title: "Quantum Phase-Space Rigidity: Cyclic Weyl-Heisenberg AME Dichotomy, Maximal-Cardinality t-Resolvable Quantum Latin Squares, and Absolutely Stabilizer Magic Geometry"
 author:
   name: "Alexander Stephen Donahue"

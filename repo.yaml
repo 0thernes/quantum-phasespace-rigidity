@@ -1,74 +1,42 @@
+# yaml-language-server: $schema=./repo-standard.schema.json
 # SPDX-License-Identifier: Apache-2.0
-schema_version: "1.2.0"
+# Project manifest for the Build Standard for LLMs v1.2.0 (strict Draft 2020-12 compliant).
+standard: "1.2.0"
 name: "quantum-phasespace-rigidity"
-slug: "quantum-phasespace-rigidity"
-archive_id: "0TH-2026-020"
-version: "1.0.0"
-title: "Quantum Phase-Space Rigidity: Cyclic Weyl-Heisenberg AME Dichotomy, Maximal-Cardinality t-Resolvable Quantum Latin Squares, and Absolutely Stabilizer Magic Geometry"
-author:
-  name: "Alexander Stephen Donahue"
-  orcid: "0009-0006-8168-9648"
-  affiliation: "Independent Researcher, Spokane, WA, USA"
-  email: "0_0@0thernes.art"
-repository: "https://github.com/0thernes/quantum-phasespace-rigidity"
-homepage: "https://0thernes.github.io/quantum-phasespace-rigidity/"
-license:
-  code: "Apache-2.0"
-  documentation: "CC-BY-4.0"
-  third_party_vendored: "MIT (tsotchke/moonlab@cd3b2347e3739327548708073d7e4ac710cc6a6c)"
-kind: "research-formalization-polyglot"
-languages:
-  - "Lean 4.35.0 (zero-Mathlib)"
-  - "Rust 1.94.1"
-  - "Zig 0.17.0"
-  - "C++20"
-  - "ISO C11"
-  - "x86-64 NASM Assembly"
-  - "Eshkol (forward-mode AD)"
-  - "Python 3.12"
-  - "AMS-LaTeX"
-workflow:
-  branch: "main"
-  direct_push: true
-  branch_protection: false
-  commit_signing: false
-  ci_informational: true
-  hardening_cycles_target: 3
-  hardening_checks_per_cycle: 1000
-verification:
-  lean_kernels: 6
-  comparator_flags: "--paranoid"
-  zero_sorry: true
-  zero_native_decide: true
-  allowed_axioms: ["propext", "Classical.choice", "Quot.sound"]
-  exact_polyglot_engines: ["rust", "zig", "cpp", "c", "asm", "eshkol", "python"]
-  mutation_testing: "scripts/mutate.py"
-  axiom_drift_guard: "scripts/check_readme_axioms.py"
-  citation_audit: "scripts/check_citations.py"
-  timestamps: ["timestamps/MANIFEST.sha256.tsr", "timestamps/MANIFEST.sha256.ots"]
-
+description: "Discrete Symplectic Phase-Space Rigidity (0TH-2026-020): zero-Mathlib 6-kernel Lean 4.35.0 formalization, 7-engine polyglot exact verification stack, and AMS-LaTeX white paper."
+owner: "Alexander Stephen Donahue"
+year: 2026
+project_type: research
+stack: [python, rust, zig, c-cpp, other]
 flags:
-  numeric: true
-  formal: false
-  experimental: false
+  public: true
+  package: true
+  visual: true
+  ui: false
+  native: true
+  ai: false
+  personal_data: false
   service: false
   deployed: false
-  perf: false
-  ui: false
-  ai: false
   api: false
+  perf: false
   concurrent: false
+  numeric: true
+  experimental: false
   ml: false
-  personal_data: false
-
+  formal: true
 items:
-  A19: { status: done, note: "GitHub About description, homepage URL, and research topics configured." }
-  B03: { status: done, note: "Zero-float deterministic exact engines (Lean 4, Rust, Zig, C++20, Python) + deterministic seeded Moonlab DRBG." }
-  B05: { status: done, note: "Every theorem in CLAIMS.md maps to falsifiable Lean 4 + polyglot exact checks." }
-  B06: { status: done, note: "6 Lean adversarial boundary refutations, negative CI axiom injection test, Moonlab stuck-zero RCT check, pytest ValueError tests." }
-  B07: { status: done, note: "Regression tests lock SMD n=2 exact bound, Zig stderr capture, and Rains/Pless/F_8 boundaries." }
-  B08: { status: done, note: "Golden verbatim results/lean_axioms.txt diff-locked in CI and data/certificates.json SHA-256 locked." }
-  B11: { status: done, note: "Cross-language differential suite in tests/test_all.py checks Python vs Rust, Zig, C++20, C11+NASM, and Eshkol AD." }
-  B12: { status: done, note: "Independent reference/exact_reference.py oracle cross-checks src/qp_rigidity/oracle.py." }
-  B14: { status: done, note: "Metamorphic symmetries verified: Sp(2n,2) Clifford invariance, radical divisor descent, affine slope permutation invariance." }
-  B20: { status: done, note: "80-digit Decimal + exact Fraction/Z[zeta_p] zero-float arithmetic; C11 QGTL finite-diff vs Eshkol AD verified to 1.7e-11 / 0.0." }
+  A19: {status: done, evidence: "GitHub About/topics", note: "GitHub About description, homepage URL, and research topics configured."}
+  B03: {status: done, evidence: "scripts/verify_all.py", note: "Zero-float deterministic exact engines (Lean 4, Rust, Zig, C++20, Python) plus deterministic seeded Moonlab DRBG."}
+  B05: {status: done, evidence: "CLAIMS.md", note: "Every theorem T1a-T3d in CLAIMS.md maps to falsifiable Lean 4 + polyglot exact checks."}
+  B06: {status: done, evidence: "lean/QPRigidity/AdversarialTests.lean", note: "6 Lean adversarial boundary refutations, negative CI axiom injection test, Moonlab stuck-zero RCT check, pytest ValueError tests."}
+  B07: {status: done, evidence: "tests/test_all.py", note: "Regression tests lock SMD n=2 exact bound, README snippet, repo.yaml schema, and Rains/Pless/F_8 boundaries."}
+  B08: {status: done, evidence: "results/lean_axioms.txt", note: "Golden verbatim results/lean_axioms.txt diff-locked in CI and data/certificates.json SHA-256 locked."}
+  B11: {status: done, evidence: "tests/test_all.py", note: "Unified cross-language differential suite with REQUIRE_ALL_ENGINES=1 in CI checks Python vs Rust, Zig, C++20, C11+NASM, and Eshkol AD."}
+  B12: {status: done, evidence: "reference/exact_reference.py", note: "Independent reference/exact_reference.py oracle cross-checks src/qp_rigidity/oracle.py."}
+  B14: {status: done, evidence: "tests/test_all.py", note: "Metamorphic symmetries verified: Sp(2n,2) Clifford/subspace uniformity, radical divisor descent, affine slope permutation invariance."}
+  B20: {status: done, evidence: "src/qp_rigidity/oracle.py", note: "80-digit Decimal + exact Fraction/Z[zeta_p] zero-float arithmetic; float64 QGTL/Eshkol explicitly tagged numerical_approximation."}
+  B22: {status: done, evidence: "lean/PalomarSolution.lean", note: "Zero-Mathlib Lean 4.35.0 formal proofs verified across 6 independent kernels via lake comparator --paranoid."}
+  B23: {status: n/a, note: "Not a concurrent/distributed protocol; formal verification uses theorem proving in Lean 4.35.0 (B22) rather than TLA+/Alloy state-space model checking."}
+  B24: {status: done, evidence: "rust/src/main.rs", note: "Critical mathematical cores verified in Lean 4.35.0 (zero Mathlib) and zero-dependency #![forbid(unsafe_code)] Rust 1.94."}
+  B25: {status: n/a, note: "Native C/C++/ASM engines are verified via ASan/UBSan (-Werror -pedantic), 100k fuzzing, and cross-language differential checks against Lean 4 + safe Rust rather than Kani/CBMC."}

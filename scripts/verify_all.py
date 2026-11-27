@@ -35,6 +35,7 @@ def main() -> int:
     # 2. Run Python quickstart, pytest (with differential checks), mutation suite, ruff, mypy
     py_env = dict(os.environ)
     py_env["PYTHONPATH"] = f"{REPO / 'src'}{os.pathsep}{REPO}"
+    py_env["REQUIRE_ALL_ENGINES"] = "1"
 
     run([sys.executable, "examples/quickstart_demo.py"], REPO, env=py_env)
     run([sys.executable, "-m", "pytest", "-v", "tests/test_all.py"], REPO, env=py_env)
@@ -81,7 +82,7 @@ def main() -> int:
 
     astab = exact_astab_circumradii(80)
     certs = {
-        "schema_version": "1.0.0",
+        "schema_version": "2.0.0",
         "project": "quantum-phasespace-rigidity",
         "author": "Alexander Stephen Donahue",
         "orcid": "0009-0006-8168-9648",

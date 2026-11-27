@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Alexander Stephen Donahue
-"""Generate 4 publication-grade vector PDF figures (+ web PNGs) from exact computations."""
+"""Generate 4 publication-grade vector PDF figures (+ web PNGs + social preview) from exact computations."""
 from __future__ import annotations
 
 import math
@@ -43,11 +43,11 @@ plt.rcParams.update(
     {
         "font.family": "serif",
         "font.size": 9.5,
-        "axes.titlesize": 10.5,
-        "axes.labelsize": 9.5,
-        "xtick.labelsize": 8.5,
-        "ytick.labelsize": 8.5,
-        "legend.fontsize": 8.2,
+        "axes.titlesize": 10.2,
+        "axes.labelsize": 9.3,
+        "xtick.labelsize": 8.4,
+        "ytick.labelsize": 8.4,
+        "legend.fontsize": 7.6,
         "axes.spines.top": False,
         "axes.spines.right": False,
         "figure.dpi": 220,
@@ -60,14 +60,14 @@ plt.rcParams.update(
 def save_dual(fig: plt.Figure, stem: str) -> None:
     pdf_path = FIG_DIR / f"{stem}.pdf"
     png_path = WEB_ASSETS / f"{stem}.png"
-    fig.savefig(pdf_path, bbox_inches="tight")
-    fig.savefig(png_path, dpi=220, bbox_inches="tight")
+    fig.savefig(pdf_path, bbox_inches="tight", pad_inches=0.12)
+    fig.savefig(png_path, dpi=220, bbox_inches="tight", pad_inches=0.12)
     plt.close(fig)
     print(f"[FIG] Saved {pdf_path.name} and {png_path.name}", flush=True)
 
 
 def make_fig1() -> None:
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.5, 4.0), gridspec_kw={"wspace": 0.28})
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11.2, 4.3), gridspec_kw={"wspace": 0.27})
 
     ns = list(range(2, 13))
     mins = []
@@ -79,32 +79,51 @@ def make_fig1() -> None:
             mins.append(-0.75)
             colors.append(ORANGE)
         else:
-            mins.append(max(min(s_vals), -25.0))
+            mins.append(max(min(s_vals), -22.0))
             colors.append(GREEN if r["feasible"] else VERMILION)
 
-    ax1.bar(ns, [max(v, -22.0) for v in mins], color=colors, edgecolor="#1E293B", linewidth=0.7)
+    ax1.bar(ns, mins, color=colors, edgecolor="#1E293B", linewidth=0.75, width=0.72)
     ax1.axhline(0.0, color="#1E293B", linewidth=0.9)
     ax1.set_xticks(ns)
+    ax1.set_xlim(1.3, 12.7)
     ax1.set_xlabel(r"Number of subsystems $N$")
     ax1.set_ylabel(r"Shadow obstruction index ($\min_j S_j$, clipped at $-22$)")
     ax1.set_title(r"(a) Complete $\mathbb{Z}_{2\ell}$-Stabilizer $\mathrm{AME}(N, 2\ell)$ Dichotomy")
-    ax1.set_ylim(-25.0, 5.8)
+    ax1.set_ylim(-25.5, 6.2)
 
     for n in ns:
         if n in (2, 3, 5, 6):
-            lbl = {2: "Bell", 3: "GHZ", 5: r"$C_5$", 6: r"$\mathrm{Prism}_6$"}[n]
-            ax1.text(n, 0.8, lbl, ha="center", va="bottom", fontsize=7.8, fontweight="bold", color=GREEN)
+            lbl = {2: "Bell", 3: "GHZ", 5: r"$C_5$", 6: r"$\mathrm{Prism}_6$" "\n" r"$W_5$"}[n]
+            ax1.text(n, 0.75, lbl, ha="center", va="bottom", fontsize=7.4, fontweight="bold", color=GREEN)
         elif n == 4:
-            ax1.text(n, -1.6, r"$S_0=-\frac{1}{2}$", ha="center", va="top", fontsize=7.5, color=VERMILION)
+            ax1.text(n, -1.35, r"$S_0=-\frac{1}{2}$", ha="center", va="top", fontsize=7.2, color=VERMILION)
         elif n == 7:
-            ax1.text(n, -1.7, r"$A_6=-21$", ha="center", va="top", fontsize=7.3, color="#B45309")
+            ax1.text(n, -1.45, r"$A_6=-21$", ha="center", va="top", fontsize=7.1, color="#B45309")
         elif n == 8:
-            ax1.text(n, -11.6, r"$-10.5$", ha="center", va="top", fontsize=7.3, color=VERMILION)
+            ax1.annotate(
+                r"$S_{\min}=-\frac{27}{16}$" "\n" r"($A_6=-10.5$)",
+                xy=(8, -1.75),
+                xytext=(7.15, -7.8),
+                ha="center",
+                va="top",
+                fontsize=6.9,
+                color=VERMILION,
+                arrowprops={"arrowstyle": "->", "color": VERMILION, "lw": 0.8},
+            )
         elif n == 9:
-            ax1.text(n, -3.2, r"$-\frac{9}{4}$", ha="center", va="top", fontsize=7.5, color=VERMILION)
+            ax1.annotate(
+                r"$S_1=-\frac{9}{4}$",
+                xy=(9, -2.35),
+                xytext=(8.95, -5.2),
+                ha="center",
+                va="top",
+                fontsize=7.2,
+                color=VERMILION,
+                arrowprops={"arrowstyle": "->", "color": VERMILION, "lw": 0.8},
+            )
         elif n == 11:
             ax1.text(
-                n, -21.2, r"$-\frac{165}{8}$", ha="center", va="top",
+                n, -18.5, r"$-\frac{165}{8}$", ha="center", va="center",
                 fontsize=7.3, color="white", fontweight="bold",
             )
 
@@ -113,7 +132,14 @@ def make_fig1() -> None:
         mpatches.Patch(color=VERMILION, label=r"Rains/Pless negative ($N\in\{4,8,9,10,11,12\}$)"),
         mpatches.Patch(color=ORANGE, label=r"$N=7$: $S_1=\frac{7}{4}\notin\mathbb{Z}$ & $A_6=-21<0$"),
     ]
-    ax1.legend(handles=legend_handles, loc="lower left", frameon=True, facecolor="white", framealpha=0.92)
+    ax1.legend(
+        handles=legend_handles,
+        loc="lower left",
+        frameon=True,
+        facecolor="white",
+        framealpha=0.96,
+        fontsize=7.1,
+    )
     ax1.grid(axis="y", linestyle=":", alpha=0.45)
 
     primes = np.array([2, 3, 5, 7, 11])
@@ -134,24 +160,25 @@ def make_fig1() -> None:
     ax2.annotate(
         r"$p=2 \Rightarrow$ even $N\geq 8$, odd $N\geq 13$" "\n" r"(+ Rains $N\in\{4,7,9,11\}$)",
         xy=(2, 8),
-        xytext=(3.3, 62),
-        arrowprops={"arrowstyle": "->", "color": SLATE, "lw": 1.0},
-        fontsize=8.0,
-        bbox={"boxstyle": "round,pad=0.3", "fc": "white", "ec": SLATE, "alpha": 0.92},
+        xytext=(5.4, 18),
+        arrowprops={"arrowstyle": "->", "color": SLATE, "lw": 1.0, "connectionstyle": "arc3,rad=-0.12"},
+        fontsize=7.8,
+        bbox={"boxstyle": "round,pad=0.3", "fc": "white", "ec": SLATE, "alpha": 0.95},
     )
     ax2.set_xticks(primes)
+    ax2.set_xlim(1.5, 11.5)
     ax2.set_ylim(0, 290)
     ax2.set_xlabel(r"Smallest prime divisor $p \mid d$ (Radical Descent)")
     ax2.set_ylabel(r"Minimum excluded subsystem count $N$")
     ax2.set_title(r"(b) Pless Non-Existence Frontier for $\mathbb{Z}_d$ Stabilizers")
-    ax2.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.92)
+    ax2.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.95)
     ax2.grid(True, linestyle=":", alpha=0.45)
 
     save_dual(fig, "fig1_ame_phase_diagram")
 
 
 def make_fig2() -> None:
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.5, 4.1), gridspec_kw={"wspace": 0.28})
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11.2, 4.4), gridspec_kw={"wspace": 0.28})
 
     primes = [7, 11, 13, 17, 19, 23, 29, 31]
     t_primes = [(p - 5) // 2 for p in primes]
@@ -176,25 +203,25 @@ def make_fig2() -> None:
     ax1.annotate(
         r"$\mathbb{F}_{16}$: $3$-$\mathrm{RQLS}(16)$" "\n" r"(char 2 breakthrough!)",
         xy=(16, 3),
-        xytext=(18.2, 1.0),
+        xytext=(18.5, 0.9),
         arrowprops={"arrowstyle": "->", "color": GREEN, "lw": 1.1},
-        fontsize=7.9,
-        bbox={"boxstyle": "round,pad=0.25", "fc": "white", "ec": GREEN, "alpha": 0.92},
+        fontsize=7.8,
+        bbox={"boxstyle": "round,pad=0.25", "fc": "white", "ec": GREEN, "alpha": 0.95},
     )
     ax1.annotate(
         r"$\mathbb{F}_8$: $0/4872$ nonlinear",
         xy=(8, 0),
-        xytext=(10.0, -0.6),
+        xytext=(10.2, -0.95),
         arrowprops={"arrowstyle": "->", "color": VERMILION, "lw": 1.0},
-        fontsize=7.8,
+        fontsize=7.6,
         color=VERMILION,
     )
     ax1.set_xlim(5.5, 33)
-    ax1.set_ylim(-1.2, 14.5)
+    ax1.set_ylim(-1.6, 14.8)
     ax1.set_xlabel(r"Quantum Latin square order $q$")
     ax1.set_ylabel(r"Maximal-cardinality resolvability $t$ ($q^2$ states)")
     ax1.set_title("(a) Resolvable QLS Frontier vs. Previous State of the Art")
-    ax1.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.92, fontsize=7.6)
+    ax1.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.95, fontsize=7.3)
     ax1.grid(True, linestyle=":", alpha=0.45)
 
     r11 = exact_megyesi_rqls_prime(11)
@@ -226,24 +253,33 @@ def make_fig2() -> None:
     ax2.set_title(
         r"(b) $3$-$\mathrm{RQLS}(11)$ Overlap Grid ($14,641$ $\mathbb{Z}[\zeta_{11}]$ pairs)"
     )
+    # Place legend cleanly BELOW the heatmap so zero cells are obscured!
     ax2.legend(
-        loc="upper right", frameon=True, facecolor="#0F172A",
-        edgecolor="white", labelcolor="white", fontsize=7.2,
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.17),
+        ncol=3,
+        frameon=True,
+        facecolor="#0F172A",
+        edgecolor="#334155",
+        labelcolor="white",
+        fontsize=7.2,
+        columnspacing=0.9,
+        handletextpad=0.35,
     )
 
     save_dual(fig, "fig2_rqls_frontier")
 
 
 def make_fig3() -> None:
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.5, 4.1), gridspec_kw={"wspace": 0.30})
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11.4, 4.3), gridspec_kw={"wspace": 0.28})
 
     astab = exact_astab_circumradii(60)
     labels = [
         "2-qubit\nGB ball\n$r_{\\mathrm{GB}}^2$",
-        "2-qubit\n$\\rho_{\\mathrm{ent}}$\n(ASTAB\\ASEP)",
-        "2-qubit\n$R^2(\\mathrm{ASTAB}_0)$\n(Thm T3b)",
+        "2-qubit\n$\\rho_{\\mathrm{ent}}$\nASTAB$\\setminus$ASEP",
+        "2-qubit\n$R^2(\\mathrm{ASTAB}_0)$\nThm T3b",
         "1-qutrit\nInball\n$r_{\\mathrm{in}}^2$",
-        "1-qutrit\n$R^2(\\mathrm{ASTAB}_0)$\n(Thm T3b)",
+        "1-qutrit\n$R^2(\\mathrm{ASTAB}_0)$\nThm T3b",
         "2-qutrit\n$R^2(\\mathrm{AWP}_0)$\n$= r_{\\mathrm{GB}}^2$",
     ]
     vals = [
@@ -256,15 +292,15 @@ def make_fig3() -> None:
     ]
     cols = [SKY, ORANGE, VERMILION, LIGHT, BLUE, GREEN]
     x = np.arange(len(labels))
-    bars = ax1.bar(x, vals, color=cols, edgecolor="#1E293B", linewidth=0.8)
+    bars = ax1.bar(x, vals, color=cols, edgecolor="#1E293B", linewidth=0.8, width=0.62)
     for b, v in zip(bars, vals, strict=True):
         ax1.text(
             b.get_x() + b.get_width() / 2.0, v + 0.003, f"{v:.4f}",
-            ha="center", va="bottom", fontsize=7.6, fontweight="bold",
+            ha="center", va="bottom", fontsize=7.5, fontweight="bold",
         )
     ax1.axhline(float(astab["r2_2qubit_gb"]), color=SLATE, linestyle=":", linewidth=1.0)
     ax1.set_xticks(x)
-    ax1.set_xticklabels(labels, fontsize=7.4)
+    ax1.set_xticklabels(labels, fontsize=7.0)
     ax1.set_ylim(0, 0.148)
     ax1.set_ylabel(r"Squared Hilbert–Schmidt radius $\|\rho - I_D/D\|_2^2$")
     ax1.set_title(r"(a) Exact $\mathrm{ASTAB}_0$ Circumradii vs. Gurvits–Barnum Ball")
@@ -288,29 +324,32 @@ def make_fig3() -> None:
     )
     ax2.scatter(
         [2], [2.0], color=GREEN, marker="*", s=130, zorder=6,
-        label=r"Exact $C_2 = 2$ (240 CNC $m=1$ vertices)",
+        label=r"Exact $C_2 = 2$ (all 240 CNC $m=1$ vertices)",
     )
 
     ax2.annotate(
         r"$C_n^{\mathrm{SMD}} / C_n^{\mathrm{Liu}} \to \frac{7}{15} \approx 0.4667$",
         xy=(7, c_ours[5]),
-        xytext=(4.3, 12.0),
-        arrowprops={"arrowstyle": "->", "color": BLUE, "lw": 1.1},
-        fontsize=8.0,
-        bbox={"boxstyle": "round,pad=0.25", "fc": "white", "ec": BLUE, "alpha": 0.92},
+        xytext=(5.1, 3.3),
+        arrowprops={"arrowstyle": "->", "color": BLUE, "lw": 1.1, "connectionstyle": "arc3,rad=0.15"},
+        fontsize=7.8,
+        bbox={"boxstyle": "round,pad=0.28", "fc": "white", "ec": BLUE, "alpha": 0.95},
     )
     ax2.set_xticks(ns)
+    ax2.set_ylim(1.4, 2200)
     ax2.set_xlabel(r"Number of qubits $n$")
     ax2.set_ylabel(r"$\Lambda_n$ purity upper bound $C_n = \max_{\Lambda_n}\mathrm{Tr}(X^2)$")
     ax2.set_title("(b) Symplectic Marginal Descent vs. Deg-2 RLT Barrier")
-    ax2.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.92, fontsize=7.5)
+    ax2.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.95, fontsize=7.3)
     ax2.grid(True, which="both", linestyle=":", alpha=0.45)
 
     save_dual(fig, "fig3_astab_magic_geometry")
 
 
 def make_fig4() -> None:
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.5, 4.0), gridspec_kw={"wspace": 0.25})
+    fig, (ax1, ax2) = plt.subplots(
+        1, 2, figsize=(11.6, 4.4), gridspec_kw={"wspace": 0.20, "width_ratios": [1.0, 1.18]}
+    )
 
     thetas = np.linspace(0.02, math.pi - 0.02, 240)
     a = 0.55
@@ -340,20 +379,25 @@ def make_fig4() -> None:
         color="#0F172A", s=32, zorder=6,
     )
     ax1.axvline(th0, color=SLATE, linestyle=":", linewidth=1.0)
-    ax1.text(
-        th0 + 0.06, -0.25,
+    ax1.annotate(
         r"Audit point $\theta=1.1$" "\n" r"C11 err $=1.72\times 10^{-11}$" "\n" r"Eshkol AD err $=0$",
-        fontsize=7.5,
-        bbox={"boxstyle": "round,pad=0.25", "fc": "white", "ec": SLATE, "alpha": 0.92},
+        xy=(th0, -0.5 * a * math.sin(th0)),
+        xytext=(1.78, -0.075),
+        ha="left",
+        va="center",
+        fontsize=7.2,
+        bbox={"boxstyle": "round,pad=0.25", "fc": "white", "ec": SLATE, "alpha": 0.96},
+        arrowprops={"arrowstyle": "->", "color": SLATE, "lw": 0.9, "connectionstyle": "arc3,rad=0.18"},
     )
 
     ax1.set_xlim(0, math.pi)
+    ax1.set_ylim(-0.34, 0.43)
     ax1.set_xticks([0, math.pi / 4, math.pi / 2, 3 * math.pi / 4, math.pi])
     ax1.set_xticklabels([r"$0$", r"$\pi/4$", r"$\pi/2$", r"$3\pi/4$", r"$\pi$"])
     ax1.set_xlabel(r"Polar angle $\theta$ on entangled-$\mathrm{ASTAB}$ pure-state manifold")
     ax1.set_ylabel(r"Quantum Geometric Tensor components")
     ax1.set_title("(a) QGTL Metric & Berry Curvature (C11+NASM vs. Eshkol AD)")
-    ax1.legend(loc="upper right", frameon=True, facecolor="white", framealpha=0.92, fontsize=7.5)
+    ax1.legend(loc="upper right", frameon=True, facecolor="white", framealpha=0.95, fontsize=7.2)
     ax1.grid(True, linestyle=":", alpha=0.45)
 
     ax2.axis("off")
@@ -363,42 +407,42 @@ def make_fig4() -> None:
 
     layers = [
         (
-            8.2, 1.35, "#0F172A", "white",
+            8.2, 1.38, "#0F172A", "white",
             "Formal Proof Core: Pure Lean 4.35.0 (Zero Mathlib, Zero native_decide)",
-            "23 declarations | [propext, Classical.choice, Quot.sound] | 6-Kernel Palomar Comparator",
+            "6-Kernel Palomar Comparator | Whole-module axiom sweep | Global ASTAB & Poly RLT",
         ),
         (
-            6.4, 1.35, BLUE, "white",
+            6.4, 1.38, BLUE, "white",
             "Rust 1.94 (#![forbid(unsafe_code)])  +  Zig 0.17 (comptime + F8/F7)",
-            "60 Lambda_2 facets, 240 CNC vertices, 512 RLT cases | 5,040 F_8 perms (0 nonlinear)",
+            "All 240 CNC m=1 vertices, 1,770 facet pairs, 336 Sp(6,2) subspaces | 5,040 F_8 perms",
         ),
         (
-            4.6, 1.35, GREEN, "white",
+            4.6, 1.38, GREEN, "white",
             "C++20 Exact Cyclotomic Z[zeta_p]  +  Eshkol Forward-Mode Dual AD",
-            "198,820 exact integer inner products (0 floats) | Machine-eps ASTAB & QGTL gradients",
+            "198,820 zero-float inner products | Machine-eps ASTAB KKT & QGTL gradients",
         ),
         (
-            2.8, 1.35, "#B45309", "white",
+            2.8, 1.38, "#B45309", "white",
             "ISO C11 + x86-64 NASM POPCNT + Vendored MIT Moonlab + QGTL/QRNG",
-            "100k symplectic fuzz checks | SP 800-90B health tests + SHA3-256 | QGTL err 1.7e-11",
+            "100k symplectic fuzz checks | SP 800-90B + SHA3-256 QRNG | QGTL err 1.72e-11",
         ),
         (
-            1.0, 1.35, SLATE, "white",
-            "Python 3.12 Exact Oracle + Hypothesis + 100% Mutation Kill + Build Std",
-            "80-digit Decimal & Fraction oracle | 6/6 mutants killed | 3x1,000 hardening + RFC 3161/OTS",
+            1.0, 1.38, SLATE, "white",
+            "Python 3.12 Exact Oracle + Unified CI + 12/12 Mutation + Build Std v1.2",
+            "80-digit Decimal/Fraction | REQUIRE_ALL_ENGINES=1 | Zero-pad 1,000-check + RFC3161/OTS",
         ),
     ]
     for y, h, fc, tc, title, sub in layers:
         rect = mpatches.FancyBboxPatch(
-            (0.25, y), 9.5, h, boxstyle="round,pad=0.12,rounding_size=0.18",
+            (0.18, y), 9.64, h, boxstyle="round,pad=0.10,rounding_size=0.18",
             facecolor=fc, edgecolor="#0F172A", linewidth=0.9,
         )
         ax2.add_patch(rect)
         ax2.text(
-            5.0, y + h * 0.64, title, ha="center", va="center",
-            color=tc, fontsize=7.8, fontweight="bold",
+            5.0, y + h * 0.65, title, ha="center", va="center",
+            color=tc, fontsize=7.0, fontweight="bold",
         )
-        ax2.text(5.0, y + h * 0.27, sub, ha="center", va="center", color="#E2E8F0", fontsize=7.0)
+        ax2.text(5.0, y + h * 0.27, sub, ha="center", va="center", color="#E2E8F0", fontsize=6.25)
 
     save_dual(fig, "fig4_qgtl_and_architecture")
 
@@ -413,39 +457,51 @@ def make_social_preview() -> None:
     ax.set_xlim(0, 10)
     ax.set_ylim(0, 5)
     ax.text(
-        0.5, 4.25, "0TH-2026-020  ·  0thernes/quantum-phasespace-rigidity",
-        color="#38BDF8", fontsize=13, fontweight="bold", family="monospace",
+        0.45, 4.30, "0TH-2026-020  ·  v2.0.0  ·  0thernes/quantum-phasespace-rigidity",
+        color="#38BDF8", fontsize=12.5, fontweight="bold", family="monospace",
     )
     ax.text(
-        0.5, 3.35, "Discrete Symplectic Phase-Space Rigidity",
-        color="#F8FAFC", fontsize=28, fontweight="bold",
+        0.45, 3.42, "Discrete Symplectic Phase-Space Rigidity",
+        color="#F8FAFC", fontsize=27.5, fontweight="bold",
     )
     ax.text(
-        0.5, 2.78,
-        "Cyclic Z_{2l} AME Dichotomy  ·  Maximal-Cardinality t-RQLS  ·  ASTAB Magic Geometry",
-        color="#CBD5E1", fontsize=13.5,
+        0.45, 2.84,
+        (
+            r"Cyclic $\mathbb{Z}_{2\ell}$ AME Dichotomy  $\cdot$  "
+            r"Maximal-Cardinality $t$-RQLS  $\cdot$  ASTAB Magic Geometry"
+        ),
+        color="#CBD5E1", fontsize=13.0,
     )
     cards = [
-        (0.5, "#0284C7", "Pillar I: AME(N, 2l)", "Exists iff N in {2,3,5,6}\nZ_4 vs F_4 separation"),
-        (3.65, "#059669", "Pillar II: t-RQLS(q)", "Breaks t<=2: t=(p-5)/2\n2-RQLS(9), 3-RQLS(16), F_8=0"),
         (
-            6.8, "#D97706", "Pillar III: Magic",
-            "ASTAB subset AWP subseteq ASEP\n15/7x SMD gain + Deg-2 Barrier",
+            0.45, "#0284C7", r"Pillar I: $\mathrm{AME}(N, 2\ell)$",
+            r"Exists iff $N \in \{2, 3, 5, 6\}$" "\n"
+            r"$\mathbb{Z}_4$ vs. $\mathbb{F}_4$ separation at $(4,4)$",
+        ),
+        (
+            3.62, "#059669", r"Pillar II: $t$-$\mathrm{RQLS}(q)$",
+            r"Breaks $t \leq 2$: $t = (p-5)/2$" "\n"
+            r"$2$-$\mathrm{RQLS}(9)$, $3$-$\mathrm{RQLS}(16)$, $\mathbb{F}_8 = 0$",
+        ),
+        (
+            6.80, "#D97706", "Pillar III: Magic",
+            r"$\mathrm{ASTAB} \subset \mathrm{AWP} \subseteq \mathrm{ASEP}$ (odd $p$)" "\n"
+            r"$15/7\times$ SMD + Poly Deg-2 Barrier",
         ),
     ]
     for cx, col, hdr, body in cards:
         box = mpatches.FancyBboxPatch(
-            (cx, 1.0), 2.75, 1.35, boxstyle="round,pad=0.1,rounding_size=0.15",
+            (cx, 1.02), 2.75, 1.38, boxstyle="round,pad=0.10,rounding_size=0.15",
             facecolor="#111827", edgecolor=col, linewidth=2.0,
         )
         ax.add_patch(box)
-        ax.text(cx + 0.15, 2.02, hdr, color=col, fontsize=12, fontweight="bold")
-        ax.text(cx + 0.15, 1.38, body, color="#E2E8F0", fontsize=10.2)
+        ax.text(cx + 0.14, 2.05, hdr, color=col, fontsize=11.5, fontweight="bold")
+        ax.text(cx + 0.14, 1.38, body, color="#E2E8F0", fontsize=10.0)
     ax.text(
-        0.5, 0.35,
+        5.0, 0.36,
         "Alexander Stephen Donahue (ORCID 0009-0006-8168-9648)  ·  "
-        "Pure Lean 4.35.0 (6-Kernel) + Rust + Zig + C++20 + C11/NASM + Eshkol AD + Python",
-        color="#94A3B8", fontsize=10.5,
+        "Pure Lean 4.35.0 (6-Kernel) · Rust · Zig · C++20 · C11/NASM · Eshkol AD · Python",
+        color="#94A3B8", fontsize=9.1, ha="center", va="center",
     )
     out = media_dir / "social-preview.png"
     fig.savefig(out, dpi=100, facecolor=fig.get_facecolor())

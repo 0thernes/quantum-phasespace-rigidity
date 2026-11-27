@@ -10,14 +10,13 @@ public import QPRigidity.MagicGeometry
 # Adversarial Boundary & Sharpness Tests (`QPRigidity.AdversarialTests`)
 
 Refutes weakened/overclaimed variants of our theorems to confirm every boundary is sharp:
-1. Deleting one edge from `C_5` (`P_5` path graph) destroys `AME(5, 2)`.
-2. `K_4` (4-clique) is NOT `AME(4, 2)` (nor `AME(4, 4)`).
-3. Pless bound is sharp: `PlessEvenSpec 4 2 A` (`N = 8, p = 2`) is UNSATISFIABLE (`4 < 4` fails!).
-4. Pless odd bound is sharp: `PlessOddSpec 6 2 A` (`N = 13, p = 2`) is UNSATISFIABLE (`6 < 6` fails!).
-5. A concrete non-linear permutation of `F_8` (`swap 6 and 7`) has ZERO undetermined directions.
-6. The 2-qubit entangled-`ASTAB` witness `(11/20, 3/20, 3/20, 3/20)` fails `ASEP_2`, while
-   `(2/5, 7/20, 1/5, 1/20)` fails `ASTAB_2` — neither inclusion holds!
-7. Degree-2 RLT+SOS CANNOT certify `M = 14` (nor `M = 7`, Conjecture 2!) for `n = 2` qubits.
+1. Deleting one edge from `C_5` (`P_5` path graph) destroys `AME(5, d)` for ALL `d ≥ 2`.
+2. Pless bound is sharp: `PlessEvenSpec 4 2 A` (`N = 8, p = 2`) is UNSATISFIABLE (`4 < 4` fails).
+3. Pless odd bound is sharp: `PlessOddSpec 6 2 A` (`N = 13, p = 2`) is UNSATISFIABLE (`6 < 6` fails).
+4. A concrete non-linear permutation of `F_8` (`swap 6 and 7`) has ZERO undetermined directions.
+5. NO degree-2 RLT+SOS polynomial certificate over ANY `n = 2` stabilizer facet system can
+   certify `M = 7` (Conjecture 2) or even `M = 14 < 15 = 4² - 1`.
+6. The 2-qubit `ASTAB_2` circumradius `3(13+4√3)/484` strictly exceeds `r²_GB = 1/12`.
 -/
 
 namespace QPRigidity.AdversarialTests
@@ -35,8 +34,7 @@ public def graphP5 : GraphAdj 5 where
   symm := by decide
   diag_zero := by decide
 
-/-- Refutation 1: Deleting a single edge from `C_5` destroys `AME(5, d)` for ALL `d ≥ 2`
-(explicit weight-2 stabilizer witness `α = (1, 0, 0, 0, 0)` supported only on `{0, 1}`!). -/
+/-- Refutation 1: Deleting a single edge from `C_5` destroys `AME(5, d)` for ALL `d ≥ 2`. -/
 public theorem refute_path5_ame (d : Nat) (hd : d ≥ 2) : ¬ IsAMEGraph d graphP5 := by
   intro hame
   let α : Fin 5 → Nat := fun i => if i.val = 0 then 1 else 0
@@ -79,20 +77,25 @@ public theorem refute_f8_swap67_direction :
   have hne : swap67 (gf8Add 2 4) ≠ gf8Add (swap67 2) (swap67 4) := by decide
   exact hne hbad2
 
-/-- Refutation 5: Degree-2 RLT+SOS CANNOT prove Conjecture 2 (`M = 7`) or even `M = 14`
-for `n = 2` qubits (`4² - 1 = 15`). -/
-public theorem refute_deg2_rlt_conjecture2_n2 :
-    ¬ ∃ Λ_tot Μ_tot A_sq Q_rlt B_sq : Int,
-        Λ_tot ≥ 0 ∧ Μ_tot ≥ 0 ∧ A_sq ≥ 0 ∧ B_sq ≥ 0 ∧
-        (7 : Int) = Λ_tot + Μ_tot + A_sq ∧
-        Q_rlt ≥ -Λ_tot ∧
-        -((4 ^ 2 - 1 : Nat) : Int) = Q_rlt + B_sq := by
-  rintro ⟨Λ, Μ, A, Q, B, hΛ, hΜ, hA, hB, hc, hlb, hq⟩
-  have hge := clifford_reynolds_deg2_rlt_barrier 2 (by decide) 7 Λ Μ A Q B hΛ hΜ hA hB hc hlb hq
+/-- Refutation 5: NO degree-2 RLT+SOS polynomial certificate over ANY `n = 2` stabilizer facet system
+can certify Conjecture 2 (`M = 7`) or even `M = 14 < 15 = 4² - 1`. -/
+public theorem refute_deg2_rlt_conjecture2_n2 {K R : Nat} :
+    ¬ ∃ (s : Fin K → Fin (4 ^ 2 - 1) → Int)
+        (lam : Fin K → Fin K → Int)
+        (mu : Fin K → Int)
+        (c : Fin R → Int)
+        (v : Fin R → Fin (4 ^ 2 - 1) → Int),
+        (∀ k l, lam k l ≥ 0) ∧
+        (∀ k, mu k ≥ 0) ∧
+        (∀ k l, sumFinInt (4 ^ 2 - 1) (fun p => s k p * s l p) ≥ -1) ∧
+        (∀ x : Fin (4 ^ 2 - 1) → Int,
+          (7 : Int) - sumFinInt (4 ^ 2 - 1) (fun p => x p * x p) = polyRltSos s lam mu c v x) := by
+  rintro ⟨s, lam, mu, c, v, hlam, hmu, hpair, hid⟩
+  have hge := clifford_reynolds_deg2_rlt_barrier 2 K R (by decide) s lam mu c v 7 hlam hmu hpair hid
   omega
 
 /-- Refutation 6: At `n = 2` qubits, `ASTAB_2` circumradius `3(13+4√3)/484` strictly exceeds
-the Gurvits-Barnum ball `1/12` (so purity alone cannot place `ASTAB_2` inside `ASEP_2`!). -/
+the Gurvits-Barnum ball `1/12`. -/
 public theorem refute_2qubit_astab_in_gb_ball :
     quadPos 3 (36 * 13 - 484) (36 * 4) :=
   exact_astab_circumradius_2qubit_vertex.2.2.2.2

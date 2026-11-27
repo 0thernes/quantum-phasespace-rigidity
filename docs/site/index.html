@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:;">
-<title>Quantum Phase-Space Rigidity Observatory (0TH-2026-020)</title>
+<title>Quantum Phase-Space Rigidity Observatory v2.0.0 (0TH-2026-020)</title>
 <style>
   :root { --bg:#090e1a; --panel:#111827; --ink:#f8fafc; --muted:#94a3b8; --accent:#38bdf8; --green:#10b981; --warn:#f59e0b; --bad:#ef4444; --border:#1f2937; }
   * { box-sizing:border-box; }
@@ -41,15 +41,15 @@
 <body>
 <header>
   <div class="wrap">
-    <h1>Discrete Symplectic Phase-Space Rigidity — Interactive Observatory</h1>
+    <h1>Discrete Symplectic Phase-Space Rigidity — Interactive Observatory (v2.0.0)</h1>
     <div class="sub">
       <strong>Alexander Stephen Donahue</strong> (<a href="https://orcid.org/0009-0006-8168-9648">ORCID 0009-0006-8168-9648</a>) ·
       Independent Researcher, Spokane, WA, USA · Archive ID <code>0TH-2026-020</code>
     </div>
     <div class="badges">
-      <span class="badge ok">Lean 4.35.0 Zero-Mathlib (6-Kernel Audited)</span>
-      <span class="badge ok">7 Polyglot Engines (Rust · Zig · C++20 · C11+NASM · Eshkol · Python)</span>
-      <span class="badge ok">100% Mutation Kill (6/6)</span>
+      <span class="badge ok">Lean 4.35.0 Zero-Mathlib (6-Kernel + Whole-Module Sweep)</span>
+      <span class="badge ok">7 Polyglot Engines (Unified REQUIRE_ALL_ENGINES=1 CI)</span>
+      <span class="badge ok">100% Mutation Kill (12/12)</span>
       <span class="badge"><a href="blueprint/index.html" style="color:inherit;text-decoration:none;">Open Lean 4 Blueprint DAG &rarr;</a></span>
       <span class="badge"><a href="https://github.com/0thernes/quantum-phasespace-rigidity" style="color:inherit;text-decoration:none;">GitHub Repository &rarr;</a></span>
     </div>
@@ -66,7 +66,7 @@
   <section id="p1" class="tab active">
     <div class="card">
       <h2>Pillar I — Complete Cyclic &Zopf;<sub>2&ell;</sub>-Stabilizer AME(N, 2&ell;) Classification</h2>
-      <p>Extends W&oacute;jcik et al. (<code>arXiv:2603.18193v3</code>) to <strong>all</strong> cyclic &Zopf;<sub>2&ell;</sub>-stabilizer groups (including arbitrary non-canonical and non-free torsion subgroups): exists <strong>iff N &isin; {2, 3, 5, 6}</strong>, contrasted with an explicit Galois &Fopf;<sub>4</sub>-stabilizer AME(4, 4).</p>
+      <p>Extends W&oacute;jcik et al. (<code>arXiv:2603.18193v3</code>) to <strong>all</strong> cyclic &Zopf;<sub>2&ell;</sub>-stabilizer groups (including arbitrary non-canonical and non-free torsion subgroups): exists <strong>iff N &isin; {2, 3, 5, 6}</strong> (with universal unimodular lifts K<sub>2</sub>, K<sub>3</sub>, C<sub>5</sub>, Prism<sub>6</sub>, and W<sub>5</sub>), contrasted with an explicit Galois &Fopf;<sub>4</sub> CSS stabilizer AME(4, 4).</p>
       <img class="fig" src="assets/fig1_ame_phase_diagram.png" alt="Pillar I AME phase diagram">
     </div>
   </section>
@@ -81,7 +81,7 @@
       </div>
       <div class="card">
         <h2>Maximal-Cardinality t-RQLS Frontier</h2>
-        <p style="font-size:0.86rem;color:#cbd5e1;">Breaks Zhang &amp; Cao's (<code>arXiv:2608.29201v2</code>) t &le; 2 ceiling via Megyesi&ndash;R&eacute;dei permutations: t = (p&minus;5)/2 for all odd primes p &ge; 7, plus 2-RQLS(9), char-2 3-RQLS(16), and zero-gap &Fopf;<sub>8</sub> obstruction.</p>
+        <p style="font-size:0.86rem;color:#cbd5e1;">Breaks Zhang &amp; Cao's (<code>arXiv:2608.29201v2</code>) t &le; 2 ceiling via Megyesi&ndash;R&eacute;dei permutations: t = (p&minus;5)/2 for all odd primes p &ge; 7, plus 2-RQLS(9), char-2 3-RQLS(16), untwisted 3-RQLS(143), twisted 3-RQLS(55), and zero-gap &Fopf;<sub>8</sub> obstruction.</p>
         <img class="fig" src="assets/fig2_rqls_frontier.png" alt="Pillar II RQLS frontier">
       </div>
     </div>
@@ -103,7 +103,7 @@
       </div>
       <div class="card">
         <h2>ASTAB Circumradii &amp; Symplectic Marginal Descent</h2>
-        <p style="font-size:0.86rem;color:#cbd5e1;">Gurvits&ndash;Barnum Cor. 3 forces ASTAB<sub>2,d</sub> &subset; AWP<sub>2,d</sub> &sube; ASEP<sub>2,d</sub> for all odd primes d &ge; 3, while Symplectic Marginal Descent delivers an exact <strong>15/7&times;</strong> squared-inball gain for all n &ge; 2.</p>
+        <p style="font-size:0.86rem;color:#cbd5e1;">Gurvits&ndash;Barnum Cor. 3 forces ASTAB<sub>2,d</sub> &subset; AWP<sub>2,d</sub> &sube; ASEP<sub>2,d</sub> for all odd primes d &ge; 3, global &Zopf;[&radic;3]/&Zopf;[&radic;5] optimality certifies exact ASTAB circumradii, and Symplectic Marginal Descent delivers an exact <strong>15/7&times;</strong> squared-inball gain for all n &ge; 2.</p>
         <img class="fig" src="assets/fig3_astab_magic_geometry.png" alt="Pillar III magic geometry">
       </div>
     </div>
@@ -127,19 +127,19 @@
 'QPRigidity.Palomar.prove_t2b' depends on axioms: [propext, Classical.choice, Quot.sound]
 'QPRigidity.Palomar.prove_t2c' depends on axioms: [propext, Classical.choice, Quot.sound]
 'QPRigidity.Palomar.prove_t2d' depends on axioms: [propext, Quot.sound]
-'QPRigidity.Palomar.prove_t3a' depends on axioms: [propext, Quot.sound]
-'QPRigidity.Palomar.prove_t3b' depends on axioms: [propext, Quot.sound]
+'QPRigidity.Palomar.prove_t3a' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QPRigidity.Palomar.prove_t3b' depends on axioms: [propext, Classical.choice, Quot.sound]
 'QPRigidity.Palomar.prove_t3c' depends on axioms: [propext, Quot.sound]
-'QPRigidity.Palomar.prove_t3d' depends on axioms: [propext, Quot.sound]
+'QPRigidity.Palomar.prove_t3d' depends on axioms: [propext, Classical.choice, Quot.sound]
 'QPRigidity.Palomar.prove_all_rigidity_theorems' depends on axioms: [propext, Classical.choice, Quot.sound]
 'QPRigidity.NonVacuity.nonvacuity_pillar1_ame' depends on axioms: [propext, Classical.choice, Quot.sound]
-'QPRigidity.NonVacuity.nonvacuity_pillar2_rqls55' depends on axioms: [propext, Classical.choice, Quot.sound]
-'QPRigidity.NonVacuity.nonvacuity_pillar3_magic' depends on axioms: [propext, Quot.sound]
+'QPRigidity.NonVacuity.nonvacuity_pillar2_rqls_lifts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QPRigidity.NonVacuity.nonvacuity_pillar3_magic' depends on axioms: [propext, Classical.choice, Quot.sound]
 'QPRigidity.AdversarialTests.refute_path5_ame' depends on axioms: [propext, Quot.sound]
 'QPRigidity.AdversarialTests.refute_pless_even_n8_p2' depends on axioms: [propext, Quot.sound]
 'QPRigidity.AdversarialTests.refute_pless_odd_n13_p2' depends on axioms: [propext, Quot.sound]
 'QPRigidity.AdversarialTests.refute_f8_swap67_direction' depends on axioms: [propext, Quot.sound]
-'QPRigidity.AdversarialTests.refute_deg2_rlt_conjecture2_n2' depends on axioms: [propext, Quot.sound]
+'QPRigidity.AdversarialTests.refute_deg2_rlt_conjecture2_n2' depends on axioms: [propext, Classical.choice, Quot.sound]
 'QPRigidity.AdversarialTests.refute_2qubit_astab_in_gb_ball' does not depend on any axioms</pre>
     </div>
   </section>

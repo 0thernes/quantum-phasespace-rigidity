@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software, Lean 4 formalization, or manuscript, please cite it as below."
 type: software
 title: "Quantum Phase-Space Rigidity: Cyclic Weyl-Heisenberg AME Dichotomy, Maximal-Cardinality t-Resolvable Quantum Latin Squares, and Absolutely Stabilizer Magic Geometry"
-version: "1.0.0"
-date-released: "2026-11-26"
+version: "2.0.0"
+date-released: "2026-11-27"
 authors:
   - family-names: "Donahue"
     given-names: "Alexander Stephen"

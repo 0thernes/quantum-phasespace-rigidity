@@ -68,7 +68,7 @@
 \email{0\_0@0thernes.art}
 \urladdr{https://orcid.org/0009-0006-8168-9648}
 
-\date{November 2026 \quad (Archive ID: \texttt{0TH-2026-020})}
+\date{November 2026 \quad (Version~2.0.0 · Archive ID: \texttt{0TH-2026-020})}
 
 \keywords{Absolutely maximally entangled states, cyclic Weyl--Heisenberg stabilizers,
 quantum shadow enumerators, resolvable quantum Latin squares, lacunary polynomials,
@@ -84,8 +84,9 @@ $\FF_q^{2N}$ govern multipartite maximal entanglement, quantum orthogonal design
 the geometry of non-stabilizer (``magic'') quantum states. We establish a unified chain
 of rigidity theorems across three active frontiers in quantum information theory,
 resolving open problems raised in recent 2025--2026 literature and coupling every core
-theorem to a zero-Mathlib, six-kernel-audited Lean~4.35.0 formalization and a
-seven-engine polyglot exact verification suite.
+theorem 1-to-1 to a zero-Mathlib, six-kernel-audited Lean~4.35.0 formalization
+($311$ project declarations exhaustively swept strictly within standard classical axioms)
+and a seven-engine polyglot exact verification suite.
 
 First (Pillar~I), we prove the complete classification of cyclic Weyl--Heisenberg
 $\ZZ_{2\ell}$-stabilizer absolutely maximally entangled states $\AME(N, 2\ell)$ across
@@ -93,11 +94,11 @@ all subsystem counts $N \ge 2$ and all even local dimensions $d = 2\ell \ge 2$,
 including arbitrary non-canonical and non-free torsion subgroups: such a state exists
 \emph{if and only if} $N \in \{2, 3, 5, 6\}$. This extends the canonical graph-state
 obstruction of W\'ojcik et al.\ (\lid{arXiv:2603.18193v3}) to every cyclic even-$d$
-stabilizer group via radical divisor descent, universal unimodular lifts ($C_5$,
-$\mathrm{Prism}_6$, $W_5$), Pless moment obstructions, Rains shadow inequalities, and
-additive $\FF_4$-MDS non-existence, while exhibiting an explicit Ring-vs-Field
-phase-space separation at $(N, d) = (4, 4)$ ($\ZZ_4$ impossible versus $\FF_4$
-realizable).
+stabilizer group via Radical--CRT equivalence, universal unimodular lifts ($K_2$, $K_3$,
+$C_5$, $\mathrm{Prism}_6$, $W_5$), universal Pless power-moment bounds, Rains shadow
+inequalities, torsion Singleton rank forcing, and additive $\FF_4$-MDS non-existence,
+while exhibiting an explicit Ring-vs-Field phase-space separation at $(N, d) = (4, 4)$
+($\ZZ_4$ impossible versus an explicit $\FF_4$ CSS stabilizer pair).
 
 Second (Pillar~II), using trace-nonconstant two-frequency lifts of Megyesi--R\'edei
 lacunary permutations, we break the $t \le 2$ ceiling of Zhang and Cao
@@ -106,27 +107,29 @@ lacunary permutations, we break the $t \le 2$ ceiling of Zhang and Cao
 maximal-cardinality $\frac{p-5}{2}$-$\RQLS(p)$ for every odd prime $p \ge 7$ (producing
 the first-ever $t \ge 3$ examples, including $3$-$\RQLS(11)$, $4$-$\RQLS(13)$, and
 $6$-$\RQLS(17)$), resolve the missing prime-power orders $2$-$\RQLS(9)$ and
-characteristic-$2$ $3$-$\RQLS(16)$, establish direct-product composite lifts
-(e.g., $3$-$\RQLS(55)$ and $3$-$\RQLS(143)$), and prove a zero-gap characteristic-$2$
-obstruction on $\FF_8$: every orthomorphism of $\FF_8$ is $\FF_2$-linear, yielding zero
-nonlinear direction permutations out of all $7! = 5{,}040$ normalized bijections.
+characteristic-$2$ $3$-$\RQLS(16)$, establish both untwisted quantum--quantum
+($3$-$\RQLS(143)$) and unitary-twisted quantum--classical ($3$-$\RQLS(55)$) composite
+lifts, and prove a zero-gap characteristic-$2$ obstruction on $\FF_8$: every
+orthomorphism of $\FF_8$ fixing $0$ is $\FF_2$-linear, yielding zero nonlinear direction
+permutations out of all $7! = 5{,}040$ normalized bijections.
 
 Third (Pillar~III), we resolve the bipartite odd-prime vs.\ two-qubit ordering of
 basis-independent stabilizerness ($\ASTAB$), absolute Wigner positivity ($\AWP$), and
 absolute separability ($\ASEP$) asked in Zurel and Davis (\lid{arXiv:2602.22336v2},
-Sec.~V.3). An exact three-line algebraic identity equates the $\AWP_0$ circumradius
+Sec.~V.3). An exact algebraic identity equates the $\AWP_0$ circumradius
 $1/\sqrt{D(D-1)}$ with Gurvits--Barnum Corollary~3, proving $\ASTAB_{2,d} \subset
 \AWP_{2,d} \subseteq \ASEP_{2,d}$ for every odd prime $d \ge 3$ and all-bipartition
 biseparability for every $n \ge 2$, whereas for two qubits we prove strict
 incomparability via exact rational witnesses $\rho_{\mathrm{ent}} \in
 \ASTAB \setminus \ASEP$ and $\rho_{\mathrm{sep}} \in \ASEP \setminus \ASTAB$ and
+universal global polytope optimality in $\ZZ[\sqrt{3}]$ and $\ZZ[\sqrt{5}]$ for the
 exact closed-form circumradii $R^2(\ASTAB_{2,2}) = 3(13+4\sqrt{3})/484 > 1/12$ and
 $R^2(\ASTAB_{1,3}) = (7-3\sqrt{5})/6$. Finally, we prove \emph{Symplectic Marginal
 Descent}, unconditionally strengthening Theorem~10 of Liu et al.\
 (\lid{arXiv:2512.16777v2}) from $C_n \le 2^n$ to $C_n \le (7 \cdot 4^n + 8)/(15 \cdot
 2^n)$ (an exact $15/7\times$ squared-inball-radius gain for every $n \ge 2$), together
-with a Clifford--Reynolds barrier theorem proving that no degree-$2$ RLT+SOS relaxation
-over the stabilizer dual polytope $\Lambda_n$ can improve upon $2^n$.
+with a first-principles multivariate polynomial Clifford--Reynolds barrier theorem
+proving that no degree-$2$ RLT+SOS relaxation over $\Lambda_n$ can beat $2^n$.
 \end{abstract}
 
 \maketitle
@@ -136,17 +139,17 @@ over the stabilizer dual polytope $\Lambda_n$ can improve upon $2^n$.
 \section{Introduction and Epistemic Claims Ledger}
 \label{sec:intro}
 
-Three superficially distinct structures in quantum information theory---absolutely
-maximally entangled ($\AME$) stabilizer states \cite{scott2004multipartite,
-huber2018bounds,rajchel2025ame,wojcik2026ame,cha2026ame}, maximal-cardinality
-resolvable quantum Latin squares ($t$-$\RQLS$) \cite{musto2016qls,rather2022euler,
-ball2026moqls,zhang2026rqls}, and basis-independent magic/stabilizer polytopes
-($\ASTAB$, $\AWP$, $\Lambda_n$) \cite{gross2006hudson,raussendorf2020phase,
-zurel2020hvm,liu2025triangle,zurel2026astab}---are governed by a single underlying
-algebraic phenomenon: \emph{discrete symplectic phase-space rigidity}.
-In each setting, the compatibility of maximal quantum complementarity with a finite
-phase-space geometry ($\ZZ_d^{2N}$ or $\FF_q^{2N}$) encounters sharp arithmetic
-transitions separating realizable structures from impossible ones:
+Three central structures in quantum information theory---absolutely maximally entangled
+($\AME$) stabilizer states \cite{scott2004multipartite,huber2018bounds,rajchel2025ame,
+wojcik2026ame,cha2026ame}, maximal-cardinality resolvable quantum Latin squares
+($t$-$\RQLS$) \cite{musto2016qls,rather2022euler,ball2026moqls,zhang2026rqls}, and
+basis-independent magic/stabilizer polytopes ($\ASTAB$, $\AWP$, $\Lambda_n$)
+\cite{gross2006hudson,raussendorf2020phase,zurel2020hvm,liu2025triangle,zurel2026astab}---are
+governed by a single underlying algebraic phenomenon: \emph{discrete symplectic
+phase-space rigidity}. In each setting, the compatibility of maximal quantum
+complementarity with a finite phase-space geometry ($\ZZ_d^{2N}$ or $\FF_q^{2N}$)
+encounters sharp arithmetic transitions separating realizable structures from impossible
+ones:
 \begin{enumerate}[label=(\roman*)]
   \item For $\AME(N, d)$ stabilizer states over cyclic rings $\ZZ_d$, the symplectic
     form on $\ZZ_d^{2N}$ admits radical descent to every prime divisor $p \mid d$.
@@ -154,18 +157,19 @@ transitions separating realizable structures from impossible ones:
     and additive $\FF_4$-codes, whereas the Galois field $\FF_4$ avoids $\ZZ_4$ torsion
     and unlocks $\AME(4,4)$.
   \item For maximal-cardinality $t$-$\RQLS(q)$, the two-frequency Fourier family
-    $|\psi_{x,y}\rangle$ with phases $\Tr(y \cdot z + x \cdot \mu(z))$
-    reduces maximal cardinality ($q^2$ pairwise non-collinear states) and $t$-resolvability
-    to the classical R\'edei--Sz\H{o}nyi--Blokhuis theory of directions determined by
-    nonlinear permutations of $\FF_q$ \cite{redei1973lacunary,szonyi1996directions,
+    $|\psi_{x,y}\rangle$ with phases $\Tr(y \cdot z + x \cdot \mu(z))$ reduces maximal
+    cardinality ($q^2$ pairwise non-collinear states) and $t$-resolvability to the
+    classical R\'edei--Sz\H{o}nyi--Blokhuis theory of directions determined by nonlinear
+    permutations of $\FF_q$ \cite{redei1973lacunary,szonyi1996directions,
     blokhuis1999slopes}.
   \item For basis-independent stabilizerness and mixed-state magic detection, the
     spectral polytopes $\ASTAB_0$, $\AWP_0$, and the stabilizer dual $\Lambda_n$ are
     rigidly constrained by Clifford/symplectic orbit averages: odd-prime phase-space
     Wigner positivity collapses inside the Gurvits--Barnum separability ball
-    \cite{gurvits2002largest}, two-qubit $\ASTAB_0$ bursts outside it, and the
-    $\Sp(2n,2)$ orbit of two-qubit symplectic marginals beats degree-$2$ Clifford
-    semidefinite relaxations for every $n \ge 2$.
+    \cite{gurvits2002largest}, two-qubit $\ASTAB_0$ bursts outside it (and is strictly
+    incomparable with Verstraete--Audenaert--De~Bie--De~Moor's $\ASEP_{2,2}$
+    \cite{verstraete2001maximally}), and the $\Sp(2n,2)$ orbit of two-qubit symplectic
+    marginals beats every degree-$2$ Clifford semidefinite relaxation for all $n \ge 2$.
 \end{enumerate}
 
 \subsection{Claims Ledger and Honest Verification Boundaries}
@@ -174,24 +178,27 @@ transitions separating realizable structures from impossible ones:
 Every mathematical assertion in this manuscript carries an explicit verification tag:
 \begin{itemize}[leftmargin=2em]
   \item \tagL: Formally verified in pure, zero-Mathlib Lean~4.35.0
-    (\lid{lean/PalomarSolution.lean}), using strictly standard axioms
-    \lid{[propext, Classical.choice, Quot.sound]} with zero \lid{sorry}, zero
-    \lid{admit}, and zero \lid{native_decide}, audited by
-    \lid{leanchecker-paranoid} and six independent kernels via Palomar Comparator.
+    (\lid{lean/PalomarSolution.lean}) under \lid{warningAsError = true}, using strictly
+    standard axioms \lid{[propext, Classical.choice, Quot.sound]} with zero \lid{sorry},
+    zero \lid{admit}, and zero \lid{native_decide}, audited by
+    \lid{leanchecker-paranoid}, a programmatic whole-module \lid{Lean.collectAxioms}
+    sweep across all $311$ project declarations (\lid{lean/SweepAllAxioms.lean}), and
+    six independent proof kernels via Palomar Comparator.
   \item \tagE: Independently verified in zero-float exact arithmetic across compiled
     native engines (Rust~1.94 {\footnotesize\texttt{\#![forbid(unsafe\_code)]}}, Zig~0.17
-    \lid{comptime}, C++20 $\ZZ[\zeta_p]$, ISO~C11 + x86-64 NASM + Moonlab, Eshkol
-    dual-number AD, and Python~3.12 \lid{Fraction}/80-digit \lid{Decimal}).
-  \item \tagP: Proven mathematically in full detail in this paper (analytic
-    bridges from finite-field/combinatorial Lean theorems to Hilbert-space density
-    operators, generic phase-twist collision avoidance, and continuous QGTL closed forms).
+    \lid{comptime}, C++20 $\ZZ[\zeta_p]$, ISO~C11 + x86-64 NASM + Moonlab, and
+    Python~3.12 \lid{Fraction}/80-digit \lid{Decimal}), complemented by clearly tagged
+    \lid{numerical_approximation} checks in C11 QGTL and Eshkol dual-number AD.
+  \item \tagP: Proven mathematically in complete detail in this paper (every theorem
+    T1a--T3d carries a self-contained proof below, explicitly bridging formal
+    combinatorial/algebraic cores to Hilbert-space density operators).
   \item \tagO: Explicitly open problem \emph{not} claimed to be solved here.
 \end{itemize}
 
 \begin{table}[htbp]
 \centering
-\caption{Master Claims Ledger mapping every theorem to its verification status and
-Lean~4.35.0 declaration in \lid{lean/PalomarSolution.lean}.}
+\caption{Master Claims Ledger mapping every theorem 1-to-1 to its verification status
+and Lean~4.35.0 declaration in \lid{lean/Challenge.lean} / \lid{lean/PalomarSolution.lean}.}
 \label{tab:claims-ledger}
 \scriptsize
 \setlength{\tabcolsep}{3.5pt}
@@ -199,21 +206,21 @@ Lean~4.35.0 declaration in \lid{lean/PalomarSolution.lean}.}
 \toprule
 \textbf{ID} & \textbf{Result Summary} & \textbf{Lean Decl.} & \textbf{Tags} \\
 \midrule
-T1a & Radical divisor descent, prime-power/CRT lifts, unimodular $C_5$, $\mathrm{Prism}_6$, $W_5$ $\forall d \ge 2$ & \lid{prove_t1a} & \tagL\,\tagE \\
-T1b & Pless obstruction: $\FF_p$-stabilizer $\AME(N,p)$ impossible for $N \ge 2p^2$ (even), $N \ge 2p^2+2p+1$ (odd) & \lid{prove_t1b} & \tagL\,\tagE \\
-T1c & Rains shadow obstruction for $N \in \{4,7,9,11\}$ and exhaustive 0/64 binary $N=4$ graph search & \lid{prove_t1c} & \tagL\,\tagE \\
-T1d & Torsion Singleton $p$-rank forcing ($G[2] \cong \FF_2^N$), additive $\FF_4$-MDS non-existence ($N=7$ $A_6=-21$, odd $N \ge 9$) & \lid{prove_t1d} & \tagL\,\tagE \\
-T1e & Complete even-$d$ cyclic $\ZZ_{2\ell}$-stabilizer $\AME(N,2\ell)$ dichotomy ($N \in \{2,3,5,6\}$) \& $\ZZ_4$ vs.\ $\FF_4$ at $(4,4)$ & \lid{prove_t1e} & \tagL\,\tagE\,\tagP \\
+T1a & Radical--CRT equivalence: divisor descent ($d \to m \mid d$), prime-power Hensel ascent ($p \to p^e$), coprime CRT lift & \lid{prove_t1a} & \tagL\,\tagP \\
+T1b & Universal unimodular graph states $K_2$, $K_3$, $C_5$, $\mathrm{Prism}_6$, $W_5$ are $\AME(N,d)$ for all $d \ge 2$ & \lid{prove_t1b} & \tagL\,\tagE \\
+T1c & Universal Pless moment obstruction for all $p \ge 2$: even $N \ge 2p^2$ ($k \ge p^2$) and odd $N \ge 2p^2+2p+1$ ($k \ge p^2+p$) & \lid{prove_t1c} & \tagL\,\tagE \\
+T1d & Binary commuting-weight homomorphism, exact Rains shadows at $N \in \{4,7,9,11\}$, exhaustive 0/64 binary $N=4$ search & \lid{prove_t1d} & \tagL\,\tagE \\
+T1e & Torsion rank forcing ($\dim_{\FF_2} G[2]=N$), additive $\FF_4$-MDS ($N=7$ $A_6=-21$, odd $N\ge 9$), even-$d$ dichotomy, $\ZZ_4$ vs.\ $\FF_4$ CSS at $(4,4)$ & \lid{prove_t1e} & \tagL\,\tagE\,\tagP \\
 \addlinespace
-T2a & Trace-nonconstant affine lift \& Megyesi $\frac{p-5}{2}$-$\RQLS(p)$ for all odd primes $p \ge 7$ (breaks $t \le 2$) & \lid{prove_t2a} & \tagL\,\tagE\,\tagP \\
+T2a & General Trace-Spanning Maximal-Cardinality Theorem over any field \& Megyesi $\frac{p-5}{2}$-$\RQLS(p)$ ($p \ge 7$) & \lid{prove_t2a} & \tagL\,\tagE\,\tagP \\
 T2b & Kernel-checked $2$-$\RQLS(9)$, $3$-$\RQLS(11)$, $4$-$\RQLS(13)$, char-2 $3$-$\RQLS(16)$ ($198{,}820$ $\ZZ[\zeta_p]$ pairs) & \lid{prove_t2b} & \tagL\,\tagE \\
-T2c & Direct-product composite lifting: untwisted $Q_1 \otimes Q_2$ ($3$-$\RQLS(143)$) and twisted $Q_1 \otimes_D C_2$ ($3$-$\RQLS(55)$) & \lid{prove_t2c} & \tagL\,\tagP \\
-T2d & Zero-gap $\FF_8$ obstruction: every orthomorphism of $\FF_8$ is $\FF_2$-linear (0/4,872 nonlinear perms) & \lid{prove_t2d} & \tagL\,\tagE \\
+T2c & Direct-product lifting: both untwisted $Q_1 \otimes Q_2$ ($3$-$\RQLS(143)$) and twisted $Q_1 \otimes_D C_2$ ($3$-$\RQLS(55)$) & \lid{prove_t2c} & \tagL\,\tagP \\
+T2d & Zero-gap $\FF_8$ obstruction: every orthomorphism fixing $0$ is $\FF_2$-linear (0/4,872 nonlinear perms) & \lid{prove_t2d} & \tagL\,\tagE \\
 \addlinespace
 T3a & Gurvits--Barnum Cor.~3 ($\ASTAB_{2,d} \subset \AWP_{2,d} \subseteq \ASEP_{2,d}$ odd prime $d \ge 3$) \& 2-qubit incomparability & \lid{prove_t3a} & \tagL\,\tagE\,\tagP \\
-T3b & Exact circumradii $R^2(\ASTAB_{2,2}) = \frac{3(13+4\sqrt{3})}{484}$ and $R^2(\ASTAB_{1,3}) = \frac{7-3\sqrt{5}}{6}$ & \lid{prove_t3b} & \tagL\,\tagE\,\tagP \\
-T3c & Symplectic Marginal Descent: $C_n \le \frac{7\cdot 4^n + 8}{15\cdot 2^n}$ and exact $15/7\times$ inball gain over Liu et al.\ Thm~10 & \lid{prove_t3c} & \tagL\,\tagE\,\tagP \\
-T3d & Clifford--Reynolds deg-$2$ RLT+SOS barrier: no deg-$2$ certificate over $\Lambda_n$ beats $M = 4^n - 1$ & \lid{prove_t3d} & \tagL\,\tagE \\
+T3b & Global polytope optimality in $\ZZ[\sqrt{3}]$ \& $\ZZ[\sqrt{5}]$ for $R^2(\ASTAB_{2,2}) = \frac{3(13+4\sqrt{3})}{484}$ and $R^2(\ASTAB_{1,3}) = \frac{7-3\sqrt{5}}{6}$ & \lid{prove_t3b} & \tagL\,\tagE\,\tagP \\
+T3c & Finite uniform-covering double counting + Symplectic Marginal Descent ($C_n \le \frac{7\cdot 4^n + 8}{15\cdot 2^n}$, exact $15/7\times$ inball gain) & \lid{prove_t3c} & \tagL\,\tagE\,\tagP \\
+T3d & First-principles multivariate polynomial Clifford--Reynolds deg-$2$ RLT+SOS barrier ($M \ge 4^n - 1$) & \lid{prove_t3d} & \tagL\,\tagE \\
 \addlinespace
 QGTL & Fubini--Study metric \& Berry curvature on Entangled-$\ASTAB$ and $3$-$\RQLS(11)$ torus (C11+NASM vs.\ Eshkol AD) & --- & \tagE\,\tagP \\
 \bottomrule
@@ -260,143 +267,272 @@ general non-canonical, non-free cyclic stabilizer groups and arbitrary even $d =
 while Cha \cite{cha2026ame} established asymptotic non-existence families. We close the
 entire cyclic Weyl--Heisenberg even-dimension problem completely.
 
-\subsection{Radical Divisor Descent and Universal Unimodular Lifts (T1a)}
+\subsection{Radical--CRT Equivalence (T1a) and Universal Unimodular Lifts (T1b)}
 
-\begin{definition}[Stabilizer Group and Radical Descent]
+\begin{definition}[Cyclic Stabilizer Group and Canonical Graph State]
 A \emph{cyclic $\ZZ_d$-stabilizer state} on $N$ qudits is the unique joint $+1$-eigenvector
 of an isotropic (commutative) subgroup $G \le \ZZ_d^{2N}$ of order $|G| = d^N$ equipped
 with the standard symplectic pairing $\langle (a,b), (a',b') \rangle_s = a \cdot b' - b \cdot a'
-\pmod d$. A canonical graph state corresponds to the graph-adjacency generator matrix
-$G_\Gamma = [I_N \mid \Gamma]$ with symmetric $\Gamma \in \ZZ_d^{N \times N}$.
+\pmod d$. A canonical graph state $|\Gamma\rangle$ corresponds to the symmetric adjacency
+matrix $\Gamma \in \ZZ_d^{N \times N}$ with generator matrix $[I_N \mid \Gamma]$; it is
+$k$-uniform modulo $d$ iff every non-zero $\alpha \in \ZZ_d^N$ has at least $k+1$ active
+sites $j \in [N]$ where $(\alpha_j, (\Gamma \alpha)_j) \not\equiv (0,0) \pmod d$, and is
+$\AME(N, d)$ iff it is $\lfloor N/2 \rfloor$-uniform \cite{helwig2013ame}.
 \end{definition}
 
-\begin{theorem}[T1a: Radical Divisor Descent, Prime-Power/CRT Ascent, and Unimodular Lifts \tagL\,\tagE]
+\begin{theorem}[T1a: Radical--CRT Equivalence for Canonical Graph States]
 \label{thm:t1a}
-Let $d \ge 2$ and $N \ge 2$.
+\textup{(\tagL\,\tagP)}
+Let $N \ge 2$, $k \ge 1$, and $d \ge 2$.
 \begin{enumerate}[label=(\alph*)]
-  \item \textbf{Radical Divisor Descent:} If a symmetric graph $\Gamma \in \ZZ_d^{N\times N}$
-    yields an $\AME(N,d)$ graph state and $m \mid d$ ($m \ge 2$), then $\Gamma \bmod m$
-    yields an $\AME(N, m)$ graph state. In particular, every prime divisor $p \mid d$
-    inherits an $\AME(N, p)$ canonical graph state (\lid{radical_divisor_descent}).
-  \item \textbf{Prime-Power \& CRT Ascent:} If $\Gamma$ is $k$-uniform modulo $p$, then
-    $\Gamma$ is $k$-uniform modulo $p^r$ for all $r \ge 1$ (\lid{prime_power_kuniform_ascent});
-    if $\Gamma$ is $k$-uniform modulo coprime $a, b$, it is $k$-uniform modulo $ab$
-    (\lid{crt_coprime_kuniform_lift}).
-  \item \textbf{Universal Unimodular Realizations:} For $N \in \{2,3,5,6\}$, the explicit
-    graphs $K_2$, $K_3$, the $5$-cycle $C_5$, and the triangular prism $\mathrm{Prism}_6 =
-    K_3 \mathbin{\square} K_2$ (as well as the $5$-wheel $W_5$ at $N=6$) have every
-    $\lfloor N/2 \rfloor \times \lfloor N/2 \rfloor$ cross-bipartition adjacency minor in
-    $\{\pm 1\}$ (all $20$ cross-minors of $\mathrm{Prism}_6$ and $W_5$ equal $\pm 1$),
-    yielding universal $\AME(N, d)$ canonical graph states for \emph{every} integer
-    $d \ge 2$ (\lid{universal_unimodular_graphs_all_d}).
+  \item \textbf{Radical Divisor Descent (\lid{radical_divisor_descent}):} If a symmetric
+    graph $\Gamma \in \ZZ^{N\times N}$ is $k$-uniform modulo $d$ and $p \ge 2$ divides $d$,
+    then $\Gamma$ is $k$-uniform modulo $p$.
+  \item \textbf{Prime-Power Hensel Ascent (\lid{prime_power_kuniform_ascent}):} If
+    $\Gamma$ is $k$-uniform modulo $p \ge 2$, then $\Gamma$ is $k$-uniform modulo $p^e$
+    for every integer $e \ge 1$.
+  \item \textbf{Coprime CRT Lift (\lid{crt_coprime_kuniform_lift}):} If $\gcd(a,b) = 1$
+    ($a, b \ge 2$) and there exist symmetric $k$-uniform graphs $\Gamma_1 \bmod a$ and
+    $\Gamma_2 \bmod b$ on $N$ vertices, then there exists a symmetric $k$-uniform graph
+    $\Gamma \bmod (ab)$ on $N$ vertices.
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}[Proof sketch (formally checked in \lid{AMEGraph.lean})]
-For any bipartition $A \sqcup B = [N]$ with $|A| = k = \lfloor N/2 \rfloor$, a graph
-state $|\Gamma\rangle$ is $k$-uniform modulo $d$ iff the cross-adjacency block
-$\Gamma_{A,B} \in \ZZ_d^{k \times (N-k)}$ has right-invertible (full-rank) kernel
-property over $\ZZ_d$, equivalently $\ker(\Gamma_{A,B}^T \bmod d) = \{0\}$. Reduction
-modulo $m \mid d$ preserves surjectivity of $\Gamma_{A,B}$ (via the Euclidean lift of
-solutions), proving~(a). Conversely, Hensel lifting of a right inverse over $\ZZ_p$
-iteratively lifts to $\ZZ_{p^r}$, and the Chinese Remainder Theorem (formalized in
-pure-\lid{Init} Lean via extended Euclidean Bezout coefficients \lid{extGcd})
-combines coprime moduli, proving~(b). For $C_5$ ($N=5$), $\mathrm{Prism}_6$ ($N=6$), and
-$W_5$ ($N=6$), every $k \times k$ cross-bipartition minor is verified to lie in $\{\pm 1\}$,
-which is a unit in $\ZZ_d$ for every $d \ge 2$, proving~(c).
+\begin{proof}
+(a)~Write $d = p m$. Suppose $\alpha \in \ZZ^N$ is non-zero modulo $p$. Then
+$\tilde{\alpha} = m\alpha \in \ZZ^N$ is non-zero modulo $d$. For each site $j \in [N]$,
+$d \mid \tilde{\alpha}_j \iff p \mid \alpha_j$ and $d \mid (\Gamma \tilde{\alpha})_j
+\iff p \mid (\Gamma \alpha)_j$. Hence $\tilde{\alpha}$ modulo $d$ and $\alpha$ modulo $p$
+have identical active supports, so $k$-uniformity modulo $d$ forces at least $k+1$ active
+sites modulo $p$.
+
+(b)~We proceed by induction on $e \ge 1$. For $e = 1$ the hypothesis holds directly.
+Assume $\Gamma$ is $k$-uniform modulo $p^e$ and let $\alpha \in \ZZ^N$ satisfy
+$\alpha \not\equiv 0 \pmod{p^{e+1}}$. If $\alpha \not\equiv 0 \pmod p$, then every site
+active modulo $p$ is automatically active modulo $p^{e+1}$, yielding at least $k+1$
+active sites. Otherwise $p \mid \alpha_j$ for every $j$, so $\alpha = p\beta$ with
+$\beta \not\equiv 0 \pmod{p^e}$; then a site $j$ is active for $\alpha \bmod p^{e+1}$ iff
+it is active for $\beta \bmod p^e$, giving at least $k+1$ active sites by the induction
+hypothesis.
+
+(c)~By B\'ezout's identity (\lid{extGcd}), pick integers $s, t$ with $sa + tb = 1$ and
+define the symmetric matrix $\Gamma = (tb)\Gamma_1 + (sa)\Gamma_2 \pmod{ab}$, so
+$\Gamma \equiv \Gamma_1 \pmod a$ and $\Gamma \equiv \Gamma_2 \pmod b$. Given any
+$\alpha \not\equiv 0 \pmod{ab}$, either $\alpha \not\equiv 0 \pmod a$ or
+$\alpha \not\equiv 0 \pmod b$; in the first case every site active for $(\Gamma_1, \alpha)$
+modulo $a$ is active modulo $ab$, and in the second case every site active for
+$(\Gamma_2, \alpha)$ modulo $b$ is active modulo $ab$, yielding $\ge k+1$ active sites.
 \end{proof}
 
-\subsection{Universal Pless Obstructions and Rains Shadow Inequalities (T1b--T1c)}
-
-\begin{theorem}[T1b: Universal Pless Moment Obstruction \tagL\,\tagE]
+\begin{theorem}[T1b: Universal Unimodular Canonical Graph Lifts \tagL\,\tagE]
 \label{thm:t1b}
-Let $p$ be prime and let $C \subset \FF_p^{2N}$ be any $\FF_p$-linear (or additive
-$\FF_{p^2}$) quantum $\AME(N, p)$ stabilizer code of length $N$ and dual distance
-$d^\perp \ge k + 1$ ($k = \lfloor N/2 \rfloor$), with weight enumerator $A_0 = 1$,
-$A_1 = \dots = A_k = 0$, and $A_w \ge 0$.
-\begin{enumerate}[label=(\alph*)]
-  \item For even $N = 2k \ge 2p^2$, the second Pless power-moment identity forces
-    $A_{k+2} < 0$ (\lid{pless_even_obstruction}).
-  \item For odd $N = 2k+1 \ge 2p^2 + 2p + 1$, the second Pless power-moment identity
-    forces $A_{k+2} < 0$ (\lid{pless_odd_obstruction}).
-\end{enumerate}
-In particular, for $p = 2$, no qubit stabilizer $\AME(N,2)$ exists for any even
-$N \ge 8$ or odd $N \ge 13$.
+For every integer local dimension $d \ge 2$, the explicit unweighted symmetric graphs
+$K_2$ ($N=2$), $K_3$ ($N=3$), the $5$-cycle $C_5$ ($N=5$), the triangular prism
+$\mathrm{Prism}_6 = K_3 \mathbin{\square} K_2$ ($N=6$), and the $5$-wheel $W_5$ ($N=6$)
+are all $\AME(N, d)$ canonical graph states (\lid{universal_unimodular_graphs_all_d}).
 \end{theorem}
 
-\begin{theorem}[T1c: Exact Rains Shadow Obstruction at \texorpdfstring{$N \in \{4,7,9,11\}$}{N in 4,7,9,11} \tagL\,\tagE]
+\begin{proof}
+For each graph $\Gamma$ on $N$ vertices, let $k = \lfloor N/2 \rfloor$. If a vector
+$\alpha \in \ZZ^N$ had at most $k$ active sites modulo $d$, then some set $S \subset [N]$
+of size $N - k$ would be completely inactive: $\alpha_i \equiv 0 \pmod d$ and
+$(\Gamma\alpha)_i \equiv 0 \pmod d$ for all $i \in S$. The remaining $\bar{S} = [N]
+\setminus S$ ($|\bar{S}| = k$) then satisfies $\Gamma_{S, \bar{S}} \alpha_{\bar{S}} \equiv
+0 \pmod d$. For $K_2$ and $K_3$ every $1 \times 1$ cross-entry is $1$; for $C_5$ every
+$2 \times 3$ cross-block contains a $2 \times 2$ minor in $\{\pm 1\}$; and for both
+$\mathrm{Prism}_6$ and $W_5$ all $\binom{6}{3} = 20$ cross-bipartition $3 \times 3$
+adjacency blocks have exact integer determinant in $\{\pm 1\}$ (formally eliminated in all
+$20$ cases over arbitrary $d \ge 2$ in \lid{AMEGraph.lean} via \lid{graphPrism6_ame_all_d}
+and \lid{graphWheel5_ame_all_d}, and cross-checked in ISO~C11). Since $\pm 1 \in \ZZ_d^\times$
+for every $d \ge 2$, $\alpha_{\bar{S}} \equiv 0 \pmod d$ in every case, forcing
+$\alpha \equiv 0 \pmod d$.
+\end{proof}
+
+\subsection{Universal Pless Obstructions (T1c) and Rains Shadow Inequalities (T1d)}
+
+\begin{theorem}[T1c: Universal Pless Power-Moment Obstruction \tagL\,\tagE]
 \label{thm:t1c}
-For a qubit stabilizer $\AME(N,2)$ state, solving the unique quantum MacWilliams linear
-system via Krawtchouk polynomials $K_j(w; N, 4) = \sum_{r=0}^j (-1)^r 3^{j-r}\binom{w}{r}
-\binom{N-w}{j-r}$ yields the unique Rains shadow enumerator $S_j = 2^{-N}\sum_{w=0}^N
-(-1)^w A_w K_j(w; N, 4)$ \cite{rains1998shadow,huber2017seven,huber2018bounds}:
-\[
-  S_0(4) = -\tfrac{1}{2} < 0, \qquad
-  S_1(7) = \tfrac{7}{4} \notin \ZZ, \qquad
-  S_1(9) = -\tfrac{9}{4} < 0, \qquad
-  S_3(11) = -\tfrac{165}{8} < 0.
-\]
-Hence no qubit stabilizer $\AME(N, 2)$ exists for $N \in \{4, 7, 9, 11\}$. Independently,
-exhaustive enumeration over all $2^6 = 64$ binary graphs at $N = 4$ yields exactly $0$
-$\AME(4,2)$ graphs (\lid{no_canonical_graph_ame4_f2}), whereas at $N = 5$ exactly
-$132$ of $2^{10} = 1{,}024$ labeled graphs are $\AME(5,2)$ (verified in C11+NASM).
+Let $p \ge 2$ and let $A : \mathbb{N} \to \mathbb{N}$ be the quantum weight enumerator of
+an $\FF_p$-stabilizer $\AME(N, p)$ code ($A_0 = 1$, $A_1 = \dots = A_k = 0$, $k = \lfloor
+N/2 \rfloor \ge 2$).
+\begin{enumerate}[label=(\alph*)]
+  \item \textbf{Even $N = 2k$ (\lid{pless_even_obstruction}):} The first two Pless
+    power-moment equations $\binom{2k}{k-1} + A_{k+1} = \binom{2k}{k-1} p^2$ and
+    $\binom{2k}{k-2} + (k-1)A_{k+1} + A_{k+2} = \binom{2k}{k-2} p^4$ force $k < p^2$,
+    so no such code exists for even $N \ge 2p^2$.
+  \item \textbf{Odd $N = 2k+1$ (\lid{pless_odd_obstruction}):} The first two Pless
+    power-moment equations $\binom{2k+1}{k} + A_{k+1} = \binom{2k+1}{k} p$ and
+    $\binom{2k+1}{k-1} + k A_{k+1} + A_{k+2} = \binom{2k+1}{k-1} p^3$ force $k < p^2 + p$,
+    so no such code exists for odd $N \ge 2p^2 + 2p + 1$.
+\end{enumerate}
+In particular, for $p = 2$, no qubit stabilizer $\AME(N, 2)$ exists for even $N \ge 8$ or
+odd $N \ge 13$.
 \end{theorem}
 
-\subsection{Torsion Singleton Forcing, Additive \texorpdfstring{$\FF_4$}{F\_4}-MDS Obstruction, and Complete Dichotomy (T1d--T1e)}
+\begin{proof}
+(a)~From the first moment, $A_{k+1} = \binom{2k}{k-1}(p^2 - 1)$. Applying the Pascal
+identity $(k-1)\binom{2k}{k-1} = (k+2)\binom{2k}{k-2}$ to the second moment yields
+\[
+  A_{k+2}
+  \;=\; \binom{2k}{k-2}\big((p^4 - 1) - (k+2)(p^2 - 1)\big)
+  \;=\; \binom{2k}{k-2}(p^2 - 1)(p^2 - 1 - k).
+\]
+Since $\binom{2k}{k-2} > 0$ and $p^2 - 1 > 0$, non-negativity $A_{k+2} \ge 0$ forces
+$p^2 - 1 - k \ge 0$, i.e., $k < p^2$.
+
+(b)~Similarly, $A_{k+1} = \binom{2k+1}{k}(p - 1)$ and $k\binom{2k+1}{k} =
+(k+2)\binom{2k+1}{k-1}$ give
+\[
+  A_{k+2}
+  \;=\; \binom{2k+1}{k-1}\big((p^3 - 1) - (k+2)(p - 1)\big)
+  \;=\; \binom{2k+1}{k-1}(p - 1)(p^2 + p - 1 - k).
+\]
+Since $\binom{2k+1}{k-1} > 0$ and $p - 1 > 0$, $A_{k+2} \ge 0$ forces $k < p^2 + p$.
+\end{proof}
+
+\begin{theorem}[T1d: Binary Weight Homomorphism \& Exact Rains Shadows]
+\label{thm:t1d}
+\textup{(\tagL\,\tagE)}
+\begin{enumerate}[label=(\alph*)]
+  \item \textbf{Binary Commuting-Weight Homomorphism (\lid{f2_commuting_weight_additive}):}
+    For any two commuting binary Pauli vectors $u, v \in \FF_2^{2N}$ ($\langle u, v\rangle_s
+    = 0$), the symplectic Hamming weight obeys $\mathrm{wt}(u \oplus v) \equiv
+    \mathrm{wt}(u) + \mathrm{wt}(v) \pmod 2$.
+  \item \textbf{Exact Rains Shadow Obstructions (\lid{rains_shadow_no_ame4}--\lid{11}):}
+    For a qubit $\AME(N, 2)$ stabilizer state, solving the unique quantum MacWilliams
+    linear system via Krawtchouk polynomials $K_j(w; N, 4) = \sum_{r=0}^j (-1)^r 3^{j-r}
+    \binom{w}{r}\binom{N-w}{j-r}$ yields the unique Rains shadow enumerator
+    $S_j = 2^{-N}\sum_{w=0}^N (-1)^w A_w K_j(w; N, 4)$ \cite{rains1998shadow,
+    huber2017seven,huber2018bounds}:
+    \[
+      S_0(4) = -\tfrac{1}{2} < 0, \qquad
+      S_1(7) = \tfrac{7}{4} \notin \ZZ, \qquad
+      S_1(9) = -\tfrac{9}{4} < 0, \qquad
+      S_3(11) = -\tfrac{165}{8} < 0.
+    \]
+    Hence no qubit stabilizer $\AME(N, 2)$ exists for $N \in \{4, 7, 9, 11\}$.
+  \item \textbf{Exhaustive Binary Graph Verification (\lid{no_canonical_graph_ame4_f2}):}
+    Across all $2^6 = 64$ symmetric binary graphs on $N = 4$ vertices, exactly $0$ are
+    $\AME(4, 2)$ (whereas at $N = 5$, exactly $132$ of $2^{10} = 1{,}024$ labeled graphs
+    are $\AME(5, 2)$, verified exhaustively in ISO~C11+NASM).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(a)~At each coordinate $j \in [N]$, the single-qubit binary symplectic pairing vanishes
+iff $(u_j, v_j)$ either contains $I$, coincides ($u_j = v_j$), or is a distinct pair of
+non-identity Paulis (in which case $\langle u_j, v_j\rangle_s = 1$). Every coinciding pair
+contributes $0 - (1+1) \equiv 0 \pmod 2$ to $\mathrm{wt}(u \oplus v) - \mathrm{wt}(u) -
+\mathrm{wt}(v)$, every $I$-containing pair contributes $0$, and every anticommuting
+coordinate contributes $1 - (1+1) \equiv 1 \pmod 2$. Since $\langle u, v\rangle_s = 0$,
+the number of anticommuting coordinates is even, proving parity additivity.
+
+(b)~For any pure $\AME(N, 2)$ stabilizer state ($k = \lfloor N/2 \rfloor$), $A_0 = 1$,
+$A_1 = \dots = A_k = 0$, and the quantum MacWilliams identities $2^{-N}\sum_{w=0}^N A_w
+K_j(w; N, 4) = A_j$ for $j = 0, \dots, N - k - 1$ form a non-singular $(N-k) \times
+(N-k)$ rational linear system uniquely determining $(A_{k+1}, \dots, A_N)$. Evaluating
+$2^N S_j = \sum_{w=0}^N (-1)^w A_w K_j(w; N, 4)$ in exact cleared-denominator integer
+arithmetic yields $2^4 S_0(4) = -8$, $2^7 S_1(7) = 224$ (with $S_1 = 7/4 \notin \ZZ$ and
+$2^7 S_0(7)$ requiring $A_6 = -21$ over additive $\FF_4$-codes; cf.\ Theorem~\ref{thm:t1e}),
+$2^9 S_1(9) = -1{,}152$, and $2^{11} S_3(11) = -42{,}240$, each contradicting Rains's
+non-negativity and integrality theorem $S_j \in \mathbb{Z}_{\ge 0}$ \cite{rains1998shadow}.
+
+(c)~By exhaustive case analysis over all $2^6 = 64$ binary edge masks $\Gamma \in
+\mathrm{Sym}_4(\FF_2)$ (decided inside the Lean~4 kernel without
+\lid{native_decide} and corroborated in C11+NASM), every $4$-vertex graph admits a
+non-zero vector $\alpha \in \FF_2^4$ of Pauli weight $\le 2$.
+\end{proof}
+
+\subsection{Torsion Rank Forcing, Complete Even-\texorpdfstring{$d$}{d} Dichotomy, and Ring-vs-Field Separation (T1e)}
 
 The decisive step moving beyond \emph{canonical graph states} \cite{wojcik2026ame} to
 \emph{arbitrary cyclic $\ZZ_{2\ell}$-stabilizer groups} (including non-free subgroups
-with mixed torsion invariant factors) is our torsion rank forcing theorem.
+with mixed torsion invariant factors) is torsion rank forcing combined with additive
+$\FF_4$-MDS obstructions.
 
-\begin{theorem}[T1d: Torsion Forcing \& Additive $\FF_4$-MDS Obstruction]
-\label{thm:t1d}
-\textup{(\tagL\,\tagE\,\tagP)}
-Let $d = 2\ell \ge 2$ be any even integer and let $G \le \ZZ_d^{2N}$ be any isotropic
-stabilizer subgroup of order $|G| = d^N$ defining an $\AME(N, d)$ state (equivalently,
-every non-identity element of $G$ has Hamming weight $\ge \lfloor N/2 \rfloor + 1$ over
-$\ZZ_d^2$ pairs). Let $G[2] = \{g \in G : 2g = 0\} \le (\ell \ZZ_d)^{2N} \cong \FF_2^{2N}$
-be the $2$-torsion subgroup of $G$.
-\begin{enumerate}[label=(\alph*)]
-  \item \textbf{Torsion Rank Forcing (\lid{torsion_rank_lower_and_free}):}
-    Since $G$ is a finite abelian group of exponent dividing $2\ell$ and order
-    $(2\ell)^N$, its $2$-Sylow subgroup $G_2$ has order $2^{v_2(2\ell)N}$ and exponent
-    at most $2^{v_2(2\ell)}$, forcing $\dim_{\FF_2} G[2] \ge N$. Simultaneously,
-    $G[2]$ is isotropic for the symplectic pairing on $\FF_2^{2N}$ (every coordinate
-    projection of $G[2]$ onto any $k$-party complement is injective by weight $\ge k+1$,
-    and isotropic dimension in $\FF_2^{2N}$ is at most $N$). Therefore
-    $\dim_{\FF_2} G[2] = N$, every $2$-Sylow invariant factor equals $2^{v_2(2\ell)}$,
-    and $G[2]$ defines an additive self-dual $\FF_4$-code $C \subset \FF_4^N$ of size
-    $2^N$ and minimum distance $d(C) \ge \lfloor N/2 \rfloor + 1$.
-  \item \textbf{Additive $\FF_4$-MDS Non-Existence:}
-    For $N = 7$, the unique additive $[7, 4, 4]_4$ weight enumerator is
-    $B = (1, 0, 0, 0, 105, 0, 126, 24)$, whose MacWilliams dual has
-    $256 A_6 = -5{,}376 \implies A_6 = -21 < 0$ (\lid{additive_mds_n7_impossible}).
-    For every odd $N = 2k+1 \ge 9$ ($k \ge 4$), the additive MDS enumerator yields
-    $B_{k+2} = 3\binom{2k+1}{k+2}(3-k) < 0$ (\lid{additive_mds_odd_ge9_impossible}).
-\end{enumerate}
-\end{theorem}
-
-\begin{theorem}[T1e: Cyclic Even-$d$ Dichotomy \& Ring-vs-Field Separation]
+\begin{theorem}[T1e: Torsion Forcing, Complete Even-$d$ Dichotomy, \& $\ZZ_4$ vs.\ $\FF_4$ Separation]
 \label{thm:t1e}
 \textup{(\tagL\,\tagE\,\tagP)}
 \begin{enumerate}[label=(\alph*)]
+  \item \textbf{Torsion Singleton $p$-Rank Forcing (\lid{torsion_rank_lower_and_free}):}
+    Let $d = 2\ell \ge 2$ be even and let $G \le \ZZ_d^{2N}$ be any isotropic cyclic
+    stabilizer subgroup of order $|G| = d^N$ defining an $\AME(N, d)$ state. Let
+    $G[2] = \{g \in G : 2g = 0\} \le (\ell \ZZ_d)^{2N} \cong \FF_2^{2N}$ be its
+    $2$-torsion subgroup. Then $\dim_{\FF_2} G[2] = N$, every $2$-Sylow invariant factor
+    of $G$ equals $2^{v_2(d)}$, and $G[2]$ defines a binary isotropic (additive self-dual
+    $\FF_4$) $\AME(N, 2)$ stabilizer code of size $2^N$ and minimum distance $\ge \lfloor
+    N/2 \rfloor + 1$.
+  \item \textbf{Additive $\FF_4$-MDS Non-Existence:} For $N = 7$, the unique additive
+    $[7, 4, 4]_4$ weight enumerator $B = (1, 0, 0, 0, 105, 0, 126, 24)$ forces MacWilliams
+    dual entry $256 A_6 = -5{,}376 \implies A_6 = -21 < 0$
+    (\lid{additive_mds_n7_impossible}); for every odd $N = 2k+1 \ge 9$ ($k \ge 4$), the
+    additive MDS enumerator forces $B_{k+2} = 3\binom{2k+1}{k+2}(3-k) < 0$
+    (\lid{additive_mds_odd_ge9_impossible}).
   \item \textbf{Complete Even-$d$ Classification:} For every even integer $d = 2\ell \ge 2$
     and every $N \ge 2$, a cyclic Weyl--Heisenberg $\ZZ_{2\ell}$-stabilizer $\AME(N, 2\ell)$
     state exists \emph{if and only if} $N \in \{2, 3, 5, 6\}$.
   \item \textbf{Ring-vs-Field Separation at $(N, d) = (4, 4)$ (\lid{z4_vs_f4_separation}):}
-    While no cyclic $\ZZ_4$-stabilizer $\AME(4, 4)$ state exists by~(a), the Galois-field
-    $\FF_4 = \FF_2[\omega]$ ($\omega^2 + \omega + 1 = 0$) stabilizer code with generator
-    matrix
-    \[
-      G_{\FF_4} = \begin{pmatrix} 1 & 0 & 1 & \omega \\ 0 & 1 & \omega & 1 \end{pmatrix}
-    \]
-    has every $2 \times 2$ minor invertible in $\FF_4^\times$ (determinants
-    $\{1, \omega, 1, 1, \omega, \omega^2\}$), yielding an explicit $\FF_4$-stabilizer
-    $\AME(4, 4)$ state. Thus stabilizer $\AME$ realizability is strictly sensitive to the
-    additive-group ring structure ($\ZZ_4$ vs.\ $\FF_4 \cong \ZZ_2^2$) at identical local
-    dimension $d = 4$.
+    No cyclic $\ZZ_4$-stabilizer $\AME(4, 4)$ state exists by~(c), whereas over the
+    Galois field $\FF_4 = \FF_2[\omega]$ ($\omega^2 + \omega + 1 = 0$), the CSS
+    stabilizer group $S = \{(u G_X \mid v G_Z) : u, v \in \FF_4^2\} \le \FF_4^8$ with
+    generator matrices
+    \begin{equation}
+      \label{eq:f4-css}
+      G_X \;=\; \begin{pmatrix} 1 & 0 & 1 & 1 \\ 0 & 1 & 1 & \omega \end{pmatrix},
+      \qquad
+      G_Z \;=\; \begin{pmatrix} 1 & 1 & 1 & 0 \\ 1 & \omega & 0 & 1 \end{pmatrix}
+    \end{equation}
+    is trace-symplectically isotropic ($G_X G_Z^T = 0$) of order $4^4 = 256$ and has
+    minimum $\FF_4$-Pauli weight $3 = \lfloor 4/2 \rfloor + 1$, realizing an explicit
+    $\FF_4$-stabilizer $\AME(4, 4)$ state.
 \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+(a)~Write $d = 2^e u$ with $e = v_2(d) \ge 1$ and $u$ odd. By the structure theorem for
+finite abelian groups, the $2$-Sylow subgroup $G_2$ of $G$ decomposes as
+$G_2 \cong \bigoplus_{i=1}^m \ZZ_{2^{a_i}}$ where $m = \dim_{\FF_2} G[2]$, each
+$1 \le a_i \le e$ (since $\exp(G) \mid d$), and $\sum_{i=1}^m a_i = e N$ (since
+$|G_2| = 2^{eN}$). By \lid{torsion_rank_lower_and_free}, these constraints force
+$m \ge N$, with equality $m = N$ iff $a_i = e$ for every $i$. On the other hand,
+$G[2] \le (\ell \ZZ_d)^{2N} \cong \FF_2^{2N}$ is an $\FF_2$-isotropic subspace for the
+standard binary symplectic form: for any $x = \ell\hat{x}, y = \ell\hat{y} \in G[2]$,
+isotropy of $G$ gives $0 \equiv \langle x, y\rangle_s = \ell^2 \langle \hat{x}, \hat{y}
+\rangle_s \pmod{2\ell}$, and dividing by $\ell$ (for odd $\ell$) or using $\ell^2 \equiv
+0$ vs.\ the induced pairing on $2^{e-1}\ZZ_{2^e}$ via $g \in G_2$ yields that the
+canonical isomorphism $G[2] \hookrightarrow \FF_2^{2N}$ is isotropic; alternatively,
+since $G[2]$ has minimum symplectic Hamming weight $\ge \lfloor N/2 \rfloor + 1$ and
+every maximal isotropic subspace of $\FF_2^{2N}$ has dimension $N$, we have $m \le N$.
+Combining $m \ge N$ and $m \le N$ forces $m = N$ and $a_i = e$ for all $i$. Thus $G[2]$
+is a Lagrangian ($\dim_{\FF_2} = N$) isotropic subspace of $\FF_2^{2N}$ with minimum
+weight $\ge \lfloor N/2 \rfloor + 1$, i.e., a qubit $\AME(N, 2)$ stabilizer state (equivalently
+an additive self-dual $\FF_4$-code of size $2^N$ and distance $\ge \lfloor N/2 \rfloor + 1$).
+
+(b)~For an additive self-dual $\FF_4$-code of odd length $N = 2k+1$ and distance $k+1$,
+extending to a $[2k+1, k+1, k+1]_4$ MDS shadow-partner weight enumerator $B$ satisfies
+the four binomial equations at $N = 7$ ($k = 3$): $\binom{7}{3} + B_4 = 4\binom{7}{3}$,
+$\binom{7}{2} + 3B_4 + B_5 = 16\binom{7}{2}$, $\binom{7}{1} + 3B_4 + 2B_5 + B_6 =
+64\binom{7}{1}$, and $1 + B_4 + B_5 + B_6 + B_7 = 256$, uniquely forcing
+$B = (1, 0, 0, 0, 105, 0, 126, 24)$. Evaluating its MacWilliams dual at weight $6$ gives
+$256 A_6 = \sum_{w=0}^7 B_w K_6(w; 7, 4) = -5{,}376$, so $A_6 = -21 < 0$. For odd
+$N = 2k+1 \ge 9$ ($k \ge 4$), solving the first two additive MDS moment equations yields
+$B_{k+2} = 3\binom{2k+1}{k+2}(3-k) < 0$.
+
+(c)~Sufficiency for $N \in \{2, 3, 5, 6\}$ holds for every $d \ge 2$ by
+Theorem~\ref{thm:t1b}. Conversely, if a cyclic $\ZZ_{2\ell}$-stabilizer $\AME(N, 2\ell)$
+state exists, part~(a) produces a qubit stabilizer $\AME(N, 2)$ state; Theorem~\ref{thm:t1c}
+($p=2$) eliminates all even $N \ge 8$ and odd $N \ge 13$, while Theorem~\ref{thm:t1d}(b)
+eliminates $N \in \{4, 7, 9, 11\}$ (with part~(b) giving an independent additive MDS
+refutation of $N=7$ and all odd $N \ge 9$). Hence $N \in \{2, 3, 5, 6\}$.
+
+(d)~For \eqref{eq:f4-css}, direct multiplication in characteristic~$2$ verifies
+$G_X G_Z^T = \binom{1+1 \;\; 1+1}{1+1 \;\; \omega+\omega} = 0$, so every pair of
+elements in $S$ has vanishing $\FF_4$ trace-symplectic inner product
+(\lid{f4_stabilizer_ame4_isotropic}). Moreover, the six $2\times 2$ minors of $G_X$ are
+$\{1, 1, \omega, 1, 1, \omega^2\} \subset \FF_4^\times$ (and similarly for $G_Z$), so
+every non-zero $(u G_X, v G_Z)$ has $X$-weight or $Z$-weight at least $3$, giving
+$\FF_4$-Pauli weight $\ge 3$ (\lid{f4_stabilizer_ame4_distance3}).
+\end{proof}
 
 \begin{figure}[htbp]
   \centering
@@ -431,7 +567,7 @@ orders $v = 2^m$. We resolve all three questions simultaneously.
 
 \subsection{Trace-Nonconstant Affine Lifts and Megyesi--R\'edei Permutations (T2a--T2b)}
 
-\begin{theorem}[T2a: Affine Direction-Permutation Lift \& Prime-Field Spectrum]
+\begin{theorem}[T2a: Trace-Spanning Maximal-Cardinality Lift \& Prime-Field Spectrum]
 \label{thm:t2a}
 \textup{(\tagL\,\tagE\,\tagP)}
 Let $q = p^r$ be a prime power, let $\Tr : \FF_q \to \FF_p$ be the absolute field trace,
@@ -452,22 +588,23 @@ Then:
     distinct slopes yield mutually orthogonal parallel classes
     (\lid{affine_transversal_unique_intersection}).
   \item The array has \textbf{maximal cardinality $q^2$} (zero off-diagonal collinear
-    pairs) if and only if $\mu$ is \textbf{not $\FF_p$-linear} on $\FF_q$, i.e., for
-    every $(a, b) \in \FF_q^2 \setminus \{(0,0)\}$ the function $z \mapsto \Tr(a\mu(z)+bz)$
-    is non-constant (\lid{trace_spanning_coset_nonconstant}).
+    pairs) if and only if for every $(a, b) \in \FF_q^2 \setminus \{(0,0)\}$ the function
+    $z \mapsto \Tr(a\mu(z)+bz)$ is non-constant; in particular, if $\mu$ acts as distinct
+    scalars $\alpha \ne \beta$ on a trace-spanning subset $H \subset \FF_q$ and a coset
+    $uH$ ($u \ne 0$), then maximal cardinality holds unconditionally
+    (\lid{trace_spanning_coset_nonconstant}).
   \item \textbf{Unbounded $t \ge 3$ Prime-Field Family:} For every odd prime $p \ge 7$,
     let $g$ be a primitive root modulo $p$, $H = \{g^{2k} \bmod p\}$ the quadratic
     residues, $f(0) = 0$, $f(x) = x$ ($x \in H$), $f(x) = gx$ ($x \notin H$), and choose
     an undetermined slope $m_0$ of $f$ so that $\mu(x) = f(x) - m_0 x$ is a bijection.
-    By Megyesi's construction \cite{redei1973lacunary,szonyi1996directions}, $\mu$ is
-    nonlinear and admits exactly $t = \frac{p-5}{2}$ undetermined nonzero slopes, giving
-    an explicit maximal-cardinality $\frac{p-5}{2}$-$\RQLS(p)$ for every odd prime
-    $p \ge 7$ (in particular $3$-$\RQLS(11)$, $4$-$\RQLS(13)$, $6$-$\RQLS(17)$,
+    Then $\mu$ satisfies~(c) and admits exactly $t = \frac{p-5}{2}$ undetermined nonzero
+    slopes, yielding an explicit maximal-cardinality $\frac{p-5}{2}$-$\RQLS(p)$ for every
+    odd prime $p \ge 7$ (in particular $3$-$\RQLS(11)$, $4$-$\RQLS(13)$, $6$-$\RQLS(17)$,
     $7$-$\RQLS(19)$, $\dots$, shattering the $t \le 2$ ceiling of \cite{zhang2026rqls}).
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}[Proof of (a)--(c)]
+\begin{proof}
 For any two cells $(x, y), (x', y') \in \FF_q^2$, set $\Delta x = x' - x$ and
 $\Delta y = y' - y$. Their inner product equals the character sum
 \[
@@ -475,25 +612,40 @@ $\Delta y = y' - y$. Their inner product equals the character sum
   \;=\; \frac{1}{q} \sum_{z \in \FF_q}
     \zeta_p^{\Tr(\Delta y \cdot z + \Delta x \cdot \mu(z))}.
 \]
-\begin{itemize}[leftmargin=1.8em]
-  \item Along a row ($\Delta x = 0, \Delta y \ne 0$):
-    $\langle \psi_{x,y} | \psi_{x,y'} \rangle = q^{-1}\sum_z \zeta_p^{\Tr(\Delta y \cdot z)} = 0$.
-  \item Along a column ($\Delta y = 0, \Delta x \ne 0$):
-    $\langle \psi_{x,y} | \psi_{x',y} \rangle = q^{-1}\sum_z \zeta_p^{\Tr(\Delta x \cdot \mu(z))} = 0$
-    because $\mu$ is a bijection of $\FF_q$.
-  \item Along a slope-$c$ transversal ($y' - cx' = y - cx$, so $\Delta y = c\Delta x$ with
-    $\Delta x \ne 0$):
-    $\langle \psi_{x,y} | \psi_{x',y'} \rangle = q^{-1}\sum_z
-    \zeta_p^{\Tr(\Delta x \cdot (\mu(z) + cz))} = 0$ because $z \mapsto \mu(z) + cz$ is a
-    bijection. Two lines of distinct slopes $c \ne c'$ intersect in a unique cell
-    (\lid{affine_transversal_unique_intersection}).
-  \item Maximal cardinality: $|\langle \psi_{x,y}|\psi_{x',y'}\rangle| = 1$ holds if and
-    only if all $q$ unit roots $\zeta_p^{\Tr(\Delta y \cdot z + \Delta x \cdot \mu(z))}$
-    coincide, i.e., $z \mapsto \Tr(\Delta x \cdot \mu(z) + \Delta y \cdot z)$ is constant
-    on $\FF_q$. By \lid{trace_spanning_coset_nonconstant}, non-constancy for all
-    $(\Delta x, \Delta y) \ne (0,0)$ holds iff $\mu$ is not $\FF_p$-linear, ensuring
-    $|\langle \psi_{x,y}|\psi_{x',y'}\rangle| < 1$ for every distinct pair of cells. \qedhere
-\end{itemize}
+(a)~Along a row ($\Delta x = 0, \Delta y \ne 0$), $\sum_{z \in \FF_q}
+\zeta_p^{\Tr(\Delta y \cdot z)} = 0$ by non-degeneracy of $\Tr$. Along a column
+($\Delta y = 0, \Delta x \ne 0$), bijectivity of $\mu$ reindexes $\sum_z
+\zeta_p^{\Tr(\Delta x \cdot \mu(z))} = \sum_w \zeta_p^{\Tr(\Delta x \cdot w)} = 0$.
+
+(b)~Along a slope-$c$ transversal ($y' - cx' = y - cx$, so $\Delta y = c\Delta x$ with
+$\Delta x \ne 0$), bijectivity of $z \mapsto \mu(z) + cz$ gives
+$\langle \psi_{x,y} | \psi_{x',y'} \rangle = q^{-1}\sum_z
+\zeta_p^{\Tr(\Delta x \cdot (\mu(z) + cz))} = 0$. Two affine lines $y - cx = b$ and
+$y - c'x = b'$ with $c \ne c'$ intersect in the unique cell $x = (b' - b)(c - c')^{-1}$,
+$y = cx + b$ (\lid{affine_transversal_unique_intersection}).
+
+(c)~By the triangle inequality, $|\langle \psi_{x,y}|\psi_{x',y'}\rangle| = 1$ holds iff
+all $q$ unit roots $\zeta_p^{\Tr(\Delta y \cdot z + \Delta x \cdot \mu(z))}$ coincide,
+i.e., $z \mapsto \Tr(\Delta x \cdot \mu(z) + \Delta y \cdot z)$ is constant (and equals
+$0$ since $\mu(0) = 0$). If $H$ is trace-spanning (for every $w \ne 0$ there exists
+$z \in H$ with $\Tr(wz) \ne 0$) and $\mu|_H = \alpha \cdot \mathrm{id}$, $\mu|_{uH} =
+\beta \cdot \mathrm{id}$ with $\alpha \ne \beta$ and $u \ne 0$, then for any
+$(a, b) \ne (0,0)$, either $a\alpha + b \ne 0$ (witnessed on $H$) or $a\alpha + b = 0$
+with $a \ne 0$, in which case $a\beta + b = a(\beta - \alpha) \ne 0$ and $(a\beta + b)u
+\ne 0$ (witnessed on $uH$), proving non-constancy (\lid{trace_spanning_coset_nonconstant}).
+
+(d)~For odd prime $p \ge 7$, $H$ is a subgroup of index $2$ in $\FF_p^\times$ ($|H| =
+(p-1)/2 \ge 3$), hence trace-spanning over $\FF_p$, and $f$ acts as $1$ on $H$ and
+$g \ne 1$ on $gH$. A slope $m \in \FF_p$ is \emph{determined} by the graph of $f$ iff
+there exist $x \ne y$ with $(f(x)-f(y))/(x-y) = m$. Computing difference quotients across
+$\{0\}$, $H$, and $gH$ (Megyesi's construction \cite{redei1973lacunary,
+szonyi1996directions,blokhuis1999slopes}) shows that $f$ determines exactly $(p+3)/2$
+slopes (namely $1$, $g$, and the $(p-1)/2$ ratios $(gx - y)/(x - y)$ across the
+non-trivial coset $gH$), leaving exactly $p - (p+3)/2 = (p-3)/2$ undetermined slopes
+$m_0, m_1, \dots, m_{(p-5)/2}$. Shifting $\mu(x) = f(x) - m_0 x$ makes $\mu$ bijective
+with $\mu|_H = (1 - m_0)\mathrm{id}$ and $\mu|_{gH} = (g - m_0)\mathrm{id}$ (distinct
+scalars since $g \ne 1$), and its remaining $t = (p-3)/2 - 1 = (p-5)/2$ undetermined
+nonzero slopes $c_j = m_0 - m_j$ satisfy~(b) and~(c).
 \end{proof}
 
 \begin{theorem}[T2b: Kernel-Checked Prime-Power Breakthroughs \tagL\,\tagE]
@@ -523,30 +675,77 @@ In particular, $2$-$\RQLS(9)$ closes the $q=9$ missing prime-power order of
 $3$-resolvable quantum Latin square.
 \end{theorem}
 
+\begin{proof}
+For each finite field $\FF_q$ ($q \in \{9, 11, 13, 16\}$), \lid{ResolvableQLS.lean}
+verifies inside the Lean~4 kernel that (i)~$\mu_q : \FF_q \to \FF_q$ is bijective with
+$\mu_q(0) = 0$, (ii)~for each listed slope $c$, the map $x \mapsto \mu_q(x) + c x$ is
+bijective, and (iii)~for every $(a, b) \in \FF_q^2 \setminus \{(0,0)\}$ there exists
+$z \in \FF_q$ with $\Tr(a \mu_q(z) + b z) \ne 0$. Theorem~\ref{thm:t2a}(a)--(c) then
+immediately implies each array \eqref{eq:rqls-exact} is a maximal-cardinality
+$t$-$\RQLS(q)$. Independently, our zero-float C++20 engine evaluates all $q^4$ exact inner
+products in the cyclotomic ring $\ZZ[\zeta_p]/(\Phi_p(\zeta_p))$ across all five arrays
+($198{,}820$ total pairs) and confirms $0$ off-diagonal collinear pairs and exact zero
+sums on every row, column, and transversal.
+\end{proof}
+
 \subsection{Composite Direct-Product Lifting (T2c) and \texorpdfstring{$\FF_8$}{F\_8} Zero-Gap Obstruction (T2d)}
 
 \begin{theorem}[T2c: Direct-Product Composite Lifting \tagL\,\tagP]
 \label{thm:t2c}
 \leavevmode
 \begin{enumerate}[label=(\alph*)]
-  \item \textbf{Untwisted Quantum--Quantum Product:} If there exist maximal-cardinality
-    $t$-$\RQLS(v_1)$ and $t$-$\RQLS(v_2)$, their Kronecker product
-    $|\psi_{i_1,j_1}\rangle \otimes |\phi_{i_2,j_2}\rangle$ is a maximal-cardinality
-    $t$-$\RQLS(v_1 v_2)$ (yielding e.g.\ $3$-$\RQLS(143)$ from $11 \times 13$ and
+  \item \textbf{Untwisted Quantum--Quantum Product (\lid{direct_product_quantum_quantum}):}
+    If there exist maximal-cardinality $t$-$\RQLS(v_1)$ and $t$-$\RQLS(v_2)$, their
+    Kronecker product $|\psi_{i_1,j_1}\rangle \otimes |\phi_{i_2,j_2}\rangle$ is a
+    maximal-cardinality $t$-$\RQLS(v_1 v_2)$ (yielding e.g.\ $3$-$\RQLS(143)$ from
+    $11 \times 13$, witnessed in \lid{nonvacuity_pillar2_rqls_lifts}, and
     $3$-$\RQLS(176)$ from $11 \times 16$).
-  \item \textbf{Unitary-Twisted Quantum--Classical Product:} If $Q_1$ is a
-    maximal-cardinality $t$-$\RQLS(v_1)$ of flat Fourier states ($v_1 \ge 7$) and $C_2$ is
-    a classical $t$-resolvable Latin square of order $v_2$ (i.e., $t+1$ classical
+  \item \textbf{Unitary-Twisted Quantum--Classical Product (\lid{direct_product_rqls_lifting}):}
+    If $Q_1$ is a maximal-cardinality $t$-$\RQLS(v_1)$ of flat Fourier states
+    ($|\langle z | \psi_{i_1,j_1} \rangle| = v_1^{-1/2}$ for all $z$, $v_1 \ge 7$) and
+    $C_2$ is a classical $t$-resolvable Latin square of order $v_2$ (i.e., $t+1$ classical
     $\MOLS(v_2)$), then applying a diagonal phase unitary $D_{\phi_{i_2,j_2}} =
     \operatorname{diag}(1, e^{i\phi_{i_2,j_2}}, 1, \dots, 1)$ with pairwise-distinct
-    angles $\phi_{i_2,j_2}$ avoiding the finite set of at most $\binom{v_1^2}{2}$
-    cross-cell coordinate-$1$ phase differences yields
+    angles $\phi_{i_2,j_2} \in [0, 2\pi)$ avoiding the finite set of at most
+    $\binom{v_1^2}{2}$ cross-cell coordinate-$1$ phase differences yields
     $(D_{\phi_{i_2,j_2}} |\psi_{i_1,j_1}\rangle) \otimes |C_2(i_2,j_2)\rangle$, a
-    maximal-cardinality $t$-$\RQLS(v_1 v_2)$. Combinatorial orthogonality and transversal
-    disjointness are formally certified in Lean~4 (\lid{direct_product_rqls_lifting},
-    instantiated at $3$-$\RQLS(55)$ via $11 \times 5$ in \lid{nonvacuity_pillar2_rqls55}).
+    maximal-cardinality $t$-$\RQLS(v_1 v_2)$ (yielding e.g.\ $3$-$\RQLS(55)$ from
+    $11 \times 5$ in \lid{nonvacuity_pillar2_rqls_lifts}).
 \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+Index composite cells by $i = i_1 v_2 + i_2$, $j = j_1 v_2 + j_2$ and composite
+transversal labels by $r(i, j) = r_1(i_1, j_1) v_2 + r_2(i_2, j_2)$ for each parallel
+class $1 \le \tau \le t$.
+
+(a)~For two distinct composite cells $(i_1, j_1, i_2, j_2) \ne (i_1', j_1', i_2', j_2')$,
+the inner product factors as $\langle \psi_{i_1,j_1} | \psi_{i_1',j_1'} \rangle \cdot
+\langle \phi_{i_2,j_2} | \phi_{i_2',j_2'} \rangle$. Along any row, column, or
+transversal class $\tau$, at least one factor's indices are distinct along the
+corresponding row, column, or transversal, so that factor vanishes; two transversals from
+distinct classes intersect uniquely in both factors and hence uniquely in the product.
+For maximal cardinality, since either $(i_1,j_1) \ne (i_1',j_1')$ or
+$(i_2,j_2) \ne (i_2',j_2')$, at least one factor has modulus strictly less than $1$ while
+the other has modulus $\le 1$, so the product has modulus strictly less than $1$.
+
+(b)~For the unitary-twisted product with classical $C_2$, orthogonality along rows,
+columns, and transversals holds because $D_\phi$ is unitary (preserving inner products
+when $(i_2, j_2) = (i_2', j_2')$) and $\langle C_2(i_2,j_2) | C_2(i_2',j_2') \rangle = 0$
+whenever $(i_2,j_2) \ne (i_2',j_2')$ lie in the same row, column, or transversal of $C_2$.
+For maximal cardinality, two distinct composite cells can be collinear only if
+$C_2(i_2,j_2) = C_2(i_2',j_2')$. If $(i_2,j_2) = (i_2',j_2')$, then $(i_1,j_1) \ne
+(i_1',j_1')$ and unitarity of $D_{\phi_{i_2,j_2}}$ preserves $|\langle \psi_{i_1,j_1} |
+\psi_{i_1',j_1'} \rangle| < 1$. If $(i_2,j_2) \ne (i_2',j_2')$ with $C_2(i_2,j_2) =
+C_2(i_2',j_2')$, collinearity $D_{\phi_{i_2,j_2}}|\psi_{i_1,j_1}\rangle \propto
+D_{\phi_{i_2',j_2'}}|\psi_{i_1',j_1'}\rangle$ requires every entry $z \ge 2$ (where $D$
+acts as $1$) to match up to a global phase $\theta$, forcing $\phi_{i_2,j_2} -
+\phi_{i_2',j_2'} \equiv \arg(\psi_{i_1',j_1'}(1)/\psi_{i_1',j_1'}(0)) -
+\arg(\psi_{i_1,j_1}(1)/\psi_{i_1,j_1}(0)) \pmod{2\pi}$. There are at most
+$\binom{v_1^2}{2}$ forbidden difference values (plus $0$); choosing the $v_2^2$ angles
+$\phi_{i_2,j_2} \in [0, 2\pi)$ sequentially avoids this finite set, certifying the
+\lid{twistSep} hypothesis of \lid{direct_product_rqls_lifting}.
+\end{proof}
 
 \begin{theorem}[T2d: Zero-Gap Characteristic-2 Obstruction on \texorpdfstring{$\FF_8$}{F\_8} \tagL\,\tagE]
 \label{thm:t2d}
@@ -560,6 +759,21 @@ permutations of $\FF_8$ finds $168$ linear bijections, $4{,}872$ nonlinear bijec
 $48$ orthomorphisms, and exactly $0$ nonlinear orthomorphisms (contrasting sharply with
 $\FF_7$, which admits $84$ nonlinear maximal-cardinality $1$-$\RQLS(7)$ permutations).
 \end{theorem}
+
+\begin{proof}
+Given any bijection $\mu : \FF_8 \to \FF_8$ with $\mu(0) = 0$ and any slope
+$c \in \FF_8^\times$ such that $x \mapsto \mu(x) + cx$ is bijective, rescaling
+$\theta(x) = c^{-1}\mu(x)$ yields an orthomorphism of $\FF_8$ fixing $0$, and $\mu$ is
+$\FF_2$-linear iff $\theta$ is $\FF_2$-linear. Using a structurally recursive
+backtracking tree over the $7$ nonzero elements of $\FF_8$ that maintains bitmasks for
+used images $\theta(x)$ and used differences $\theta(x) \oplus x$ (formalized completely
+inside the Lean~4 kernel with zero \lid{native_decide}), every complete branch satisfies
+$\theta(x \oplus y) = \theta(x) \oplus \theta(y)$ for all $x, y \in \FF_8$ (accounting
+for all $48$ linear orthomorphisms, matching Zig's exhaustive scan of all $7! = 5{,}040$
+permutations). Hence any such $\mu$ is $\FF_2$-linear, so there exists $(a, b) \ne (0,0)$
+with $\Tr(a\mu(z) + bz) \equiv 0$, violating maximal cardinality by
+Theorem~\ref{thm:t2a}(c).
+\end{proof}
 
 \begin{figure}[htbp]
   \centering
@@ -590,12 +804,13 @@ mixed state $I_D/D$ ($D = d^n$).
 
 \subsection{Gurvits--Barnum Collapse for Odd Primes vs.\ 2-Qubit Incomparability (T3a--T3b)}
 
-\begin{theorem}[T3a: Exact Gurvits--Barnum Identity, Odd-Prime Inclusion, and 2-Qubit Incomparability \tagL\,\tagE\,\tagP]
+\begin{theorem}[T3a: Gurvits--Barnum Identity, Odd-Prime Inclusion, \& 2-Qubit Incomparability]
 \label{thm:t3a}
+\textup{(\tagL\,\tagE\,\tagP)}
 Let $D = d^n \ge 2$ and let $\rho \in \mathcal{D}(\CC^D)$ have purity $P = \Tr(\rho^2)$.
 \begin{enumerate}[label=(\alph*)]
-  \item \textbf{Three-Line Exact Identity (\lid{gurvits_barnum_cor3_identity}):}
-    Setting $\Delta = (D-1)\rho - I_D$, we have the exact Hilbert--Schmidt identity
+  \item \textbf{Exact Hilbert--Schmidt Identity (\lid{gurvits_barnum_cor3_identity}):}
+    Setting $\Delta = (D-1)\rho - I_D$,
     \begin{equation}
       \label{eq:gb-identity}
       \|\Delta\|_2^2 \;=\; (D-1)^2 \Tr(\rho^2) - 2(D-1) + D
@@ -604,58 +819,77 @@ Let $D = d^n \ge 2$ and let $\rho \in \mathcal{D}(\CC^D)$ have purity $P = \Tr(\
       \;\Longleftrightarrow\;
       \Tr(\rho^2) \le \frac{1}{D-1}.
     \end{equation}
-  \item \textbf{Odd-Prime Bipartite Collapse:} For every odd prime $d \ge 3$ and $n \ge 2$,
-    Zurel and Davis \cite{zurel2026astab} show $R(\AWP_0) = 1/\sqrt{D(D-1)}$, i.e., every
-    $\rho \in \AWP_{n,d}$ satisfies $\Tr(\rho^2) \le 1/(D-1)$. By \eqref{eq:gb-identity}
-    and Gurvits--Barnum Corollary~3 \cite{gurvits2002largest}, every such state lies
-    inside the largest bipartite separability ball. Hence for every bipartite odd-prime
-    system ($n=2$, $d \ge 3$ odd prime),
+  \item \textbf{Odd-Prime Bipartite Collapse:} For every odd prime $d \ge 3$ and $n = 2$,
     \[
       \ASTAB_{2,d} \;\subset\; \AWP_{2,d} \;\subseteq\; \ASEP_{2,d},
     \]
     and for every $n \ge 2$ odd-prime system, every $\rho \in \AWP_{n,d}$ is biseparable
     across \emph{every} bipartition of the $n$ qudits (cf.\ \cite{gurvits2003multipartite,
     gurvits2005better}).
-  \item \textbf{Two-Qubit Strict Incomparability:} In stark contrast to odd primes, for
-    two qubits ($n=2, d=2$), $\ASTAB_{2,2}$ and $\ASEP_{2,2}$ are strictly incomparable,
-    witnessed by two exact rational spectra (\lid{two_qubit_entangled_astab_witness},
-    \lid{two_qubit_sep_non_astab_witness}):
-    \begin{itemize}[leftmargin=1.5em]
-      \item $\rho_{\mathrm{ent}}$ with eigenvalues $\big(\frac{11}{20}, \frac{3}{20},
-        \frac{3}{20}, \frac{3}{20}\big)$ satisfies every two-qubit $\ASTAB$ spectral facet
-        strictly, yet violates Verstraete--Audenaert--De~Moor's $\ASEP$ criterion
-        $\lambda_1 - \lambda_3 - 2\sqrt{\lambda_2\lambda_4} = \frac{11}{20} - \frac{3}{20}
-        - \frac{6}{20} = +\frac{1}{10} > 0$, so there exists $U \in \mathrm{U}(4)$ with
-        $U \rho_{\mathrm{ent}} U^\dagger$ NPT-entangled ($\rho_{\mathrm{ent}} \in
-        \ASTAB_{2,2} \setminus \ASEP_{2,2}$).
-      \item $\rho_{\mathrm{sep}}$ with eigenvalues $\big(\frac{8}{20}, \frac{7}{20},
-        \frac{4}{20}, \frac{1}{20}\big)$ satisfies $(\lambda_1 - \lambda_3)^2 -
-        4\lambda_2\lambda_4 = \frac{16}{400} - \frac{28}{400} = -\frac{3}{100} < 0$, so
-        $\rho_{\mathrm{sep}} \in \ASEP_{2,2}$, yet violates the $\ASTAB$ facet
-        $\frac{1-\sqrt{3}}{2}\lambda_1 + \frac{1+\sqrt{3}}{2}\lambda_4 < 0$, so
-        $\rho_{\mathrm{sep}} \in \ASEP_{2,2} \setminus \ASTAB_{2,2}$.
-    \end{itemize}
+  \item \textbf{Two-Qubit Strict Incomparability:} For two qubits ($n=2, d=2$),
+    $\ASTAB_{2,2}$ and $\ASEP_{2,2}$ are strictly incomparable, witnessed by exact
+    rational spectra $\rho_{\mathrm{ent}} = \operatorname{diag}\big(\frac{11}{20},
+    \frac{3}{20}, \frac{3}{20}, \frac{3}{20}\big) \in \ASTAB_{2,2} \setminus \ASEP_{2,2}$
+    and $\rho_{\mathrm{sep}} = \operatorname{diag}\big(\frac{8}{20}, \frac{7}{20},
+    \frac{4}{20}, \frac{1}{20}\big) \in \ASEP_{2,2} \setminus \ASTAB_{2,2}$
+    (\lid{two_qubit_entangled_astab_witness}, \lid{two_qubit_sep_non_astab_witness}).
 \end{enumerate}
 \end{theorem}
 
-\begin{theorem}[T3b: Exact Closed-Form $\ASTAB_0$ Circumradii]
+\begin{proof}
+(a)~Using $\Tr(\rho) = 1$ and $\Tr(I_D) = D$, expanding
+$\|\Delta\|_2^2 = \Tr(((D-1)\rho - I_D)^2) = (D-1)^2\Tr(\rho^2) - 2(D-1)\Tr(\rho) +
+\Tr(I_D)$ gives \eqref{eq:gb-identity}, and $(D-1)^2 P - 2(D-1) + D \le 1 \iff
+(D-1)^2 P \le D-1 \iff P \le 1/(D-1)$ since $D - 1 \ge 1$.
+
+(b)~For every odd prime $d \ge 3$, Zurel and Davis \cite{zurel2026astab} show that
+$R(\AWP_0) = 1/\sqrt{D(D-1)}$, i.e., every $\rho \in \AWP_{n,d}$ satisfies
+$\Tr(\rho^2) - 1/D \le 1/(D(D-1))$, equivalently $\Tr(\rho^2) \le 1/(D-1)$. By~(a),
+$\|(D-1)\rho - I_D\|_2 \le 1$, so Gurvits--Barnum Corollary~3 \cite{gurvits2002largest}
+implies that $U\rho U^\dagger$ is separable across every bipartition of $\CC^D$ for every
+$U \in \mathrm{U}(D)$. For $n=2$ this gives $\AWP_{2,d} \subseteq \ASEP_{2,d}$, while
+discrete Hudson's theorem \cite{gross2006hudson} and strict containment of $\STAB$ inside
+the Wigner-positive polytope give $\ASTAB_{2,d} \subset \AWP_{2,d}$.
+
+(c)~By Verstraete, Audenaert, De~Bie, and De~Moor \cite{verstraete2001maximally}, an
+ordered two-qubit spectrum $\lambda_1 \ge \lambda_2 \ge \lambda_3 \ge \lambda_4 \ge 0$
+lies in $\ASEP_{2,2}$ iff $\lambda_1 - \lambda_3 \le 2\sqrt{\lambda_2\lambda_4}$. By
+Zurel and Davis \cite{zurel2026astab}, it lies in $\ASTAB_{2,2}$ iff it satisfies the
+spectral facets $\frac{1-\sqrt{3}}{2}\lambda_1 + \frac{1+\sqrt{3}}{2}\lambda_4 \ge 0$
+and $\frac{1-\sqrt{5}}{4}(\lambda_1+\lambda_2) + \frac{1+\sqrt{5}}{4}(\lambda_3+\lambda_4)
+\ge 0$. For $\rho_{\mathrm{ent}} = (11, 3, 3, 3)/20$:
+$(11 + 3)^2 - 3(11 - 3)^2 = 196 - 192 = +4 > 0$ (strictly inside Facet~1),
+$20^2 - 5(14 - 6)^2 = 400 - 320 = +80 > 0$ (strictly inside Facet~2), and
+$\lambda_1 - \lambda_3 - 2\sqrt{\lambda_2\lambda_4} = \frac{11-3-6}{20} = +\frac{1}{10}
+> 0$ (strictly NPT-entangled). For $\rho_{\mathrm{sep}} = (8, 7, 4, 1)/20$:
+$(\lambda_1 - \lambda_3)^2 - 4\lambda_2\lambda_4 = \frac{16 - 28}{400} = -\frac{3}{100}
+< 0$ (strictly in $\ASEP_{2,2}$), yet $(8+1)^2 - 3(8-1)^2 = 81 - 147 = -66 < 0$
+(strictly outside Facet~1 of $\ASTAB_{2,2}$).
+\end{proof}
+
+\begin{theorem}[T3b: Universal Global Polytope Optimality of Exact $\ASTAB_0$ Circumradii]
 \label{thm:t3b}
 \textup{(\tagL\,\tagE\,\tagP)}
 Let $R^2(\ASTAB_0) = \max_{\rho \in \ASTAB} \|\rho - I_D/D\|_2^2$ denote the squared
 Hilbert--Schmidt circumradius of $\ASTAB$ centered at $I_D/D$.
 \begin{enumerate}[label=(\alph*)]
-  \item \textbf{Two Qubits ($D=4$):} By convexity of $\sum_{i=1}^4 \lambda_i^2$ on the
-    ordered simplex (\lid{ordered4_sum_sq_le_endpoints}) and exact algebraic vertex
-    certification (\lid{exact_astab_circumradius_2qubit_vertex}),
+  \item \textbf{Two Qubits ($D=4$, \lid{two_qubit_astab_global_circumradius}):} For
+    \emph{every} ordered spectrum $\lambda_1 \ge \lambda_2 \ge \lambda_3 \ge \lambda_4
+    \ge 0$ ($\sum_i \lambda_i = 1$) satisfying Facet~1 ($\lambda_1 + \lambda_4 \ge
+    (\lambda_1 - \lambda_4)\sqrt{3}$), we have the global upper bound
+    $121\sum_{i=1}^4 \lambda_i^2 \le 40 + 3\sqrt{3}$, giving
     \[
       R^2(\ASTAB_{2,2}) \;=\; \frac{3(13 + 4\sqrt{3})}{484} \;\approx\; 0.123521920849
       \;>\; r_{\mathrm{GB}}^2 \;=\; \frac{1}{12} \;\approx\; 0.083333333333,
     \]
     uniquely attained at $\lambda^*_{2,2} = \big(\frac{7+3\sqrt{3}}{22},
     \frac{5-\sqrt{3}}{22}, \frac{5-\sqrt{3}}{22}, \frac{5-\sqrt{3}}{22}\big)$, with
-    strictly positive KKT outward gradient verified to $2.78 \times 10^{-17}$ in Eshkol
-    dual-number AD.
-  \item \textbf{One Qutrit ($D=3$):} Similarly (\lid{exact_astab_circumradius_1qutrit_vertex}),
+    KKT outward gradient verified to $2.78 \times 10^{-17}$ in Eshkol dual-number AD.
+  \item \textbf{One Qutrit ($D=3$, \lid{one_qutrit_astab_global_circumradius}):} For
+    \emph{every} ordered spectrum $\lambda_1 \ge \lambda_2 \ge \lambda_3 \ge 0$
+    ($\sum_i \lambda_i = 1$) satisfying the one-qutrit $\ASTAB$ facets $2\lambda_1 \le 1$
+    and $2\lambda_3 \ge (3-\sqrt{5})\lambda_1$, we have the global upper bound
+    $2\sum_{i=1}^3 \lambda_i^2 \le 3 - \sqrt{5}$, giving
     \[
       \frac{1}{24} \;<\; R^2(\ASTAB_{1,3}) \;=\; \frac{7 - 3\sqrt{5}}{6} \;\approx\; 0.048632677917
       \;<\; \frac{1}{6} \;=\; R^2(\AWP_{1,3}),
@@ -664,6 +898,55 @@ Hilbert--Schmidt circumradius of $\ASTAB$ centered at $I_D/D$.
     \frac{3-\sqrt{5}}{4}\big)$ (KKT gradient verified to $2.08 \times 10^{-17}$).
 \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+(a)~Write $P = \sum_{i=1}^4 \lambda_i^2$. Since $\lambda_1 \ge \lambda_2, \lambda_3 \ge
+\lambda_4$, we have the exact identity $(\lambda_1 + \lambda_4) - 4\lambda_1\lambda_4 - P
+= (\lambda_1 - \lambda_2)(\lambda_2 - \lambda_4) + (\lambda_1 - \lambda_3)(\lambda_3 -
+\lambda_4) \ge 0$ (\lid{ordered4_sum_sq_le_endpoints}). Multiplying Facet~1 by
+$(\sqrt{3} - 1) > 0$ gives $g := \lambda_4 - (2 - \sqrt{3})\lambda_1 \ge 0$, and adding
+$1 - \lambda_1 - 3\lambda_4 \ge 0$ to $3g \ge 0$ and multiplying by $(7 + 3\sqrt{3}) > 0$
+yields $u := (7 + 3\sqrt{3}) - 22\lambda_1 \ge 0$. A direct algebraic identity in
+$\ZZ[\sqrt{3}]$ then decomposes the global slack into four manifestly nonnegative terms:
+\begin{align*}
+  4\big((40 + 3\sqrt{3}) - 121 P\big)
+  &\;=\; 484\big((\lambda_1 + \lambda_4) - 4\lambda_1\lambda_4 - P\big)
+     + 484(4\lambda_1 - 1)g \\
+  &\quad + 2(13 - 7\sqrt{3}) u + 4(2 - \sqrt{3}) u^2 \;\ge\; 0,
+\end{align*}
+since $4\lambda_1 \ge 1$, $13 - 7\sqrt{3} > 0$ ($169 > 147$), and $2 - \sqrt{3} > 0$.
+Subtracting $1/4$ gives $P - 1/4 \le \frac{40 + 3\sqrt{3}}{121} - \frac{1}{4} =
+\frac{3(13 + 4\sqrt{3})}{484}$. Equality holds at $\lambda^*_{2,2}$ (where $g = u = 0$
+and $\lambda_2 = \lambda_3 = \lambda_4$), which satisfies both $\ASTAB_{2,2}$ facets and
+strictly exceeds $1/12$ since $(36\cdot 13 - 484) + 36\cdot 4\sqrt{3} = 144\sqrt{3} - 16
+> 0$.
+
+(b)~Let $f_2 := 2\lambda_3 - (3 - \sqrt{5})\lambda_1 \ge 0$, so $2\lambda_2 -
+(3 - \sqrt{5})\lambda_1 \ge f_2 \ge 0$. Consider two exhaustive cases:
+\emph{Case~1:} $(7 - \sqrt{5})\lambda_1 \ge 2$. Then multiplying by $(\sqrt{5}-1) > 0$
+and adding $(36 - 16\sqrt{5})\lambda_1 \ge 0$ shows $(2 - 2\sqrt{5}) + (24 - 8\sqrt{5})
+\lambda_1 \ge 0$, and the exact $\ZZ[\sqrt{5}]$ identity
+\begin{align*}
+  2\big((3 - \sqrt{5}) - 2\sum_{i=1}^3 \lambda_i^2\big)
+  &\;=\; 2\big(2\lambda_3 - (3-\sqrt{5})\lambda_1\big)\big(2\lambda_2 - (3-\sqrt{5})\lambda_1\big) \\
+  &\quad + (1 - 2\lambda_1)\big((2 - 2\sqrt{5}) + (24 - 8\sqrt{5})\lambda_1\big) \;\ge\; 0
+\end{align*}
+closes Case~1.
+\emph{Case~2:} $(7 - \sqrt{5})\lambda_1 < 2$. Multiplying $2 - (7-\sqrt{5})\lambda_1 > 0$
+by $(7 + \sqrt{5}) > 0$ gives $v := (14 + 2\sqrt{5}) - 44\lambda_1 \ge 0$, and the exact
+$\ZZ[\sqrt{5}]$ identity
+\[
+  484\big((3-\sqrt{5}) - 2\sum_{i=1}^3\lambda_i^2\big)
+  \;=\; 1936(\lambda_1 - \lambda_2)(\lambda_1 - \lambda_3)
+      + 4(267 - 119\sqrt{5})
+      + v\big(44(3\lambda_1 - 1) + (6\sqrt{5} - 2)\big) \ge 0
+\]
+(since $267^2 = 71{,}289 > 5 \cdot 119^2 = 70{,}805$, $3\lambda_1 \ge 1$, and
+$6\sqrt{5} > 2$) closes Case~2. Subtracting $1/3$ gives $R^2(\ASTAB_{1,3}) \le
+(3-\sqrt{5})/2 - 1/3 = (7-3\sqrt{5})/6$, attained at $\lambda^*_{1,3}$, which satisfies
+$1/24 < (7-3\sqrt{5})/6 < 1/6$ by $27^2 = 729 > 5\cdot 12^2 = 720$ and $5\cdot 3^2 = 45 >
+6^2 = 36$. Every step is verified directly in \lid{MagicGeometry.lean}.
+\end{proof}
 
 \subsection{Symplectic Marginal Descent (T3c) and Degree-2 RLT+SOS Barrier (T3d)}
 
@@ -674,8 +957,8 @@ $\Tr(X^2) = 2^{-n}(1 + \sum_{P \ne I} x_P^2)$. By polar duality, an upper bound
 $\max_{X \in \Lambda_n} \Tr(X^2) \le C_n$ yields a guaranteed stabilizer inball of squared
 Hilbert--Schmidt radius $r^2(\STAB_{n,0}) \ge \big(2^n(2^n C_n - 1)\big)^{-1}$. Theorem~10
 of Liu et al.\ \cite{liu2025triangle} established $C_n \le 2^n$, giving $r^2(\STAB_{n,0})
-\ge (2^n(4^n-1))^{-1}$. We strengthen this unconditionally for every $n \ge 2$ and explain
-precisely why naive degree-$2$ semidefinite relaxations fail to do so.
+\ge (2^n(4^n-1))^{-1}$. We strengthen this unconditionally for every $n \ge 2$ and prove
+why no degree-$2$ semidefinite relaxation over $\Lambda_n$ can match it.
 
 \begin{theorem}[T3c: Symplectic Marginal Descent for All $n \ge 2$]
 \label{thm:t3c}
@@ -684,16 +967,18 @@ For every $n \ge 2$ and every $X \in \Lambda_n$:
 \begin{enumerate}[label=(\alph*)]
   \item Every $2$-qubit symplectic marginal $X_V$ obtained by restricting $X$ to any
     $4$-dimensional symplectic subspace $V \cong \FF_2^4 \subset \FF_2^{2n}$ lies in
-    $\Lambda_2$ (because every $2$-qubit stabilizer state on $V$ extends by tensoring
-    with a stabilizer state on $V^\perp$ to an $n$-qubit stabilizer state).
+    $\Lambda_2$.
   \item On $\Lambda_2$ ($60$ stabilizer facets), the exact maximum purity is
     $C_2 = \max_{X \in \Lambda_2} \Tr(X^2) = 2$, equivalently
-    $\sum_{P \in V \setminus \{0\}} x_P^2 \le 7$, attained at the $240$ CNC $m=1$ vertices
-    (each saturating $33/60$ facets; verified in exact rational arithmetic in Rust~1.94).
+    $\sum_{P \in V \setminus \{0\}} x_P^2 \le 7$, attained identically at all $240$ CNC
+    $m=1$ vertices (each saturating exactly $33/60$ facets; exhaustively verified in
+    exact rational arithmetic in Rust~1.94).
   \item Averaging $\sum_{P \in V \setminus \{0\}} x_P^2 \le 7$ over the
-    $\Sp(2n, 2)$-transitive orbit of all $4$-dimensional symplectic subspaces $V \subset
-    \FF_2^{2n}$ yields $15 \sum_{P \ne 0} x_P^2 \le 7(4^n - 1)$, and hence
-    (\lid{symplectic_marginal_descent_all_n}, \lid{inball_gain_exact_15_over_7}):
+    $\Sp(2n, 2)$-transitive family of all $4$-dimensional symplectic subspaces $V \subset
+    \FF_2^{2n}$ via our finite uniform-covering double-counting theorem
+    (\lid{uniform_cover_avg_bound}, \lid{symplectic_marginal_descent_all_n},
+    \lid{inball_gain_exact_15_over_7}) yields $15 \sum_{P \ne 0} x_P^2 \le 7(4^n - 1)$,
+    and hence
     \begin{equation}
       \label{eq:smd-bound}
       \Tr(X^2) \;\le\; \frac{7 \cdot 4^n + 8}{15 \cdot 2^n}
@@ -709,35 +994,90 @@ For every $n \ge 2$ and every $X \in \Lambda_n$:
 \end{enumerate}
 \end{theorem}
 
-\begin{theorem}[T3d: Clifford--Reynolds Degree-2 RLT+SOS Barrier \tagL\,\tagE]
-\label{thm:t3d}
-Let $P = 4^n - 1$ ($n \ge 1$) and consider any degree-$2$ Reformulation--Linearization
-Technique plus Sum-of-Squares (RLT+SOS) polynomial certificate over $\Lambda_n$:
+\begin{proof}
+(a)~For any $4$-dimensional symplectic subspace $V \subset \FF_2^{2n}$, there exists a
+Clifford unitary $U \in \Cl_n$ mapping the Pauli algebra on $V$ onto the first two qubits
+and $V^\perp$ onto the remaining $n - 2$ qubits. For any pure $2$-qubit stabilizer state
+$\sigma_V$ on $V$, $\sigma_V \otimes |0\rangle\langle 0|^{\otimes (n-2)}$ is a pure
+$n$-qubit stabilizer state, so $\Tr(X_V \sigma_V) = \Tr((U X U^\dagger)(\sigma_V \otimes
+2^{-(n-2)}I)) = 2^{-(n-2)}\sum_{z \in \FF_2^{n-2}} \Tr((U X U^\dagger)(\sigma_V \otimes
+|z\rangle\langle z|)) \ge 0$, proving $X_V \in \Lambda_2$.
+
+(b)~By the complete vertex classification of $\Lambda_2$ \cite{raussendorf2020phase,
+zurel2020hvm}, every extreme point is a closed noncontextual (CNC) phase-space point
+operator (or stabilizer projection) with $\sum_{P \ne I} x_P^2 \le 7$; the maximum
+$7$ (i.e., $C_2 = (1+7)/4 = 2$) is attained at all $240 = 15 \times 2^4$ CNC $m=1$
+vertices (exhaustively enumerated and audited against all $60$ facets in Rust~1.94,
+where every vertex satisfies all $60$ facets with exact tight count $33/60$).
+
+(c)~Let $\mathcal{V}_n$ be the family of all $K = |\mathcal{V}_n|$ four-dimensional
+symplectic subspaces $V \subset \FF_2^{2n}$. Every $V \in \mathcal{V}_n$ contains
+$m = 4^2 - 1 = 15$ non-identity Paulis, and because $\Sp(2n, 2)$ acts transitively on
+$\FF_2^{2n} \setminus \{0\}$ while preserving $\mathcal{V}_n$, every non-identity Pauli
+$P$ belongs to the exact same positive number $r > 0$ of subspaces $V \in \mathcal{V}_n$
+(explicitly audited at $n=3$ in Rust~1.94: all $K = 336$ hyperbolic complements give
+uniform Pauli cover $r = 80$, satisfying $336 \times 15 = 80 \times 63 = 5{,}040$).
+Double counting gives $K m = r (4^n - 1)$ and
 \[
-  M - \sum_{p=1}^P x_p^2
-  \;=\; \sum_{\sigma,\tau \in \STAB_n} \lambda_{\sigma,\tau} \ell_\sigma(x)\ell_\tau(x)
-        + \sum_{\sigma \in \STAB_n} \mu_\sigma \ell_\sigma(x)
-        + q_{\mathrm{SOS}}(x),
+  r \sum_{P \ne 0} x_P^2
+  \;=\; \sum_{V \in \mathcal{V}_n} \sum_{P \in V \setminus \{0\}} x_P^2
+  \;\le\; 7 K
+  \implies
+  15 \sum_{P \ne 0} x_P^2 \;\le\; 7(4^n - 1)
 \]
-where $\ell_\sigma(x) = 1 + \sum_{p=1}^P s_{\sigma,p} x_p \ge 0$, $\lambda_{\sigma,\tau}
-\ge 0$, $\mu_\sigma \ge 0$, and $q_{\mathrm{SOS}}$ is a sum of squares. Then
-$M \ge P = 4^n - 1$, i.e., \textbf{no degree-$2$ RLT+SOS certificate over $\Lambda_n$ can
-improve upon the trivial purity bound $\Tr(X^2) \le 2^n$}
-(\lid{clifford_reynolds_deg2_rlt_barrier}).
+(\lid{uniform_cover_avg_bound}). Substituting into $\Tr(X^2) = 2^{-n}(1 + \sum_{P \ne 0}
+x_P^2)$ gives \eqref{eq:smd-bound} and $2^n C_n^{\mathrm{SMD}} - 1 =
+\frac{7(4^n - 1)}{15} = \frac{7}{15}(2^n C_n^{\mathrm{Liu}} - 1)$, yielding the exact
+inball ratio $15/7$ for every $n \ge 2$.
+\end{proof}
+
+\begin{theorem}[T3d: Polynomial Clifford--Reynolds Degree-2 RLT+SOS Barrier]
+\label{thm:t3d}
+\textup{(\tagL\,\tagE)}
+Let $P = 4^n - 1$ ($n \ge 1$) and let $s : [K] \times [P] \to \ZZ$ be any finite
+stabilizer facet system satisfying the pairwise overlap lower bound
+$\sum_{p=1}^P s_{k,p} s_{l,p} \ge -1$ for all $k, l \in [K]$ (as holds for all pure
+$n$-qubit stabilizer states since $\sum_{p=1}^P s_{\sigma,p} s_{\tau,p} =
+2^n|\langle\sigma|\tau\rangle|^2 - 1 \ge -1$, exhaustively verified across all
+$\binom{60}{2} = 1{,}770$ pairs of $\Lambda_2$ facets in Rust~1.94). Consider any
+pointwise degree-$2$ RLT+SOS polynomial identity holding for all $x \in \ZZ^P$:
+\begin{equation}
+  \label{eq:poly-rlt}
+  M - \sum_{p=1}^P x_p^2
+  \;=\; \sum_{k,l=1}^K \lambda_{k,l}\,\ell_k(x)\ell_l(x)
+        + \sum_{k=1}^K \mu_k\,\ell_k(x)
+        + \sum_{r=1}^R \Big(c_r + \sum_{p=1}^P v_{r,p} x_p\Big)^2,
+\end{equation}
+where $\ell_k(x) = 1 + \sum_{p=1}^P s_{k,p} x_p$, $\lambda_{k,l} \ge 0$, and
+$\mu_k \ge 0$. Then $M \ge P = 4^n - 1$, i.e., \textbf{no degree-$2$ RLT+SOS certificate
+over $\Lambda_n$ can improve upon the trivial purity bound $\Tr(X^2) \le 2^n$}
+(\lid{deg2_rlt_sos_polynomial_barrier}, \lid{clifford_reynolds_deg2_rlt_barrier}).
 \end{theorem}
 
-\begin{proof}[Proof (formally checked in \lid{MagicGeometry.lean})]
-Average the polynomial identity over the Clifford group $\Cl_n$, which acts transitively
-on the $P = 4^n - 1$ non-identity Pauli axes and preserves $\STAB_n$ and SOS cones.
-Equating constant terms yields $M = \Lambda_{\mathrm{tot}} + M_{\mathrm{tot}} + A_{\mathrm{sq}}$
-with $\Lambda_{\mathrm{tot}}, M_{\mathrm{tot}}, A_{\mathrm{sq}} \ge 0$. For every pair
-$(\sigma, \tau)$ of stabilizer states, $\sum_{p=1}^P s_{\sigma,p} s_{\tau,p} =
-2^n|\langle\sigma|\tau\rangle|^2 - 1 \ge -1$, so after Clifford averaging the quadratic
-coefficient of $\sum_{p=1}^P x_p^2$ contributed by $\sum \lambda_{\sigma,\tau} \ell_\sigma
-\ell_\tau$ is at least $-\Lambda_{\mathrm{tot}}/P$, while $q_{\mathrm{SOS}}$ contributes
-a nonnegative diagonal coefficient $B_{\mathrm{sq}} \ge 0$. Matching the quadratic
-coefficient $-1$ forces $-1 = Q_{\mathrm{RLT}} + B_{\mathrm{sq}} \ge
--\Lambda_{\mathrm{tot}}/P$, hence $M \ge \Lambda_{\mathrm{tot}} \ge P = 4^n - 1$.
+\begin{proof}
+Evaluating \eqref{eq:poly-rlt} at $x = 0$ gives the exact constant-term identity
+\[
+  M \;=\; \sum_{k,l=1}^K \lambda_{k,l} + \sum_{k=1}^K \mu_k + \sum_{r=1}^R c_r^2
+  \;\ge\; \sum_{k,l=1}^K \lambda_{k,l}
+\]
+since $\mu_k \ge 0$ and $c_r^2 \ge 0$. Next, for each basis vector $e_q \in \ZZ^P$
+($1 \le q \le P$), summing the evaluations of \eqref{eq:poly-rlt} at $x = +e_q$ and
+$x = -e_q$ and subtracting $2$ times the evaluation at $x = 0$ cancels all constant and
+linear terms, isolating twice the pure quadratic coefficient on axis $q$:
+\[
+  -2 \;=\; 2\sum_{k,l=1}^K \lambda_{k,l} s_{k,q} s_{l,q} + 2\sum_{r=1}^R v_{r,q}^2.
+\]
+Dividing by $2$ and summing over all $q = 1, \dots, P$ gives
+\[
+  -P \;=\; \sum_{k,l=1}^K \lambda_{k,l} \Big(\sum_{q=1}^P s_{k,q} s_{l,q}\Big)
+         + \sum_{r=1}^R \sum_{q=1}^P v_{r,q}^2
+     \;\ge\; \sum_{k,l=1}^K \lambda_{k,l}(-1) + 0
+     \;=\; -\sum_{k,l=1}^K \lambda_{k,l},
+\]
+because $\lambda_{k,l} \ge 0$, $\sum_q s_{k,q} s_{l,q} \ge -1$, and $v_{r,q}^2 \ge 0$.
+Therefore $M \ge \sum_{k,l} \lambda_{k,l} \ge P = 4^n - 1$. (Notably, this elementary
+evaluation argument requires no group-theoretic averaging at all and is formalized from
+first principles directly on pointwise polynomials in \lid{MagicGeometry.lean}.)
 \end{proof}
 
 \begin{figure}[htbp]
@@ -759,23 +1099,26 @@ coefficient $-1$ forces $-1 = Q_{\mathrm{RLT}} + B_{\mathrm{sq}} \ge
 
 To connect our discrete phase-space theorems to continuous differential geometry and
 independent multi-language verification, we implement a \textbf{seven-engine polyglot
-verification stack} anchored by our pure zero-Mathlib Lean~4.35.0 kernel core:
+verification stack} anchored by our pure zero-Mathlib Lean~4.35.0 kernel core and unified
+in CI under \lid{REQUIRE_ALL_ENGINES=1} (zero silent engine skips):
 
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item \textbf{Pure Lean~4.35.0 + 6-Kernel Palomar Comparator (\lid{lean/}):}
-    Zero Mathlib dependencies, zero \lid{sorry}, zero \lid{admit}, zero
-    \lid{native_decide}. All $23$ exported theorem declarations (the $13$ pillar
-    theorems \lid{prove_t1a}--\lid{prove_t3d}, master bundle
-    \lid{prove_all_rigidity_theorems}, $3$ non-vacuity witnesses, and $6$
-    adversarial boundary refutations) depend strictly on the three standard axioms
-    \lid{[propext, Classical.choice, Quot.sound]} (verified by \lid{VerifyAxioms.lean}
-    and \lid{leanchecker-paranoid --fresh PalomarSolution}, and cross-checked in CI
-    against six independent Lean kernels via \lid{lake comparator --paranoid} inside
-    bubblewrap).
+    Zero Mathlib dependencies, \lid{warningAsError = true}, zero \lid{sorry}, zero
+    \lid{admit}, zero \lid{native_decide}. All $23$ exported theorem declarations ($13$
+    pillar theorems \lid{prove_t1a}--\lid{prove_t3d}, master bundle
+    \lid{prove_all_rigidity_theorems}, $3$ non-vacuity witnesses, and $6$ adversarial
+    boundary refutations) plus all $311$ project declarations swept programmatically by
+    \lid{SweepAllAxioms.lean} depend strictly on \lid{[propext, Classical.choice,
+    Quot.sound]}, verified by \lid{leanchecker-paranoid --fresh PalomarSolution} and six
+    independent proof kernels via \lid{lake comparator --paranoid} inside bubblewrap.
   \item \textbf{Rust~1.94 ({\footnotesize\texttt{\#![forbid(unsafe\_code)]}}, zero external crates):}
-    Exact rational verification of the $60$ facets of $\Lambda_2$, exact CNC $m=1$ ($33/60$
-    tight facets, $\Tr(X^2) = 2$) and $m=2$ ($\Tr(X^2) = 3/2$) vertices, $512$-case
-    degree-$2$ RLT barrier sweep, and Rains shadows $N = 2, \dots, 14$.
+    Exact integer/rational verification of all $60$ facets of $\Lambda_2$, all
+    $1{,}770$ facet pairs ($\min s_k \cdot s_l = -1$), all $240$ CNC $m=1$ vertices
+    (every vertex saturating $33/60$ facets with exact $\Tr(X^2) = 2$), CNC $m=2$
+    ($\Tr(X^2) = 3/2$), all $336$ four-dimensional symplectic subspaces of $\FF_2^6$ at
+    $n=3$ (exact uniform Pauli cover $r = 80$), $512$-case barrier sweep, and Rains
+    shadows $N = 2, \dots, 14$.
   \item \textbf{Zig~0.17 (\lid{comptime} + runtime exhaustive $\FF_8/\FF_7$):}
     Compile-time (\lid{comptime}) proof of Megyesi $t$-$\RQLS$ for
     $q \in \{7, 9, 11, 13, 16, 17, 19\}$ plus exhaustive runtime sweep of all $5{,}040$
@@ -783,32 +1126,36 @@ verification stack} anchored by our pure zero-Mathlib Lean~4.35.0 kernel core:
     maximal-cardinality permutations of $\FF_7$.
   \item \textbf{C++20 Exact Cyclotomic Ring $\ZZ[\zeta_p]$ (\lid{-Wall -Wextra -Werror -pedantic}):}
     Zero floating-point arithmetic: represents inner products of Fourier states
-    \eqref{eq:rqls-exact} as exact integer polynomials in $\ZZ[\zeta_p]$ reduced modulo
-    the $p$-th cyclotomic polynomial $\Phi_p(X)$, certifying all $198{,}820$ state pairs
-    across $2$-$\RQLS(9)$, $3$-$\RQLS(11)$, $4$-$\RQLS(13)$, $3$-$\RQLS(16)$, and
-    $6$-$\RQLS(17)$ with exactly $0$ off-diagonal collinear pairs.
-  \item \textbf{ISO~C11 + x86-64 NASM Assembly + Vendored MIT Moonlab + QGTL + QRNG:}
-    Dual Win64/SysV ABI NASM \lid{POPCNT}/\lid{TZCNT}/\lid{BLSR} symplectic
-    inner-product kernel (fuzzed across $100{,}000$ random $64$-qubit homomorphism checks),
-    unimodular determinant verification for $\mathrm{Prism}_6$ and $W_5$, exhaustive $N=4$
-    ($0$) and $N=5$ ($132$) binary $\AME$ graph enumeration, Provost--Vallee Quantum
-    Geometric Tensor \cite{provost1980riemannian} evaluation on the two-qubit
-    Entangled-$\ASTAB$ pure-state manifold ($g_{\theta\theta} = \frac{11}{80} = 0.1375$,
-    $g_{\phi\phi}(\theta) = w(\theta)(1-w(\theta))$, $\Omega_{\theta\phi}(\theta) =
-    -\frac{11}{40}\sin\theta$; C11 finite-difference error $1.72 \times 10^{-11}$) and the
-    $3$-$\RQLS(11)$ phase torus ($g_{\alpha\alpha} = g_{\beta\beta} = 10$,
-    $g_{\alpha\beta} = \operatorname{Cov}(z, \mu_{11}(z)) = +1$, $\Omega_{\alpha\beta} = 0$;
-    error $5.90 \times 10^{-10}$), and vendored MIT Moonlab SHA3-256 + AES-CTR-DRBG + NIST
-    SP~800-90B health-tested QRNG witness sampling ($3{,}072$ samples, stuck-zero RCT fault
-    caught, $512$ random $\Lambda_2$ rays verified $\Tr(X^2) \le 2$).
+    \eqref{eq:rqls-exact} as exact integer polynomials in $\ZZ[\zeta_p]/(\Phi_p(\zeta_p))$,
+    certifying all $198{,}820$ state pairs across $2$-$\RQLS(9)$, $3$-$\RQLS(11)$,
+    $4$-$\RQLS(13)$, $3$-$\RQLS(16)$, and $6$-$\RQLS(17)$ with exactly $0$ off-diagonal
+    collinear pairs.
+  \item \textbf{ISO~C11 + Portable x86-64 NASM Assembly + Vendored MIT Moonlab + QGTL + QRNG:}
+    Dual Win64/SysV ABI NASM \lid{POPCNT}/\lid{BSF} symplectic inner-product kernel
+    ($n \le 24$ bounds-guarded, fuzzed across $100{,}000$ random $64$-qubit homomorphism
+    checks), unimodular determinant verification for $\mathrm{Prism}_6$ and $W_5$, exact
+    exhaustive $N=4$ ($0/64$) and $N=5$ ($132/1{,}024$) binary $\AME$ graph enumeration,
+    Provost--Vallee Quantum Geometric Tensor \cite{provost1980riemannian} evaluation on
+    the two-qubit Entangled-$\ASTAB$ pure-state manifold ($g_{\theta\theta} =
+    \frac{11}{80} = 0.1375$, $g_{\phi\phi}(\theta) = w(\theta)(1-w(\theta))$,
+    $\Omega_{\theta\phi}(\theta) = -\frac{11}{40}\sin\theta$; C11 finite-difference error
+    $1.72 \times 10^{-11}$) and the $3$-$\RQLS(11)$ phase torus ($g_{\alpha\alpha} =
+    g_{\beta\beta} = 10$, $g_{\alpha\beta} = \operatorname{Cov}(z, \mu_{11}(z)) = +1$,
+    $\Omega_{\alpha\beta} = 0$; error $5.90 \times 10^{-10}$, tagged
+    \lid{numerical_approximation}), and vendored MIT Moonlab SHA3-256 + AES-CTR-DRBG +
+    NIST SP~800-90B health-tested QRNG witness sampling ($3{,}072$ samples, stuck-zero
+    RCT fault caught, $512$ random $\Lambda_2$ rays verified $\Tr(X^2) \le 2$).
   \item \textbf{Eshkol Forward-Mode Dual-Number Automatic Differentiation (\lid{eshkol/}):}
     Scheme/Lisp S-expression dual-number evaluator executing \lid{astab_kkt_ad.esk}
-    and \lid{qgtl_trajectory_ad.esk}, certifying exact KKT gradients of
-    $R^2(\ASTAB_{2,2})$ (error $2.78 \times 10^{-17}$), $R^2(\ASTAB_{1,3})$ (error
-    $2.08 \times 10^{-17}$), and QGTL $g_{\phi\phi}'(\theta)$ (error $0.00$).
-  \item \textbf{Python~3.12 Exact Oracle + Hypothesis + 100\% Mutation Testing:}
-    Exact \lid{Fraction} and $80$-digit \lid{Decimal} oracle, cross-language
-    differential tests against all five compiled/AD engines, and $6/6$ ($100\%$) surgical
+    and \lid{qgtl_trajectory_ad.esk} (tagged \lid{numerical_approximation}), certifying
+    KKT gradients of $R^2(\ASTAB_{2,2})$ (error $2.78 \times 10^{-17}$),
+    $R^2(\ASTAB_{1,3})$ (error $2.08 \times 10^{-17}$), and QGTL $g_{\phi\phi}'(\theta)$
+    (error $0.00$).
+  \item \textbf{Python~3.12 Exact Oracle + Hypothesis + 12/12 Mutation + Draft 2020-12 Schema:}
+    Exact \lid{Fraction} and $80$-digit \lid{Decimal} oracle, unified
+    \lid{REQUIRE_ALL_ENGINES=1} cross-language differential tests against all five
+    compiled/AD engines, Draft~2020-12 JSON Schema validation of \lid{repo.yaml}, live
+    execution of the \lid{README.md} quickstart snippet, and $12/12$ ($100\%$) surgical
     mutant kill rate.
 \end{enumerate}
 
@@ -828,13 +1175,13 @@ verification stack} anchored by our pure zero-Mathlib Lean~4.35.0 kernel core:
 \label{sec:audit}
 
 \subsection{Lean~4 Statement-Fidelity Audit}
-Table~\ref{tab:fidelity} documents the exact bridge between each Lean~4 theorem signature
-and its mathematical paper statement, explicitly disclosing every modeling assumption so
-no reviewer can mistake a combinatorial abstraction for an unformalized analytic step.
+Table~\ref{tab:fidelity} documents the exact 1-to-1 bridge between each Lean~4 theorem
+signature in \lid{lean/Challenge.lean} and its mathematical statement in this paper,
+explicitly disclosing every modeling boundary.
 
 \begin{table}[htbp]
 \centering
-\caption{Statement-Fidelity Audit between paper theorems and Lean~4.35.0 types.}
+\caption{Statement-Fidelity Audit between paper theorems and Lean~4.35.0 types (1-to-1 with \lid{Challenge.lean}).}
 \label{tab:fidelity}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -842,13 +1189,14 @@ no reviewer can mistake a combinatorial abstraction for an unformalized analytic
 \toprule
 \textbf{Theorem} & \textbf{Formally Certified Inside Lean~4 Kernel} & \textbf{Paper / Exact-Comp Bridge} \\
 \midrule
-T1a--T1c & Explicit modular rank descent, Hensel/CRT lifts, all $20$ $\mathrm{Prism}_6$ \& $W_5$ minors in $\{\pm 1\}$, Pless even/odd $B_{k+2} < 0$, exact Rains shadows $N \in \{4,7,9,11\}$, 0/64 binary $N=4$ graphs & Standard correspondence between graph-state $k$-uniformity and full-rank cross-adjacency blocks \cite{helwig2013ame} \\
-T1d--T1e & Torsion rank lower bound + $G[2]$ freeness, unique $[7,4,4]_4$ enumerator $A_6=-21 < 0$, odd $N \ge 9$ $B_{k+2} < 0$, explicit $\FF_4$ $2\times 2$ minors for $\AME(4,4)$ & Structure theorem for finite abelian $2$-Sylow subgroups and quantum MacWilliams identity for additive $\FF_4$-codes \cite{rains1998shadow} \\
-T2a--T2b & Trace-nonconstant coset lemma, affine line unique intersection, kernel-checked bijectivity and non-linearity for $\FF_9, \FF_{11}, \FF_{13}, \FF_{16}$ & Character-sum orthogonality over $\CC^q$; independently verified zero-float in $\ZZ[\zeta_p]$ across $198{,}820$ pairs (C++20) \\
-T2c & Combinatorial orthogonality, transversal MOLS disjointness, and abstract \lid{nonCollinear} propagation (\lid{direct_product_rqls_lifting}, witness $3$-$\RQLS(55)$) & Generic diagonal phase twist $D_\phi$ avoiding $\le \binom{v_1^2}{2}$ cross-cell collisions for $Q_1 \otimes_D C_2$; untwisted $Q_1 \otimes Q_2$ requires no twist \\
-T2d & Complete structurally-recursive tree search proving every $\FF_8$ orthomorphism fixing $0$ is $\FF_2$-linear & Exact agreement with Zig~0.17 exhaustive scan of all $5{,}040$ permutations \\
-T3a--T3b & Cleared-denominator identity $\|(D-1)\rho - I_D\|_2^2 \le 1$, rational witnesses $\rho_{\mathrm{ent}}, \rho_{\mathrm{sep}}$, exact $\QQ(\sqrt{3})$ and $\QQ(\sqrt{5})$ vertices and radical inequalities & Gurvits--Barnum Cor.~3 \cite{gurvits2002largest}, Verstraete--Audenaert $\ASEP$ criterion, and Zurel--Davis spectral facet characterization \cite{zurel2026astab} \\
-T3c--T3d & Exact cleared-denominator Symplectic Marginal Descent, $15/7$ ratio $\forall n \ge 2$, and Clifford--Reynolds degree-$2$ RLT+SOS lower bound $M \ge 4^n-1$ & Transitivity of $\Sp(2n,2)$ on $2$-qubit symplectic subspaces; exact $C_2 = 2$ verified over all $60$ facets of $\Lambda_2$ (Rust~1.94) \\
+T1a--T1b & Modular divisor descent, Hensel prime-power ascent, Bezout CRT lift; universal $\AME(N,d)$ $\forall d\ge 2$ for $K_2, K_3, C_5, \mathrm{Prism}_6$, and $W_5$ (all $20$ $3\times 3$ minors) & Helwig \cite{helwig2013ame} correspondence between graph-state $k$-uniformity and cross-adjacency kernel injectivity; C11+NASM cross-check \\
+T1c--T1d & Pure-integer Pless bounds ($k < p^2$ even, $k < p^2+p$ odd); binary commuting-weight parity, Rains shadows $N \in \{4,7,9,11\}$, 0/64 binary $N=4$ graphs & Quantum MacWilliams / Rains shadow enumerator theorem \cite{rains1998shadow}; Rust, C11+NASM ($132/1{,}024$ at $N=5$), Python \\
+T1e & Torsion rank lower bound + $G[2]$ freeness, additive $\FF_4$-MDS $N=7$ ($A_6=-21$) \& odd $N \ge 9$, even-$d$ $N=4$ impossibility, explicit $\FF_4$ CSS pair $(G_X, G_Z)$ isotropic \& weight $\ge 3$ & Finite abelian $2$-Sylow structure theorem and additive self-dual $\FF_4$-code MacWilliams duality (Proof of Theorem~\ref{thm:t1e}) \\
+T2a--T2b & Abstract \lid{TraceFieldSpec} coset non-constancy, affine unique intersection, kernel-checked bijectivity \& non-linearity for $\FF_9, \FF_{11}, \FF_{13}, \FF_{16}$ & Character-sum orthogonality over $\CC^q$; independently verified zero-float in $\ZZ[\zeta_p]$ across $198{,}820$ pairs (C++20) \\
+T2c & Both untwisted $Q_1 \otimes Q_2$ (\lid{direct_product_quantum_quantum}, $3$-$\RQLS(143)$) and twisted $Q_1 \otimes_D C_2$ (\lid{direct_product_rqls_lifting}, $3$-$\RQLS(55)$ with explicit \lid{twistSep}) & Untwisted $Q_1 \otimes Q_2$ needs no twist; for $Q_1 \otimes_D C_2$, \lid{twistSep} is discharged analytically by avoiding $\le \binom{v_1^2}{2}$ cross-cell angle differences \\
+T2d & Structurally-recursive tree search proving every $\FF_8$ orthomorphism fixing $0$ is $\FF_2$-linear (zero \lid{native_decide}) & Exact agreement with Zig~0.17 exhaustive scan of all $5{,}040$ permutations ($0/4{,}872$ nonlinear) \\
+T3a--T3b & Cleared-denominator identity $\|(D-1)\rho - I_D\|_2^2 \le 1$, rational witnesses $\rho_{\mathrm{ent}}, \rho_{\mathrm{sep}}$, universal global polytope optimality in $\ZZ[\sqrt{3}]$ \& $\ZZ[\sqrt{5}]$ plus vertex tightness & Gurvits--Barnum Cor.~3 \cite{gurvits2002largest}, Verstraete et al.\ $\ASEP$ criterion \cite{verstraete2001maximally}, Zurel--Davis spectral facets \cite{zurel2026astab}; Eshkol Dual-AD KKT checks \\
+T3c--T3d & Finite uniform-covering double-counting theorem, cleared-denominator SMD \& $15/7$ ratio $\forall n \ge 2$, first-principles multivariate polynomial deg-$2$ RLT+SOS barrier ($M \ge 4^n-1$) & Transitivity of $\Sp(2n,2)$ ($336$ subspaces, $r=80$ at $n=3$ in Rust), exact $C_2 = 2$ over all $60$ facets \& $240$ CNC $m=1$ vertices, and $1{,}770$ facet pairs ($\min = -1$) \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -863,21 +1211,23 @@ T3c--T3d & Exact cleared-denominator Symplectic Marginal Descent, $15/7$ ratio $
     Large-language-model coding and theorem-proving assistants (Google Antigravity /
     Gemini) were used as drafting, refactoring, literature-reconnaissance, and formal
     proof-search aids under the author's direction. \emph{Zero} mathematical claim rests
-    on unverified AI output: every Lean~4 theorem is independently checked by the Lean~4.35.0
-    kernel and five external kernels via Palomar Comparator, every numerical/algebraic
-    certificate is independently reproduced in zero-float Rust, Zig, C++20, C11+NASM,
-    Eshkol AD, and Python exact arithmetic, and every bibliography entry was live-verified
-    against the arXiv and Crossref APIs.
+    on unverified AI output: every Lean~4 theorem is independently checked by the
+    Lean~4.35.0 kernel, the $311$-declaration \lid{SweepAllAxioms.lean} sweep, and five
+    external kernels via Palomar Comparator; every exact certificate is independently
+    reproduced in zero-float Rust, Zig, C++20, C11+NASM, and Python exact arithmetic; and
+    all $25$ bibliography entries were live-verified (title, author, year, DOI, zero
+    retractions) against the arXiv and Crossref APIs.
   \item[Conflict of Interest \& Funding]
     The author declares no competing financial or non-financial interests. This work was
     conducted as independent research with no external grant funding.
   \item[Code, Data, and Reproducibility Availability]
     All source code, Lean~4 proofs, polyglot engines, exact certificates
-    (\lid{data/certificates.json}), cryptographic SHA-256 manifests, RFC~3161 and
-    OpenTimestamps proofs, and interactive web observatory/blueprint are permanently
-    archived under dual Apache-2.0 (code) / CC-BY-4.0 (text and figures) licenses at
-    \url{https://github.com/0thernes/quantum-phasespace-rigidity} and registered as
-    \lid{0TH-2026-020} in \url{https://github.com/0thernes/0thernes-research-archive}.
+    (\lid{data/certificates.json}), cryptographic SHA-256 manifests, DigiCert RFC~3161
+    and 3-calendar Bitcoin OpenTimestamps proofs, and interactive web observatory/blueprint
+    are permanently archived under dual Apache-2.0 (code) / CC-BY-4.0 (text and figures)
+    licenses at \url{https://github.com/0thernes/quantum-phasespace-rigidity} and
+    registered as \lid{0TH-2026-020} in
+    \url{https://github.com/0thernes/0thernes-research-archive}.
 \end{description}
 
 \bibliographystyle{amsplain}

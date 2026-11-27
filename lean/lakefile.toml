@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 name = "QPRigidity"
-version = "1.0.0"
+version = "2.0.0"
 defaultTargets = ["QPRigidity", "Challenge", "Solution", "PalomarSolution"]
 
 [leanOptions]
@@ -11,15 +11,19 @@ linter.deprecated = true
 
 [[lean_lib]]
 name = "QPRigidity"
+leanOptions = { warningAsError = true }
 
 [[lean_lib]]
 name = "Challenge"
+leanOptions = { warningAsError = true }
 
 [[lean_lib]]
 name = "Solution"
+leanOptions = { warningAsError = true }
 
 [[lean_lib]]
 name = "PalomarChallenge"
 
 [[lean_lib]]
 name = "PalomarSolution"
+leanOptions = { warningAsError = true }

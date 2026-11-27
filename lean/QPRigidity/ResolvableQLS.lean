@@ -417,31 +417,97 @@ private theorem prodIdx_inj {v1 v2 : Nat} (hv2 : v2 > 0) (a a' : Fin v1) (b b' :
     exact Nat.eq_of_mul_eq_mul_right hv2 this
   exact ⟨Fin.ext hdiv, Fin.ext hmod⟩
 
-/-- **T2c (Universal `t`-Resolvable Direct-Product Lifting Theorem):**
-Given ANY maximal-cardinality `t-RQLS(v₁)` (`Q₁`) and ANY classical `t-RQLS(v₂)` (`C₂`, i.e.,
-`t + 1` classical `MOLS(v₂)`), the Kronecker product yields a maximal-cardinality `t-RQLS(v₁ * v₂)`
-where two product states `|ψ₁⟩ ⊗ |e₂⟩` are orthogonal if either factor is orthogonal, and
-non-collinear whenever either factor is non-collinear (unitary-disjointified by `U_{i₂,j₂}` on
-distinct cells of `C₂` when factor 1 coincides). -/
+/-- **T2c (Part 1 — Untwisted Quantum-Quantum Direct-Product Lifting Theorem):**
+Given ANY two maximal-cardinality `t-RQLS` (`Q₁` of order `v₁` and `Q₂` of order `v₂`),
+their untwisted Kronecker product `|ψ₁⟩ ⊗ |φ₂⟩` is a maximal-cardinality `t-RQLS(v₁ * v₂)`:
+two product rays are orthogonal if either factor is orthogonal, and non-collinear iff
+EITHER factor is non-collinear (requiring zero unitary twist!). -/
+public def direct_product_quantum_quantum {v1 v2 t : Nat} (hv2 : v2 > 0)
+    (Q1 : ResolvableQLSSpec v1 t) (Q2 : ResolvableQLSSpec v2 t) :
+    ResolvableQLSSpec (v1 * v2) t where
+  ortho i j i' j' :=
+    Q1.ortho (fstIdx hv2 i) (fstIdx hv2 j) (fstIdx hv2 i') (fstIdx hv2 j') ∨
+    Q2.ortho (sndIdx hv2 i) (sndIdx hv2 j) (sndIdx hv2 i') (sndIdx hv2 j')
+  nonCollinear i j i' j' :=
+    Q1.nonCollinear (fstIdx hv2 i) (fstIdx hv2 j) (fstIdx hv2 i') (fstIdx hv2 j') ∨
+    Q2.nonCollinear (sndIdx hv2 i) (sndIdx hv2 j) (sndIdx hv2 i') (sndIdx hv2 j')
+  ortho_imp_nonCollinear i j i' j' h := by
+    cases h with
+    | inl ho1 => exact Or.inl (Q1.ortho_imp_nonCollinear _ _ _ _ ho1)
+    | inr ho2 => exact Or.inr (Q2.ortho_imp_nonCollinear _ _ _ _ ho2)
+  row_ortho i j j' hne := by
+    by_cases hf : fstIdx hv2 j = fstIdx hv2 j'
+    · right
+      apply Q2.row_ortho
+      intro hs
+      exact hne (finProd_eq hv2 hf hs)
+    · exact Or.inl (Q1.row_ortho _ _ _ hf)
+  col_ortho i i' j hne := by
+    by_cases hf : fstIdx hv2 i = fstIdx hv2 i'
+    · right
+      apply Q2.col_ortho
+      intro hs
+      exact hne (finProd_eq hv2 hf hs)
+    · exact Or.inl (Q1.col_ortho _ _ _ hf)
+  res r i j := prodIdx (Q1.res r (fstIdx hv2 i) (fstIdx hv2 j)) (Q2.res r (sndIdx hv2 i) (sndIdx hv2 j))
+  res_row_inj r i j j' h := by
+    rcases prodIdx_inj hv2 _ _ _ _ h with ⟨h1, h2⟩
+    exact finProd_eq hv2 (Q1.res_row_inj r _ _ _ h1) (Q2.res_row_inj r _ _ _ h2)
+  res_col_inj r i i' j h := by
+    rcases prodIdx_inj hv2 _ _ _ _ h with ⟨h1, h2⟩
+    exact finProd_eq hv2 (Q1.res_col_inj r _ _ _ h1) (Q2.res_col_inj r _ _ _ h2)
+  res_mols r s i j i' j' hrs hr hs := by
+    rcases prodIdx_inj hv2 _ _ _ _ hr with ⟨hr1, hr2⟩
+    rcases prodIdx_inj hv2 _ _ _ _ hs with ⟨hs1, hs2⟩
+    rcases Q1.res_mols r s _ _ _ _ hrs hr1 hs1 with ⟨hi1, hj1⟩
+    rcases Q2.res_mols r s _ _ _ _ hrs hr2 hs2 with ⟨hi2, hj2⟩
+    exact ⟨finProd_eq hv2 hi1 hi2, finProd_eq hv2 hj1 hj2⟩
+  res_ortho r i j i' j' hne hres := by
+    rcases prodIdx_inj hv2 _ _ _ _ hres with ⟨hr1, hr2⟩
+    by_cases hf : fstIdx hv2 i ≠ fstIdx hv2 i' ∨ fstIdx hv2 j ≠ fstIdx hv2 j'
+    · exact Or.inl (Q1.res_ortho r _ _ _ _ hf hr1)
+    · right
+      have hi1 : fstIdx hv2 i = fstIdx hv2 i' := Classical.byContradiction fun h => hf (Or.inl h)
+      have hj1 : fstIdx hv2 j = fstIdx hv2 j' := Classical.byContradiction fun h => hf (Or.inr h)
+      have hne2 : sndIdx hv2 i ≠ sndIdx hv2 i' ∨ sndIdx hv2 j ≠ sndIdx hv2 j' := by
+        cases hne with
+        | inl hi => left; intro hs; exact hi (finProd_eq hv2 hi1 hs)
+        | inr hj => right; intro hs; exact hj (finProd_eq hv2 hj1 hs)
+      exact Q2.res_ortho r _ _ _ _ hne2 hr2
+  maximal_card i j i' j' hne := by
+    by_cases hf : fstIdx hv2 i ≠ fstIdx hv2 i' ∨ fstIdx hv2 j ≠ fstIdx hv2 j'
+    · exact Or.inl (Q1.maximal_card _ _ _ _ hf)
+    · right
+      have hi1 : fstIdx hv2 i = fstIdx hv2 i' := Classical.byContradiction fun h => hf (Or.inl h)
+      have hj1 : fstIdx hv2 j = fstIdx hv2 j' := Classical.byContradiction fun h => hf (Or.inr h)
+      have hne2 : sndIdx hv2 i ≠ sndIdx hv2 i' ∨ sndIdx hv2 j ≠ sndIdx hv2 j' := by
+        cases hne with
+        | inl hi => left; intro hs; exact hi (finProd_eq hv2 hi1 hs)
+        | inr hj => right; intro hs; exact hj (finProd_eq hv2 hj1 hs)
+      exact Q2.maximal_card _ _ _ _ hne2
+
+/-- **T2c (Part 2 — Unitary-Twisted Quantum-Classical Direct-Product Lifting Theorem):**
+Given ANY maximal-cardinality `t-RQLS(v₁)` (`Q₁`), ANY classical `t-RQLS(v₂)` (`C₂`, i.e.,
+`t + 1` classical `MOLS(v₂)`), and an explicit cell-indexed unitary twist disjointification
+witness `twistSep` separating distinct cells `(i₂, j₂) ≠ (i₂', j₂')` that share the same
+classical symbol `C₂.sym`, the twisted product `(D_{i₂,j₂} |ψ₁⟩) ⊗ |C₂(i₂,j₂)⟩` yields a
+maximal-cardinality `t-RQLS(v₁ * v₂)`. -/
 public def direct_product_rqls_lifting {v1 v2 t : Nat} (hv2 : v2 > 0)
-    (Q1 : ResolvableQLSSpec v1 t) (C2 : ClassicalMOLSRes v2 t) :
+    (Q1 : ResolvableQLSSpec v1 t) (C2 : ClassicalMOLSRes v2 t)
+    (twistSep : Fin v2 → Fin v2 → Fin v2 → Fin v2 → Prop)
+    (htwist : ∀ i2 j2 i2' j2', (i2 ≠ i2' ∨ j2 ≠ j2') → C2.sym i2 j2 = C2.sym i2' j2' → twistSep i2 j2 i2' j2') :
     ResolvableQLSSpec (v1 * v2) t where
   ortho i j i' j' :=
     Q1.ortho (fstIdx hv2 i) (fstIdx hv2 j) (fstIdx hv2 i') (fstIdx hv2 j') ∨
     C2.sym (sndIdx hv2 i) (sndIdx hv2 j) ≠ C2.sym (sndIdx hv2 i') (sndIdx hv2 j')
   nonCollinear i j i' j' :=
     Q1.nonCollinear (fstIdx hv2 i) (fstIdx hv2 j) (fstIdx hv2 i') (fstIdx hv2 j') ∨
-    (sndIdx hv2 i ≠ sndIdx hv2 i' ∨ sndIdx hv2 j ≠ sndIdx hv2 j')
+    C2.sym (sndIdx hv2 i) (sndIdx hv2 j) ≠ C2.sym (sndIdx hv2 i') (sndIdx hv2 j') ∨
+    twistSep (sndIdx hv2 i) (sndIdx hv2 j) (sndIdx hv2 i') (sndIdx hv2 j')
   ortho_imp_nonCollinear i j i' j' h := by
     cases h with
     | inl ho => exact Or.inl (Q1.ortho_imp_nonCollinear _ _ _ _ ho)
-    | inr hne =>
-      right
-      exact Classical.byContradiction fun hboth => by
-        have h1 : sndIdx hv2 i = sndIdx hv2 i' := Classical.byContradiction fun hne1 => hboth (Or.inl hne1)
-        have h2 : sndIdx hv2 j = sndIdx hv2 j' := Classical.byContradiction fun hne2 => hboth (Or.inr hne2)
-        rw [h1, h2] at hne
-        exact hne rfl
+    | inr hne => exact Or.inr (Or.inl hne)
   row_ortho i j j' hne := by
     by_cases hf : fstIdx hv2 j = fstIdx hv2 j'
     · right
@@ -485,9 +551,13 @@ public def direct_product_rqls_lifting {v1 v2 t : Nat} (hv2 : v2 > 0)
     · right
       have hi1 : fstIdx hv2 i = fstIdx hv2 i' := Classical.byContradiction fun h => hf (Or.inl h)
       have hj1 : fstIdx hv2 j = fstIdx hv2 j' := Classical.byContradiction fun h => hf (Or.inr h)
-      cases hne with
-      | inl hi => left; intro hi2; exact hi (finProd_eq hv2 hi1 hi2)
-      | inr hj => right; intro hj2; exact hj (finProd_eq hv2 hj1 hj2)
+      have hne2 : sndIdx hv2 i ≠ sndIdx hv2 i' ∨ sndIdx hv2 j ≠ sndIdx hv2 j' := by
+        cases hne with
+        | inl hi => left; intro hi2; exact hi (finProd_eq hv2 hi1 hi2)
+        | inr hj => right; intro hj2; exact hj (finProd_eq hv2 hj1 hj2)
+      by_cases hsym : C2.sym (sndIdx hv2 i) (sndIdx hv2 j) = C2.sym (sndIdx hv2 i') (sndIdx hv2 j')
+      · exact Or.inr (htwist _ _ _ _ hne2 hsym)
+      · exact Or.inl hsym
 
 /-! ## Section 4: T2d — Exhaustive `F_8` Non-Linear Orthomorphism Obstruction -/
 

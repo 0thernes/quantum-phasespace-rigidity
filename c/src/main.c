@@ -52,11 +52,11 @@ int main(int argc, char **argv) {
         printf("  \"wheel5_unimodular\": %s,\n", minors_w5 ? "true" : "false");
         printf("  \"n4_f2_ame_count\": %u,\n", ame4_cnt);
         printf("  \"n5_f2_ame_count\": %u,\n", ame5_cnt);
-        printf("  \"qgtl_entangled_astab\": {\"g_tt\": %.12f, \"g_pp\": %.12f, \"omega_tp\": %.12f, \"err\": %.3e},\n",
+        printf("  \"qgtl_entangled_astab\": {\"precision_class\": \"numerical_approximation\", \"g_tt\": %.12f, \"g_pp\": %.12f, \"omega_tp\": %.12f, \"err\": %.3e},\n",
                qgt_ent.g_tt, qgt_ent.g_pp, qgt_ent.omega_tp, qgt_ent.max_analytic_err);
-        printf("  \"qgtl_rqls11\": {\"g_aa\": %.12f, \"g_bb\": %.12f, \"g_ab\": %.12f, \"omega_ab\": %.12f, \"err\": %.3e},\n",
+        printf("  \"qgtl_rqls11\": {\"precision_class\": \"numerical_approximation\", \"g_aa\": %.12f, \"g_bb\": %.12f, \"g_ab\": %.12f, \"omega_ab\": %.12f, \"err\": %.3e},\n",
                qgt_rqls.g_tt, qgt_rqls.g_pp, qgt_rqls.g_tp, qgt_rqls.omega_tp, qgt_rqls.max_analytic_err);
-        printf("  \"moonlab_qrng\": {\"startup_ok\": %s, \"continuous_ok\": %s, \"stuck_detected\": %s, \"samples\": %u, \"max_lambda2_tr_sq\": %.9f, \"sha3_256\": \"",
+        printf("  \"moonlab_qrng\": {\"precision_class\": \"numerical_approximation\", \"startup_ok\": %s, \"continuous_ok\": %s, \"stuck_detected\": %s, \"samples\": %u, \"max_lambda2_tr_sq\": %.9f, \"sha3_256\": \"",
                qrng.health_startup_ok ? "true" : "false",
                qrng.health_continuous_ok ? "true" : "false",
                qrng.stuck_fault_detected ? "true" : "false",

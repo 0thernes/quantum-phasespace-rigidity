@@ -14,9 +14,10 @@
     "engine": "c11-nasm-moonlab-qgtl",
     "moonlab_qrng": {
       "continuous_ok": true,
-      "max_lambda2_tr_sq": 0.773880786,
+      "max_lambda2_tr_sq": 0.830330453,
+      "precision_class": "numerical_approximation",
       "samples": 3072,
-      "sha3_256": "9934cfbc7a4152937adf6426338f20422ebbba0c2e86f47fee5a6c5257512768",
+      "sha3_256": "b0aef34215fd37f71770e44b5ee39b126a144d912e9d3a962c0e827a026afb5a",
       "startup_ok": true,
       "stuck_detected": true
     },
@@ -36,14 +37,16 @@
       "err": 1.715e-11,
       "g_pp": 0.210104358505,
       "g_tt": 0.137499999986,
-      "omega_tp": -0.245082024015
+      "omega_tp": -0.245082024015,
+      "precision_class": "numerical_approximation"
     },
     "qgtl_rqls11": {
       "err": 5.904e-10,
       "g_aa": 9.99999999941,
       "g_ab": 0.999999999938,
       "g_bb": 9.99999999941,
-      "omega_ab": -0.0
+      "omega_ab": -0.0,
+      "precision_class": "numerical_approximation"
     },
     "wheel5_unimodular": true
   },
@@ -118,6 +121,7 @@
       "val": 0.12352192084881515
     },
     "engine": "eshkol-dual-ad",
+    "precision_class": "numerical_approximation",
     "qgtl_gpp": {
       "err": 0.0,
       "exact": 0.2101043584874127,
@@ -459,7 +463,14 @@
     "engine": "rust-exact-forbid-unsafe",
     "lambda2_c2_exact": "2/1",
     "lambda2_cnc_m1_tight_facets": 33,
+    "lambda2_cnc_m1_tight_facets_max": 33,
+    "lambda2_cnc_m1_vertex_count": 240,
     "lambda2_cnc_m2_tr_sq": "3/2",
+    "lambda2_facet_pairs_checked": 1770,
+    "lambda2_min_facet_overlap": -1,
+    "n3_pauli_uniform_cover": 80,
+    "n3_symplectic_4d_subspaces": 336,
+    "precision_class": "exact_integer_rational",
     "qubit_ame_feasible_n": [
       2,
       3,
@@ -480,6 +491,6 @@
     "symplectic_inball_gain": "15/7",
     "witnesses_ok": true
   },
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "zig_comptime_summary": "[Zig 0.17 comptime+runtime] comptime_verified=(F7:t=1,F9:t=2,F11:t=3,F13:t=4,F16:t=3,F17:t=6,F19:t=7) F8=(total=5040,lin=168,nonlin=4872,ortho=48,nonlin_t>=1=0) F7_nonlin_mc=84 all_ok=true"
 }

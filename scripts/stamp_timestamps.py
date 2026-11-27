@@ -1,17 +1,23 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Alexander Stephen Donahue
-"""Cryptographically anchor MANIFEST.sha256 via DigiCert RFC 3161 TSA and Bitcoin OpenTimestamps."""
+"""Cryptographically anchor & verify MANIFEST.sha256 via DigiCert RFC 3161 TSA and Bitcoin OpenTimestamps."""
 from __future__ import annotations
 
 import hashlib
 import pathlib
 import secrets
+import shutil
+import subprocess
+import sys
 import urllib.request
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 TS_DIR = REPO / "timestamps"
 TS_DIR.mkdir(parents=True, exist_ok=True)
 MANIFEST = REPO / "MANIFEST.sha256"
+
+OTS_MAGIC = b"\x00OpenTimestamps\x00\x00Proof\x00\xbf\x89\xe2\xe8\x84\xe8\x92\x94"
+OID_SHA256 = b"\x06\x09\x60\x86\x48\x01\x65\x03\x04\x02\x01"
 
 
 def der_len(n: int) -> bytes:
@@ -35,9 +41,7 @@ def der_int(val: int) -> bytes:
 
 def build_rfc3161_tsq(digest_sha256: bytes) -> bytes:
     """Build a minimal valid DER-encoded RFC 3161 TimeStampReq for SHA-256 with certReq=TRUE."""
-    # OID 2.16.840.1.101.3.4.2.1 (id-sha256)
-    oid_sha256 = b"\x06\x09\x60\x86\x48\x01\x65\x03\x04\x02\x01"
-    alg_id = der_seq(oid_sha256 + b"\x05\x00")
+    alg_id = der_seq(OID_SHA256 + b"\x05\x00")
     msg_imprint = der_seq(alg_id + b"\x04" + der_len(len(digest_sha256)) + digest_sha256)
     nonce = secrets.randbits(63)
     version = der_int(1)
@@ -58,8 +62,8 @@ def stamp_rfc3161(digest: bytes) -> pathlib.Path:
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
         tsr = resp.read()
-    # RFC 3161 TimeStampResp starts with SEQUENCE (0x30) and status GRANTED (0x02 0x01 0x00)
-    if not tsr.startswith(b"\x30") or len(tsr) < 128:
+    # RFC 3161 TimeStampResp starts with SEQUENCE (0x30) and embeds the exact 32-byte SHA-256 imprint
+    if not tsr.startswith(b"\x30") or len(tsr) < 128 or digest not in tsr:
         raise RuntimeError(f"Unexpected RFC 3161 response ({len(tsr)} bytes)")
     tsr_path.write_bytes(tsr)
     print(f"[RFC3161] DigiCert TSA token saved: {tsr_path.name} ({len(tsr)} bytes)")
@@ -80,17 +84,16 @@ def write_varuint(n: int) -> bytes:
 
 
 def stamp_opentimestamps(digest: bytes) -> pathlib.Path:
-    """Submit SHA-256 digest to official OpenTimestamps calendars and write valid v1 .ots proof."""
+    """Submit SHA-256 digest to 3 official OpenTimestamps calendars and write valid v1 .ots proof."""
     calendars = [
         "https://a.pool.opentimestamps.org/digest",
         "https://b.pool.opentimestamps.org/digest",
+        "https://alice.btc.calendar.opentimestamps.org/digest",
     ]
-    ots_magic = b"\x00OpenTimestamps\x00\x00Proof\x00\xbf\x89\xe2\xe8\x84\xe8\x92\x94"
     version = b"\x01"
     op_sha256 = b"\x08"
 
     nonce = secrets.token_bytes(16)
-    # Append nonce + sha256 commitment (standard OTS privacy-preserving leaf)
     leaf_digest = hashlib.sha256(digest + nonce).digest()
     op_append_nonce = b"\xf0" + write_varuint(len(nonce)) + nonce
 
@@ -103,7 +106,7 @@ def stamp_opentimestamps(digest: bytes) -> pathlib.Path:
                 headers={
                     "Accept": "application/vnd.opentimestamps.v1",
                     "Content-Type": "application/x-www-form-urlencoded",
-                    "User-Agent": "quantum-phasespace-rigidity-ots/1.0",
+                    "User-Agent": "quantum-phasespace-rigidity-ots/2.0",
                 },
                 method="POST",
             )
@@ -119,7 +122,7 @@ def stamp_opentimestamps(digest: bytes) -> pathlib.Path:
         raise RuntimeError("No OpenTimestamps calendar responded")
 
     payload = bytearray()
-    payload.extend(ots_magic)
+    payload.extend(OTS_MAGIC)
     payload.extend(version)
     payload.extend(op_sha256)
     payload.extend(digest)
@@ -132,18 +135,74 @@ def stamp_opentimestamps(digest: bytes) -> pathlib.Path:
 
     ots_path = TS_DIR / "MANIFEST.sha256.ots"
     ots_path.write_bytes(bytes(payload))
-    print(f"[OTS] Bitcoin OpenTimestamps proof saved: {ots_path.name} ({len(payload)} bytes)")
+    print(
+        f"[OTS] Bitcoin OpenTimestamps proof saved: {ots_path.name} "
+        f"({len(payload)} bytes, {len(branches)} calendars)"
+    )
     return ots_path
 
 
+def verify_timestamps() -> int:
+    """Offline structural & cryptographic digest verification of RFC 3161 (.tsq/.tsr) & Bitcoin OTS (.ots)."""
+    if not MANIFEST.exists():
+        print(f"[FAIL] Missing {MANIFEST}", file=sys.stderr)
+        return 1
+    digest = hashlib.sha256(MANIFEST.read_bytes()).digest()
+    tsq_path = TS_DIR / "MANIFEST.sha256.tsq"
+    tsr_path = TS_DIR / "MANIFEST.sha256.tsr"
+    ots_path = TS_DIR / "MANIFEST.sha256.ots"
+    for p in (tsq_path, tsr_path, ots_path):
+        if not p.exists():
+            print(f"[FAIL] Missing timestamp artifact: {p.name}", file=sys.stderr)
+            return 1
+
+    tsq = tsq_path.read_bytes()
+    tsr = tsr_path.read_bytes()
+    ots = ots_path.read_bytes()
+
+    if not tsq.startswith(b"\x30") or OID_SHA256 not in tsq or digest not in tsq:
+        print("[FAIL] MANIFEST.sha256.tsq digest imprint mismatch", file=sys.stderr)
+        return 1
+    # RFC 3161 PKIStatusInfo GRANTED = SEQUENCE { INTEGER 0 } = 30 03 02 01 00
+    if not tsr.startswith(b"\x30") or b"\x30\x03\x02\x01\x00" not in tsr[:32] or digest not in tsr:
+        print("[FAIL] MANIFEST.sha256.tsr GRANTED status or digest imprint mismatch", file=sys.stderr)
+        return 1
+    # OpenTimestamps v1 header + SHA-256 op (0x08) + exact 32-byte digest
+    expected_ots_prefix = OTS_MAGIC + b"\x01\x08" + digest
+    if not ots.startswith(expected_ots_prefix):
+        print("[FAIL] MANIFEST.sha256.ots magic/version/digest header mismatch", file=sys.stderr)
+        return 1
+
+    # If OpenSSL is available, parse & inspect the RFC 3161 TSTInfo text directly
+    openssl = shutil.which("openssl")
+    if openssl:
+        res = subprocess.run(
+            [openssl, "ts", "-reply", "-in", str(tsr_path), "-text"],
+            capture_output=True,
+            text=True,
+        )
+        if res.returncode != 0 or "Status: Granted" not in res.stdout or "sha256" not in res.stdout.lower():
+            print(f"[FAIL] OpenSSL ts -reply validation failed:\n{res.stdout}\n{res.stderr}", file=sys.stderr)
+            return 1
+        print("[VERIFY][OpenSSL] RFC 3161 TimeStampResp parsed cleanly: Status=Granted, Hash=sha256")
+
+    print(
+        f"[VERIFY][PASS] MANIFEST.sha256 ({digest.hex()[:16]}...) matches "
+        f"tsq ({len(tsq)}B), DigiCert tsr ({len(tsr)}B), and Bitcoin ots ({len(ots)}B)."
+    )
+    return 0
+
+
 def main() -> int:
+    if "--verify" in sys.argv:
+        return verify_timestamps()
     if not MANIFEST.exists():
         raise FileNotFoundError(f"Missing {MANIFEST}; run scripts/generate_manifests.py first")
     digest = hashlib.sha256(MANIFEST.read_bytes()).digest()
     print(f"[STAMP] MANIFEST.sha256 SHA-256 = {digest.hex()}")
     stamp_rfc3161(digest)
     stamp_opentimestamps(digest)
-    return 0
+    return verify_timestamps()
 
 
 if __name__ == "__main__":

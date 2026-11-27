@@ -27,6 +27,7 @@ CANONICAL_FILES = [
     "lean/QPRigidity/NonVacuity.lean",
     "lean/QPRigidity/AdversarialTests.lean",
     "lean/VerifyAxioms.lean",
+    "lean/SweepAllAxioms.lean",
     "rust/src/main.rs",
     "zig/src/main.zig",
     "cpp/src/qpr_cyclotomic.cpp",

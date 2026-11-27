@@ -150,6 +150,7 @@ def main() -> int:
 
     report = {
         "engine": "eshkol-dual-ad",
+        "precision_class": "numerical_approximation",
         "astab_2q": {"val": r2_2q_val, "grad": r2_2q_der, "exact": exact_2q, "err": err_2q},
         "astab_1qt": {"val": r2_1qt_val, "grad": r2_1qt_der, "exact": exact_1qt, "err": err_1qt},
         "qgtl_gpp": {"val": gpp_val, "grad": gpp_der, "exact": exact_gpp, "err": err_qgtl},

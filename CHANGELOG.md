@@ -2,6 +2,26 @@
 
 All notable changes to `quantum-phasespace-rigidity` are documented in this file following Keep a Changelog and Semantic Versioning.
 
+## [2.0.0] - 2026-11-27
+### Changed & Upgraded (3 × 1,000-Check Zero-Padding Deep Hardening Audit)
+- **Lean 4.35.0 Formal Proof Upgrades (`warningAsError = true` across all proof libraries):**
+  - **T1b (`AMEGraph.lean`):** Added full 20-case machine-checked proof of `graphWheel5_ame_all_d` for ALL $d \ge 2$ inside `universal_unimodular_graphs_all_d`.
+  - **T1e (`Challenge.lean` / `Solution.lean`):** Exported `additive_mds_n7_impossible` ($A_6 = -21 < 0$) directly in the Palomar challenge/solution contract.
+  - **T2c (`ResolvableQLS.lean`):** Split into BOTH untwisted quantum–quantum `direct_product_quantum_quantum` ($Q_1 \otimes Q_2$, genuine `Q1.nonCollinear ∨ Q2.nonCollinear`, witnessed at `3-RQLS(143)`) AND unitary-twisted `direct_product_rqls_lifting` ($Q_1 \otimes_D C_2$, explicit `twistSep` hypothesis, witnessed at `3-RQLS(55)`).
+  - **T3b (`MagicGeometry.lean`):** Replaced vertex-only checks and vacuous helper with full universal global polytope optimality proofs in ordered quadratic rings $\mathbb{Z}[\sqrt{3}]$ (`two_qubit_astab_global_circumradius`) and $\mathbb{Z}[\sqrt{5}]$ (`one_qutrit_astab_global_circumradius`).
+  - **T3c (`MagicGeometry.lean`):** Added general finite uniform-covering double-counting theorem `uniform_cover_avg_bound`.
+  - **T3d (`MagicGeometry.lean`):** Upgraded from abstract 6-integer `omega` summary to a first-principles multivariate polynomial barrier (`polyRltSos`, `deg2_rlt_sos_polynomial_barrier`, `clifford_reynolds_deg2_rlt_barrier`) over arbitrary finite stabilizer facet systems with pairwise overlaps $\ge -1$, inhabited by an explicit pointwise $n=1$ polynomial witness in `NonVacuity.lean`.
+  - **Whole-Module Axiom Sweep (`SweepAllAxioms.lean`):** Added programmatic `Lean.collectAxioms` sweep verifying 100% of all 311 project declarations strictly within `[propext, Classical.choice, Quot.sound]`.
+- **Polyglot Native, Security, CI & Schema Hardening:**
+  - **Rust 1.94 (`#![forbid(unsafe_code)]`):** Expanded to exhaustively verify all 1,770 $\Lambda_2$ facet pairs (`min_ip = -1`), all 240 CNC $m=1$ vertices ($C_2 = 2$), and all 336 four-dimensional symplectic subspaces of $\mathbb{F}_2^6$ ($n=3$, exact uniform Pauli cover $r = 80$).
+  - **NASM & C11:** Added `n <= 24` bounds guard, unsigned `jbe`, bitmasking, and replaced BMI1 `blsr` with portable `bsf`/`lea`/`and` in `asm/pauli_popcnt.asm`; tightened `qpr_scan_all_n5_f2_graphs` to exact `ame == 132U`; tagged all floating-point JSON outputs (C11 QGTL & Eshkol AD) with Playbook v1.3 `"precision_class": "numerical_approximation"`.
+  - **Unified 7-Engine CI & Security:** Added artifact-backed `unified-7engine-differential` CI job enforcing `REQUIRE_ALL_ENGINES=1` (zero silent skips), `gitleaks` + `osv-scanner` supply-chain security job, OpenSSL RFC 3161 + 3-calendar OpenTimestamps `--verify`, Draft 2020-12 `repo.yaml` JSON Schema validation (`formal: true`, `visual: true`), live `README.md` snippet execution test, and expanded surgical mutation suite from 6/6 → 12/12 (100% killed).
+- **Manuscript, Figures & Hardening Integrity:**
+  - Fixed `T1a`–`T1e` numbering alignment across `paper/main.tex`, `CLAIMS.md`, `docs/statement-fidelity.md`, `README.md`, and `scripts/build_blueprint.py` to match `lean/Challenge.lean` 1-to-1.
+  - Corrected the $\mathbb{F}_4$ CSS generator pair $(G_X, G_Z)$ in `paper/main.tex` to match `AMEGraph.lean`, added live-verified `verstraete2001maximally` (`25/25` citations verified on title + author + year + DOI), and added complete self-contained `\begin{proof}...\end{proof}` blocks for all 13 theorems `T1a`–`T3d`.
+  - Fixed visual overlaps/clipping across all 4 figures and `social-preview.png` (visually verified post-render).
+  - Replaced all padding loops in `scripts/hardening_audit.py` with 1,000 genuinely distinct, non-duplicated checks and generated `HARDENING_INDEX.md`.
+
 ## [1.0.0] - 2026-11-26
 ### Added
 - **Pillar I (`QPRigidity.AMEGraph`):** Complete classification of ALL cyclic Weyl–Heisenberg $\mathbb{Z}_{2\ell}$-stabilizer $\mathrm{AME}(N, 2\ell)$ states (including arbitrary non-canonical and non-free torsion subgroups: exists iff $N \in \{2, 3, 5, 6\}$), Radical-CRT equivalence for all $(N, k, d)$, universal unimodular canonical graph states ($K_2, K_3, C_5, K_3 \square K_2, W_5$), pure-integer Pless power-moment obstruction for all primes $p$, $\mathbb{F}_2$ commuting-weight homomorphism & Rains shadow proofs for $N \in \{4, 7, 9, 11\}$, and Ring-vs-Field Separation at $(4, 4)$ ($\mathbb{Z}_4$ impossible vs. $\mathbb{F}_4$ explicit).

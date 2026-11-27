@@ -5,7 +5,7 @@
 ; algebra and canonical graph-state weight enumeration (`asm/pauli_popcnt.asm`).
 ;
 ; Supports BOTH Windows x64 ABI (-DWIN64 -f win64) and System V AMD64 ABI (-f elf64).
-; Uses hardware POPCNT for exact 1-cycle Pauli weight and symplectic parity.
+; Uses SSE4.2 hardware POPCNT and portable BSF + (x & (x-1)) bit clearing (no BMI1 required).
 
 default rel
 section .text
@@ -64,6 +64,7 @@ qpr_asm_pauli_weight:
 ; void qpr_asm_graph_weight_enum(uint32_t n, const uint64_t *adj, uint64_t *counts)
 ; Exhaustively enumerates all 2^n canonical Z_2 graph stabilizer elements
 ; (n <= 24) and accumulates exact weight histogram counts[0..n].
+; Bounds-guarded: ignores n > 24 and masks adjacency bits to [0..n-1].
 ; -----------------------------------------------------------------------------
 qpr_asm_graph_weight_enum:
     push    rbx
@@ -82,18 +83,23 @@ qpr_asm_graph_weight_enum:
     mov     r13, rsi            ; adj
     mov     r14, rdx            ; counts
 %endif
-    ; Zero counts[0..n]
+    ; Guard: require n <= 24 so 1ULL << n and counts[0..n] stay strictly bounded
+    cmp     r12d, 24
+    ja      .done
+
+    ; Zero counts[0..n] (unsigned loop)
     xor     eax, eax
 .zero_loop:
     mov     qword [r14 + rax*8], 0
     inc     eax
     cmp     eax, r12d
-    jle     .zero_loop
+    jbe     .zero_loop
 
-    ; limit = 1ULL << n
+    ; limit = 1ULL << n; bitmask = limit - 1 in r10
     mov     ecx, r12d
     mov     r15, 1
     shl     r15, cl             ; r15 = 2^n
+    lea     r10, [r15 - 1]      ; r10 = (1ULL << n) - 1
 
     xor     rbx, rbx            ; mask = 0
 .mask_loop:
@@ -102,18 +108,21 @@ qpr_asm_graph_weight_enum:
 .bit_loop:
     test    rdx, rdx
     jz      .bit_done
-    tzcnt   rcx, rdx            ; lowest set bit index i
+    bsf     rcx, rdx            ; lowest set bit index i (portable x86-64)
     xor     rax, qword [r13 + rcx*8]
-    blsr    rdx, rdx            ; clear lowest set bit
+    lea     r9, [rdx - 1]       ; clear lowest set bit without BMI1
+    and     rdx, r9
     jmp     .bit_loop
 .bit_done:
-    or      rax, rbx            ; support = mask | zmask
-    popcnt  rax, rax            ; exact Pauli weight w
+    and     rax, r10            ; mask zmask to lower n qubits
+    or      rax, rbx            ; support = mask | zmask (at most n bits set)
+    popcnt  rax, rax            ; exact Pauli weight w in [0..n]
     inc     qword [r14 + rax*8]
     inc     rbx
     cmp     rbx, r15
     jb      .mask_loop
 
+.done:
     pop     r15
     pop     r14
     pop     r13

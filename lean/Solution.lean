@@ -38,6 +38,8 @@ public theorem prove_t1d : T1dStmt :=
 public theorem prove_t1e : T1eStmt :=
   ⟨fun a he hle hsum => torsion_rank_lower_and_free a he hle hsum,
    fun hk hs => additive_mds_odd_ge9_impossible hk hs,
+   fun hb0 hb1 hb2 hb3 hm3 hm2 hm1 hm0 hdual6 =>
+     additive_mds_n7_impossible hb0 hb1 hb2 hb3 hm3 hm2 hm1 hm0 hdual6,
    fun hd heven Γ => no_canonical_graph_ame4_even_d hd heven Γ,
    z4_vs_f4_separation⟩
 
@@ -49,7 +51,8 @@ public theorem prove_t2b : T2bStmt :=
   ⟨rqls9_t2_maximal_cert, rqls11_t3_maximal_cert, rqls13_t4_maximal_cert, rqls16_t3_maximal_cert⟩
 
 public theorem prove_t2c : T2cStmt :=
-  fun hv2 Q1 C2 => ⟨direct_product_rqls_lifting hv2 Q1 C2⟩
+  ⟨fun hv2 Q1 Q2 => ⟨direct_product_quantum_quantum hv2 Q1 Q2⟩,
+   fun hv2 Q1 C2 twistSep htwist => ⟨direct_product_rqls_lifting hv2 Q1 C2 twistSep htwist⟩⟩
 
 public theorem prove_t2d : T2dStmt :=
   f8_no_nonlinear_direction_perm
@@ -63,13 +66,15 @@ public theorem prove_t3a : T3aStmt :=
     two_qubit_sep_non_astab_witness.2.2.2⟩⟩
 
 public theorem prove_t3b : T3bStmt :=
-  ⟨ordered4_sum_sq_le_endpoints,
+  ⟨two_qubit_astab_global_circumradius,
+   one_qutrit_astab_global_circumradius,
    exact_astab_circumradius_2qubit_vertex.2.2.2.2,
    ⟨exact_astab_circumradius_1qutrit_vertex.2.2.2.2.1,
     exact_astab_circumradius_1qutrit_vertex.2.2.2.2.2⟩⟩
 
 public theorem prove_t3c : T3cStmt :=
-  ⟨symplectic_marginal_descent_all_n,
+  ⟨fun inSub f hr hrow hcol hsub => uniform_cover_avg_bound inSub f hr hrow hcol hsub,
+   symplectic_marginal_descent_all_n,
    fun n hn => (inball_gain_exact_15_over_7 n hn).2⟩
 
 public theorem prove_t3d : T3dStmt :=
