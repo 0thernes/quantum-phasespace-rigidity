@@ -71,4 +71,4 @@ sha256sum -c SHA256SUMS
 | Date | Environment | Scope Verified | Outcome |
 | :--- | :--- | :--- | :--- |
 | 2026-11-26 | Windows 11 x86-64 (ReFS Dev Drive) — Lean 4.35.0, Rust 1.94.1, Zig 0.17.0, GCC/G++ 15, NASM 2.16, Python 3.12, Tectonic | Full 7-engine build, 23 Lean declarations (`leanchecker-paranoid`), 100k NASM fuzz, 6/6 mutants, 0-overfull PDF + clean-room arXiv tarball | **PASS** |
-| 2026-11-26 | GitHub Actions Linux (`ubuntu-latest`) + macOS + Windows CI matrix | Automated CI replication across all 6 jobs (`lean-6kernel`, `rust-matrix`, `zig-matrix`, `cpp-c-asm-sanitizers` with ASan/UBSan, `python-eshkol-differential`, `latex-and-provenance`) | **PASS** |
+| 2026-11-26 | GitHub Actions Linux (`ubuntu-latest`) + macOS + Windows CI matrix (run [`45947314711`](https://github.com/0thernes/quantum-phasespace-rigidity/actions/runs/45947314711)) | All 8 jobs: 6-kernel Lean 4.35.0 Palomar Comparator in bubblewrap (`11m 54s`), 3-OS Rust, Zig `master`, C++20/C11/NASM ASan+UBSan+100k fuzz, Python/Eshkol/100% mutation, Tectonic clean-room arXiv + Build Standard v1.2.0 | **PASS (8/8)** |
