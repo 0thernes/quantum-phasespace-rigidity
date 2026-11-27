@@ -134,7 +134,9 @@ def main() -> int:
     cert_bytes = (json.dumps(certs, indent=2, sort_keys=True, default=str) + "\n").encode("utf-8")
     cert_path.write_bytes(cert_bytes)
     digest = hashlib.sha256(cert_bytes).hexdigest()
-    (data_dir / "MANIFEST.sha256").write_text(f"{digest}  certificates.json\n", encoding="utf-8")
+    (data_dir / "MANIFEST.sha256").write_text(
+        f"{digest}  certificates.json\n", encoding="utf-8", newline="\n"
+    )
     print(f"\n[CERTS] Wrote {cert_path} (SHA-256: {digest})", flush=True)
     print("=== FULL POLYGLOT + PYTHON + MUTATION + CERTIFICATE PIPELINE PASSED ===", flush=True)
     return 0

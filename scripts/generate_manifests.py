@@ -53,10 +53,10 @@ def main() -> int:
             raise FileNotFoundError(f"Missing canonical artifact: {rel}")
         lines.append(f"{sha256_file(p)}  {rel}")
     body = "\n".join(lines) + "\n"
-    (REPO / "MANIFEST.sha256").write_text(body, encoding="utf-8")
+    (REPO / "MANIFEST.sha256").write_text(body, encoding="utf-8", newline="\n")
 
     dist_lines = [ln for ln in lines if ln.split("  ", 1)[1].startswith(("dist/", "data/", "results/"))]
-    (REPO / "SHA256SUMS").write_text("\n".join(dist_lines) + "\n", encoding="utf-8")
+    (REPO / "SHA256SUMS").write_text("\n".join(dist_lines) + "\n", encoding="utf-8", newline="\n")
     print(f"[MANIFEST] Wrote MANIFEST.sha256 ({len(lines)} files) and SHA256SUMS ({len(dist_lines)} files).")
     return 0
 
