@@ -1,0 +1,166 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# SPDX-License-Identifier: Apache-2.0
+version: "v0.4"
+release_version: "2.0.0"
+
+project:
+  name: "Discrete Symplectic Phase-Space Rigidity: Cyclic Stabilizer AME Dichotomy, Maximal-Cardinality Resolvable Quantum Latin Squares, and Stabilizer-Polytope Magic Geometry"
+  description: >-
+    Zero-Mathlib Lean 4.35.0 formalization (warningAsError = true; 12 module files,
+    11 sorry-free plus statement-only PalomarChallenge.lean; 23 explicit audited
+    declarations and 311 project declarations exhaustively axiom-swept via
+    SweepAllAxioms.lean strictly within [propext, Classical.choice, Quot.sound])
+    certifying 13 headline theorems (T1a-T3d) across three linked pillars of discrete
+    symplectic quantum phase-space geometry: (I) radical-CRT k-uniform graph lifts,
+    all-d unimodular AME graph lifts (K_2, K_3, C_5, Prism_6, and 20-case W_5 for
+    all d >= 2), pure-integer Pless bounds, binary commuting-weight additivity and
+    Rains shadow contradictions at N in {4,7,9,11}, torsion Singleton rank forcing,
+    additive F_4-MDS obstructions (A_6 = -21 at N = 7 and odd N >= 9), and explicit
+    Z_4-versus-F_4 separation at (4,4); (II) abstract trace-spanning maximal-cardinality
+    resolvable quantum Latin square theorem, explicit certificates for 2-RQLS(9),
+    3-RQLS(11), 4-RQLS(13), and characteristic-2 3-RQLS(16), both untwisted Q_1 x Q_2
+    and twist-separated Q_1 x_D C_2 direct-product lifting, and exhaustive proof that
+    every orthomorphism of F_8 fixing 0 is F_2-linear; and (III) Gurvits-Barnum purity
+    identity and rational 2-qubit ASTAB/ASEP incomparability witnesses, universal global
+    polytope circumradius bounds in Z[sqrt(3)] for ASTAB_{2,2} and Z[sqrt(5)] for
+    ASTAB_{1,3}, finite uniform-cover Symplectic Marginal Descent yielding an exact
+    15/7 squared-inball gain for all n >= 2, and a first-principles multivariate
+    polynomial degree-2 RLT+SOS barrier M >= 4^n - 1. Analytic Hilbert-space bridges
+    are proved outside Lean in paper/main.tex and audited line by line in
+    docs/statement-fidelity.md.
+  authors:
+    - "Alexander Stephen Donahue"
+  responsible_maintainers:
+    - "Alexander Stephen Donahue"
+  license: "Apache-2.0"
+
+classification:
+  arxiv:
+    - "quant-ph"
+    - "math.CO"
+    - "cs.LO"
+  msc2020:
+    - "81P45"
+    - "81P70"
+    - "05B15"
+    - "52B12"
+    - "68V20"
+    - "94B05"
+
+sources:
+  - title: "Discrete Symplectic Phase-Space Rigidity: Cyclic Stabilizer AME Dichotomy, Maximal-Cardinality Resolvable Quantum Latin Squares, and Stabilizer-Polytope Magic Geometry"
+    authors:
+      - "Alexander Stephen Donahue"
+    id: "https://github.com/0thernes/quantum-phasespace-rigidity"
+    type: "original-proof"
+    relationship: "other"
+    author_endorsement: "participated"
+    note: "First formal and paper presentation of T1a-T3d in this repository; relationship is 'other' per Palomar original-proof convention."
+  - title: "Stabilizer AME states over rings"
+    authors:
+      - "Adam Wójcik"
+      - "Zahra Raissi"
+      - "Dardo Goyeneche"
+      - "Markus Grassl"
+      - "Felix Huber"
+      - "Karol Życzkowski"
+    id: "https://arxiv.org/abs/2603.18193"
+    type: "preprint"
+    relationship: "background"
+    author_endorsement: "not-contacted"
+    note: "Motivating background on stabilizer AME states over finite rings extended to cyclic even-d in Pillar I."
+  - title: "Resolvable quantum Latin squares"
+    authors:
+      - "S. Zhang"
+      - "H. Cao"
+    id: "https://arxiv.org/abs/2608.29201"
+    type: "preprint"
+    relationship: "background"
+    author_endorsement: "not-contacted"
+    note: "Motivating background on t-resolvable quantum Latin squares (t <= 2) extended to unbounded t = (p-5)/2, prime-power, and composite orders in Pillar II."
+  - title: "Absolute stabilizer states and magic polytopes"
+    authors:
+      - "Michael Zurel"
+      - "S. Davis"
+    id: "https://arxiv.org/abs/2602.22336"
+    type: "preprint"
+    location: "Section V.3"
+    relationship: "background"
+    author_endorsement: "not-contacted"
+    note: "Motivating open questions on ASTAB, AWP, and ASEP inclusions and circumradii addressed in Pillar III (T3a, T3b)."
+  - title: "Geometry of multiqubit stabilizer phase-point polytopes"
+    authors:
+      - "Z. Liu"
+    id: "https://arxiv.org/abs/2512.16777"
+    type: "preprint"
+    location: "Theorem 10"
+    relationship: "background"
+    author_endorsement: "not-contacted"
+    note: "Prior multiqubit phase-point circumradius bound strengthened by an exact factor of 15/7 for all n >= 2 in T3c."
+
+status:
+  scope: >-
+    All 13 headline theorems (T1a-T3d), master conjunction (14 Palomar Comparator
+    targets), 3 NonVacuity witnesses, and 6 AdversarialTests boundary refutations
+    are kernel-checked in zero-Mathlib Lean 4.35.0 with zero sorry outside
+    statement-only PalomarChallenge.lean and zero unauthorized axioms across all
+    311 project declarations. Explicitly does NOT resolve non-stabilizer even-d
+    AME(N,d), Zhang-Cao's 17 sporadic 1-RQLS orders (starting at v = 10),
+    Zurel-Davis Conjectures 1-2 for n >= 3, or odd-prime multipartite
+    bound-entangled AWP; retires 0/2,000 catalogued Mega-Atlas grand open problems.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+    - "propext"
+    - "Classical.choice"
+    - "Quot.sound"
+  main_results:
+    - declaration: "QPRigidity.Palomar.prove_all_rigidity_theorems"
+      file: "lean/PalomarSolution.lean"
+      sorry_count: 0
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
+      comparator_config: "lean/comparator.json"
+
+fidelity:
+  divergences: >-
+    Every Lean declaration is audited line by line against paper/main.tex in
+    docs/statement-fidelity.md, CLAIMS.md, and LIMITATIONS.md. Analytic
+    Hilbert-space bridges (Helwig 2013 graph-state equivalence, cyclic
+    Weyl-Heisenberg subgroup reduction, complex root-of-unity orthogonality
+    verified without floats over 198,820 Z[zeta_p] pairs in C++20, generic phase
+    twist D_phi discharging twistSep for Q_1 x_D C_2, Gurvits-Barnum Cor. 3,
+    Verstraete et al. ASEP criterion, and Sp(2n,2) transitivity / C_2 = 2 /
+    Lambda_2 overlap >= -1 verified exhaustively in Rust) are proved in
+    paper/main.tex outside Lean.
+
+automation:
+  methods:
+    - method: "manual"
+      notes: >-
+        Alexander Stephen Donahue directed problem selection, mathematical scope,
+        non-vacuity and adversarial auditing, statement-fidelity review, and
+        publication release decisions.
+    - method: "agent"
+      models:
+        - "Gemini (Antigravity)"
+      framework: "Antigravity"
+      notes: >-
+        Assisted with zero-Mathlib Lean 4.35.0 formalization, 7-engine polyglot
+        differential verification (Rust, Zig, C++20, C11+NASM, Eshkol AD, Python),
+        AMS-LaTeX manuscript preparation, and CI hardening under human direction.
+  notes: >-
+    Every Lean proof is mechanically verified without trusting any AI system
+    across six independent proof kernels in CI (lean 4.35.0, leanchecker-paranoid,
+    lean4lean, nanoda, con-leche, con-ron) plus a live negative custom-axiom
+    rejection gate and whole-module Lean.collectAxioms sweep.
+
+review:
+  status: "self-assessed"
+  notes: >-
+    Not externally peer reviewed. Passed internal 3x1,000 zero-padding hardening
+    audit, 6-kernel CI replay, 311-declaration Lean.collectAxioms sweep, 12/12
+    mutation kill, 25/25 live non-retracted citation checks, and 69/69 (100.0%)
+    Build Standard v1.2.0 compliance.

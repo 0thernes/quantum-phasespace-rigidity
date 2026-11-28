@@ -706,8 +706,8 @@ def run_1000_checks() -> tuple[AuditRunner, int]:
     rel_yml = (REPO / ".github/workflows/release.yml").read_text(encoding="utf-8")
     for lbl, cond, det in [
         ("ci_least_priv_perms", "permissions:" in ci_yml and "contents: read" in ci_yml, "CI missing contents: read"),
-        ("ci_checkout_v5", "actions/checkout@v5" in ci_yml and "actions/checkout@v4" not in ci_yml, "CI still on checkout@v4"),
-        ("ci_setup_python_v6", "actions/setup-python@v6" in ci_yml, "CI not on setup-python@v6"),
+        ("ci_checkout_v5", any(f"actions/checkout@v{v}" in ci_yml for v in (5, 6, 7)) and "actions/checkout@v4" not in ci_yml, "CI still on checkout@v4"),
+        ("ci_setup_python_v6", any(f"actions/setup-python@v{v}" in ci_yml for v in (6, 7)), "CI not on setup-python@v6+"),
         ("ci_leanchecker_paranoid", "leanchecker-paranoid" in ci_yml, "CI missing leanchecker-paranoid"),
         ("ci_sweep_all_axioms", "SweepAllAxioms.lean" in ci_yml, "CI missing SweepAllAxioms.lean"),
         ("ci_negative_axiom_test", "NegAxiomTest" in ci_yml, "CI missing NegAxiomTest"),
