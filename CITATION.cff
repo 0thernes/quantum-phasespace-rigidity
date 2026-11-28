@@ -3,6 +3,14 @@ message: "If you use this software, Lean 4 formalization, or manuscript, please 
 type: software
 title: "Quantum Phase-Space Rigidity: Cyclic Weyl-Heisenberg AME Dichotomy, Maximal-Cardinality t-Resolvable Quantum Latin Squares, and Absolutely Stabilizer Magic Geometry"
 version: "2.0.0"
+doi: "10.5281/zenodo.24618588"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24618587"
+    description: "Zenodo Concept DOI (all versions)"
+  - type: doi
+    value: "10.5281/zenodo.24618588"
+    description: "Zenodo Version DOI (zenodo-2026-11-28 / v2.0.0)"
 date-released: "2026-11-27"
 authors:
   - family-names: "Donahue"

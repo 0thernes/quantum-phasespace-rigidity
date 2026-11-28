@@ -6,11 +6,12 @@
 [![Lean 4.35.0](https://img.shields.io/badge/Lean-4.35.0_zero--Mathlib-4C1D95.svg)](lean/)
 [![CI](https://github.com/0thernes/quantum-phasespace-rigidity/actions/workflows/ci.yml/badge.svg)](https://github.com/0thernes/quantum-phasespace-rigidity/actions/workflows/ci.yml)
 [![Observatory](https://img.shields.io/badge/Web-Observatory_%26_Blueprint-0072B2.svg)](https://0thernes.github.io/quantum-phasespace-rigidity/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24618587.svg)](https://doi.org/10.5281/zenodo.24618587)
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 **Author:** [Alexander Stephen Donahue](https://orcid.org/0009-0006-8168-9648) (`ORCID 0009-0006-8168-9648`)
 **Affiliation:** Independent Researcher, Spokane, WA, USA
-**Archive ID:** `0TH-2026-020` · **Version:** `v2.0.0` · **Maintenance status:** Active · **Master Archive:** [0thernes/0thernes-research-archive](https://github.com/0thernes/0thernes-research-archive)
+**Archive ID:** `0TH-2026-020` · **Version:** `v2.0.0` · **Zenodo DOI:** [10.5281/zenodo.24618587](https://doi.org/10.5281/zenodo.24618587) (v2026-11-28: [10.5281/zenodo.24618588](https://doi.org/10.5281/zenodo.24618588)) · **Maintenance status:** Active · **Master Archive:** [0thernes/0thernes-research-archive](https://github.com/0thernes/0thernes-research-archive)
 
 ![Discrete Symplectic Phase-Space Rigidity Overview](docs/media/social-preview.png)
 

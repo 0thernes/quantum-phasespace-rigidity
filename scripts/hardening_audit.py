@@ -614,7 +614,7 @@ def run_1000_checks() -> tuple[AuditRunner, int]:
         ("playbook_limitations_substantive", len((REPO / "LIMITATIONS.md").read_text(encoding="utf-8")) > 300, "LIMITATIONS.md too thin"),
         ("playbook_errata_substantive", len((REPO / "ERRATA.md").read_text(encoding="utf-8")) > 100, "ERRATA.md too thin"),
         ("playbook_replication_substantive", len((REPO / "REPLICATION.md").read_text(encoding="utf-8")) > 400, "REPLICATION.md too thin"),
-        ("playbook_no_fake_zenodo_doi", "10.5281/zenodo." not in tex and "10.5281/zenodo." not in readme, "Fabricated Zenodo DOI"),
+        ("playbook_no_fake_zenodo_doi", "10.5281/zenodo." not in tex and all(m in {"10.5281/zenodo.24618587", "10.5281/zenodo.24618588"} for m in re.findall(r"10\.5281/zenodo\.[0-9]+", readme)), "Fabricated Zenodo DOI"),
         ("playbook_no_fake_peer_review", "peer-reviewed" not in tex.lower() and "accepted to" not in tex.lower(), "False peer-review claim"),
         ("playbook_float_precision_tags", "numerical_approximation" in c_main_src and "numerical_approximation" in eshkol_runner, "Missing numerical_approximation tags"),
     ]:

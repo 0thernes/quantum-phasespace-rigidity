@@ -51,11 +51,11 @@ sources:
   - title: "Discrete Symplectic Phase-Space Rigidity: Cyclic Stabilizer AME Dichotomy, Maximal-Cardinality Resolvable Quantum Latin Squares, and Stabilizer-Polytope Magic Geometry"
     authors:
       - "Alexander Stephen Donahue"
-    id: "https://github.com/0thernes/quantum-phasespace-rigidity"
+    id: "https://doi.org/10.5281/zenodo.24618587"
     type: "original-proof"
     relationship: "other"
     author_endorsement: "participated"
-    note: "First formal and paper presentation of T1a-T3d in this repository; relationship is 'other' per Palomar original-proof convention."
+    note: "First formal and paper presentation of T1a-T3d in this repository; live Zenodo Concept DOI 10.5281/zenodo.24618587 (Version DOI 10.5281/zenodo.24618588, linked on ORCID 0009-0006-8168-9648); relationship is 'other' per Palomar original-proof convention."
   - title: "Stabilizer AME states over rings"
     authors:
       - "Adam Wójcik"
