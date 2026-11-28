@@ -14,7 +14,7 @@ jobs:
     name: Lean 4.35.0 (6 Independent Proof Kernels + Whole-Module Axiom Sweep)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Install bubblewrap for paranoid kernel sandboxing
         run: |
@@ -71,7 +71,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy
@@ -83,7 +83,7 @@ jobs:
           cargo run --release -- --verify-all
       - name: Upload Ubuntu Rust binary for unified differential verification
         if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: bin-rust-linux
           path: rust/target/release/qpr-rust
@@ -92,7 +92,7 @@ jobs:
     name: Zig comptime + exhaustive F_8/F_7 engine
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: mlugg/setup-zig@v2
         with:
           version: master
@@ -102,10 +102,10 @@ jobs:
           zig version
           zig test src/main.zig
           mkdir -p zig-out
-          zig build-exe -OReleaseSafe src/main.zig -femit-bin=zig-out/qpr_zig
+          zig build-exe -OReleaseSafe -target x86_64-linux-musl -mcpu=x86_64 src/main.zig -femit-bin=zig-out/qpr_zig
           ./zig-out/qpr_zig --verify-all
       - name: Upload Ubuntu Zig binary for unified differential verification
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: bin-zig-linux
           path: zig/zig-out/qpr_zig
@@ -114,7 +114,7 @@ jobs:
     name: C++20 Z[zeta_p] + ISO C11 + x86-64 NASM + Moonlab + ASan/UBSan + 100k Fuzz
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Install NASM
         run: sudo apt-get update && sudo apt-get install -y nasm
       - name: Build & verify C++20 cyclotomic engine (with ASan/UBSan)
@@ -143,7 +143,7 @@ jobs:
           ./build/qpr_c --verify-all
           ./build/fuzz_qpr 100000
       - name: Upload Ubuntu C++20 & C11+NASM binaries for unified differential verification
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: bin-cpp-c-linux
           path: |
@@ -155,12 +155,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [rust-matrix, zig-matrix, cpp-c-asm-sanitizers]
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Download all compiled native engine binaries
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: bin-rust-linux
           path: rust/target/release
@@ -190,10 +190,10 @@ jobs:
     name: Secret Scan (gitleaks) + Vulnerability Audit (osv-scanner) + Timestamps
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Run gitleaks secret scan across full git history
@@ -214,8 +214,8 @@ jobs:
     name: AMS-LaTeX Tectonic + Clean-Room arXiv + Build Standard v1.2.0 + 1000-Check Audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Install Tectonic
@@ -230,7 +230,7 @@ jobs:
           python scripts/hardening_audit.py
           bash scripts/audit-repo.sh
       - name: Upload Frozen PDF & arXiv Tarball
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: white-paper-and-arxiv-bundle
           path: |
