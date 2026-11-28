@@ -1,7 +1,9 @@
 -- SPDX-License-Identifier: Apache-2.0
 -- Copyright (c) 2026 Alexander Stephen Donahue
 
-import Lean
+module
+
+meta import Lean
 import PalomarSolution
 import QPRigidity.NonVacuity
 import QPRigidity.AdversarialTests
