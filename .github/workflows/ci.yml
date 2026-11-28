@@ -164,11 +164,11 @@ jobs:
         with:
           name: bin-rust-linux
           path: rust/target/release
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v8
         with:
           name: bin-zig-linux
           path: zig/zig-out
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v8
         with:
           name: bin-cpp-c-linux
           path: .
